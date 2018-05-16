@@ -1,3 +1,37 @@
-<p>
-  sidenav works!
-</p>
+<ng-container>
+  <mat-toolbar class="header">
+    <a href="http://jops.informatik.hs-augsburg.de">
+    <img  src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo" width="90" height="auto"  />
+    </a>
+    <button mat-button (click)="sidenav.toggle()">JAVA 1</button>
+    <button mat-button (click)="sidenav.toggle()">JAVA 2</button>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="over" opened="false" class="example-sidenav">
+      <mat-nav-list>
+        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+  </mat-sidenav-container>
+
+  <mat-toolbar class="footer">Footer</mat-toolbar>
+</ng-container>
+
+<!--
+<mat-toolbar>Header</mat-toolbar>
+<mat-drawer-container class="sidenav-container" hasBackdrop="true">
+  <mat-drawer #drawer mode="over">Кто я?!</mat-drawer>
+  <mat-drawer-content>
+    <div>
+      <h1>
+        Willkommen auf JOPS!
+      </h1>
+      <h2>Die Web-Applikation wird geladen...</h2>
+      <mat-spinner></mat-spinner>
+    </div>
+    <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
+  </mat-drawer-content>
+</mat-drawer-container>
+-->
