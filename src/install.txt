@@ -4,5 +4,3 @@ npm install --save angular/material2-builds angular/cdk-builds
 npm install --save @angular/animations
 npm install --save hammerjs
 npm install
-
-test
