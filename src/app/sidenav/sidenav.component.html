@@ -1,10 +1,11 @@
 <ng-container>
   <mat-toolbar class="header">
     <a href="http://jops.informatik.hs-augsburg.de">
-    <img  src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo" width="90" height="auto"  />
+    <img  class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo" />
     </a>
-    <button mat-button (click)="sidenav.toggle()">JAVA 1</button>
-    <button mat-button (click)="sidenav.toggle()">JAVA 2</button>
+    <button class="button-header" mat-button (click)="sidenav.toggle()">JAVA 1</button>
+    <button class="button-header" mat-button (click)="sidenav.toggle()">JAVA 2</button>
+    <button class="button-login" mat-button>Logout</button>
   </mat-toolbar>
 
   <mat-sidenav-container class="example-container">
@@ -16,7 +17,9 @@
 
   </mat-sidenav-container>
 
-  <mat-toolbar class="footer">Footer</mat-toolbar>
+  <mat-toolbar class="footer">
+    <button class="button-footer" mat-button>Impressum</button>
+   </mat-toolbar>
 </ng-container>
 
 <!--
@@ -35,3 +38,4 @@
   </mat-drawer-content>
 </mat-drawer-container>
 -->
+<!-- Ich habe was geändert! -->
