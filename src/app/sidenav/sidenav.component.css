@@ -20,35 +20,11 @@
   background: rgb(255, 101, 0);
 }
 
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  height: 50px;
-}
-
-.button-header {
-  height: 50px;
-  font-family: Times, serif;
-  font-size: 110%;
-  line-height: 1.5;
-  color: rgb(255, 101, 0);
-}
 
 
-.image {
-  width: 70px;
-  height: auto;
-}
 
-.button-login{
-  height: 50px;
-  font-family: Times, serif;
-  font-size: 110%;
-  line-height: 1.5;
-  position: absolute;
-  right: 20px;
-  color: rgb(255, 101, 0);
-}
+
+
+
+
+

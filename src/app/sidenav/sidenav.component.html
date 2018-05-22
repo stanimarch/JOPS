@@ -1,12 +1,6 @@
 <ng-container>
-  <mat-toolbar class="header">
-    <a href="http://jops.informatik.hs-augsburg.de">
-    <img  class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo" />
-    </a>
-    <button class="button-header" mat-button (click)="sidenav.toggle()">JAVA 1</button>
-    <button class="button-header" mat-button (click)="sidenav.toggle()">JAVA 2</button>
-    <button class="button-login" mat-button>Logout</button>
-  </mat-toolbar>
+
+  <app-header></app-header>
 
   <mat-sidenav-container class="example-container">
     <mat-sidenav #sidenav mode="over" opened="false" class="example-sidenav">
@@ -14,7 +8,6 @@
         <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
       </mat-nav-list>
     </mat-sidenav>
-
   </mat-sidenav-container>
 
   <app-footer></app-footer>
