@@ -1,40 +1,96 @@
 <ng-container>
   <mat-toolbar class="header">
     <a href="http://jops.informatik.hs-augsburg.de">
-    <img  class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo" />
+      <img class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo"/>
     </a>
     <button class="button-header" mat-button (click)="sidenav.toggle()">JAVA 1</button>
     <button class="button-header" mat-button (click)="sidenav.toggle()">JAVA 2</button>
     <button class="button-login" mat-button>Logout</button>
   </mat-toolbar>
-
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="over" opened="false" class="example-sidenav">
+  <mat-sidenav-container hasBackdrop="true" class="example-container">
+    <mat-sidenav #sidenav mode="side" opened="false" class="example-sidenav">
       <mat-nav-list>
         <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
       </mat-nav-list>
     </mat-sidenav>
 
+    <mat-sidenav-content>
+
+      <div class="start">
+        <h1 style="display: block; text-align: center;">Willkommen auf JOPS!</h1>
+        <h4 style="display: block; text-align: center">Hier bla bla wie schön dass du da bist :) </h4>
+
+      </div>
+
+      <div class="aufgabe">
+        <p>
+          <label style="font-size:20px">Aufgabenname</label>
+        </p>
+        <p>
+          <label style="font-size:18px">Themengebiet</label>
+        </p>
+        <p position="absolut" left="10px">
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+          sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+          aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+          duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+          sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+          ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          At vero eos et accusam et justo duo dolores et ea rebum.
+          Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+          sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+          aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+          duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+          sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+          ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          At vero eos et accusam et justo duo dolores et ea rebum.
+          Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+          dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+          sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+          aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+          duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+          sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+          ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          At vero eos et accusam et justo duo dolores et ea rebum.
+          Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+          sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+          aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+          duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+          sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+          ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          At vero eos et accusam et justo duo dolores et ea rebum.
+          Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        </p>
+        <button type="button" class="button-next-aufgabe" (click)="onClick()"> >> nächste Aufgabe</button>
+
+      </div>
+
+      <div class="loesung">
+        <p>
+          <label style="font-size:20px">Gib hier deine Lösung ein</label>
+        </p>
+        <p>
+          <textarea rows="100" class="textfeld"></textarea>
+
+        </p>
+        <button type="button" class="button-speichern"(click)="onClick()">✔ Speichern!</button>
+        <button type="button" class="button-abbruch" (click)="onClick()">✘ Abbrechen!</button>
+      </div>
+
+    </mat-sidenav-content>
+
+
   </mat-sidenav-container>
-
-  <app-footer></app-footer>
-
+  <mat-toolbar class="footer">
+    <button class="button-footer" mat-button>Impressum</button>
+  </mat-toolbar>
 </ng-container>
 
-<!--
-<mat-toolbar>Header</mat-toolbar>
-<mat-drawer-container class="sidenav-container" hasBackdrop="true">
-  <mat-drawer #drawer mode="over">Кто я?!</mat-drawer>
-  <mat-drawer-content>
-    <div>
-      <h1>
-        Willkommen auf JOPS!
-      </h1>
-      <h2>Die Web-Applikation wird geladen...</h2>
-      <mat-spinner></mat-spinner>
-    </div>
-    <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
-  </mat-drawer-content>
-</mat-drawer-container>
--->
+
 <!-- Ich habe was geändert! -->
