@@ -41,18 +41,13 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {HttpClientModule} from '@angular/common/http';
 import {FormBuilder, FormsModule} from '@angular/forms';
 import {SidenavComponent} from './sidenav/sidenav.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { CenterComponent } from './center/center.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
-    HeaderComponent,
-    FooterComponent,
-    CenterComponent
   ],
   imports: [
     BrowserModule,
