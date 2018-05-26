@@ -1,96 +1,84 @@
-<ng-container>
+<ng-container >
   <mat-toolbar class="header">
     <a href="http://jops.informatik.hs-augsburg.de">
-      <img class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo"/>
+      <img (click)="onClickHaupt()" class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo"/>
     </a>
-    <button class="button-header" mat-button (click)="sidenav.toggle()">JAVA 1</button>
-    <button class="button-header" mat-button (click)="sidenav.toggle()">JAVA 2</button>
+    <button (click)="onClickAufg()" class="button-header" mat-button (click)="sidenav.toggle()">JAVA 1</button>
+    <button (click)="onClickAufg()" class="button-header" mat-button (click)="sidenav.toggle()">JAVA 2</button>
+
+    <!-- TestButton fürs div-->
+    <img (click)="onClickHaupt()" class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo"/>
+
+    <!--Logout bzw Login Button muss noch erstellt werden-->
     <button class="button-login" mat-button>Logout</button>
   </mat-toolbar>
+
+  <!-- hier kommt das Seitenmenue-->
   <mat-sidenav-container hasBackdrop="true" class="example-container">
     <mat-sidenav #sidenav mode="side" opened="false" class="example-sidenav">
+      <!-- hier Inhalt vom Seitenmenue, erstmal nur einfach ein Array, noch keine Sinn dahinter-->
       <mat-nav-list>
-        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
+        <a mat-list-item *ngFor="let nav of fillerNav">{{nav}}</a>
       </mat-nav-list>
     </mat-sidenav>
 
+    <!--ab hier der Inhalt in der Mitte-->
     <mat-sidenav-content>
-
-      <div class="start">
+      <!-- Willkommen Content
+      Hier braucht man noch die Statistik-->
+      <div id="start" style="display:block">
         <h1 style="display: block; text-align: center;">Willkommen auf JOPS!</h1>
         <h4 style="display: block; text-align: center">Hier bla bla wie schön dass du da bist :) </h4>
-
       </div>
 
-      <div class="aufgabe">
-        <p>
-          <label style="font-size:20px">Aufgabenname</label>
-        </p>
-        <p>
-          <label style="font-size:18px">Themengebiet</label>
-        </p>
-        <p position="absolut" left="10px">
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-          sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-          aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-          duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-          sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-          ut labore et dolore magna aliquyam erat, sed diam voluptua.
-          At vero eos et accusam et justo duo dolores et ea rebum.
-          Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-          sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-          aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-          duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-          sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-          ut labore et dolore magna aliquyam erat, sed diam voluptua.
-          At vero eos et accusam et justo duo dolores et ea rebum.
-          Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-          dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-          sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-          aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-          duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-          sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-          ut labore et dolore magna aliquyam erat, sed diam voluptua.
-          At vero eos et accusam et justo duo dolores et ea rebum.
-          Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-          sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-          aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-          duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-          sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-          ut labore et dolore magna aliquyam erat, sed diam voluptua.
-          At vero eos et accusam et justo duo dolores et ea rebum.
-          Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-        </p>
-        <button type="button" class="button-next-aufgabe" (click)="onClick()"> >> nächste Aufgabe</button>
+      <!--Aufgaben und Lgs Content
+      Hier fehlen noch paar Buttons-->
+      <div id="mitte" style="display:none">
 
+        <div class="aufgabe">
+          <p>
+            <label style="font-size:20px">Aufgabenname</label>
+          </p>
+          <p>
+            <label style="font-size:18px">Themengebiet</label>
+          </p>
+          <p position="absolut" left="10px">
+            Hier kommt nachher die Aufgabe rein, die der Student aus dem Seitenmenue anklickt
+          </p>
+          <button type="button" class="button-next-aufgabe" (click)="onClick()"> >> nächste Aufgabe</button>
+        </div>
+
+
+        <div class="loesung">
+          <p>
+            <label style="font-size:20px">Gib hier deine Lösung ein</label>
+          </p>
+          <p>
+            <label>
+              <textarea rows="100" class="textfeld"></textarea>
+            </label>
+          </p>
+          <p>
+            <button type="button" class="button-speichern" (click)="onClick()">✔ Speichern!</button>
+            <button type="button" class="button-abbruch" (click)="onClick()">✘ Abbrechen!</button>
+          </p>
+        </div>
       </div>
 
-      <div class="loesung">
-        <p>
-          <label style="font-size:20px">Gib hier deine Lösung ein</label>
-        </p>
-        <p>
-          <textarea rows="100" class="textfeld"></textarea>
-
-        </p>
-        <button type="button" class="button-speichern"(click)="onClick()">✔ Speichern!</button>
-        <button type="button" class="button-abbruch" (click)="onClick()">✘ Abbrechen!</button>
+      <div id="impressum" style="display:none">
+        <h1 style="display: block; text-align: center;">Hier noch Impressum einfügen</h1>
+        <p style="display: block; text-align: center"> die Hochschule usw... </p>
       </div>
+
 
     </mat-sidenav-content>
 
-
+    <!--Hier Footer, Impressum muss noch belegt werden-->
   </mat-sidenav-container>
   <mat-toolbar class="footer">
-    <button class="button-footer" mat-button>Impressum</button>
+    <button (click)="onClickImp()" class="button-footer" mat-button>Impressum</button>
   </mat-toolbar>
 </ng-container>
 
 
-<!-- Ich habe was geändert! -->
+

@@ -7,9 +7,23 @@ import {Component} from '@angular/core';
 
 })
 export class SidenavComponent {
-  fillerNav = Array(20).fill(0).map((_, i) => `Aufgabe  ${i + 1}`);
+  fillerNav = Array(10).fill(0).map((_, i) => `Aufgabe  ${i + 1}`);
 
-  onClick() {
+  onClickHaupt() {
+    document.getElementById('start').style.display = 'block';
+    document.getElementById('mitte').style.display = 'none';
+    document.getElementById('impressum').style.display = 'none';
   }
+  onClickAufg() {
+    document.getElementById('start').style.display = 'none';
+    document.getElementById('mitte').style.display = 'block';
+    document.getElementById('impressum').style.display = 'none';
+  }
+  onClickImp() {
+    document.getElementById('impressum').style.display = 'block';
+    document.getElementById('mitte').style.display = 'none';
+    document.getElementById('start').style.display = 'none';
+    }
+  onClick() {}
 }
 
