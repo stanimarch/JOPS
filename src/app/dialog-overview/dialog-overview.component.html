@@ -7,7 +7,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Passwort:" [type]="hide ? 'password' : 'text'">
+    <input (keyup.enter)="onNoClick()" matInput placeholder="Passwort:" [type]="hide ? 'password' : 'text'">
     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
   </mat-form-field>
 
