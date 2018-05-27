@@ -1,0 +1,29 @@
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-container > * {
+  width: 100%;
+}
+
+.right-align {
+  text-align: right;
+}
+
+input.right-align::-webkit-outer-spin-button,
+input.right-align::-webkit-inner-spin-button {
+  display: none;
+}
+input.right-align {
+  -moz-appearance: textfield;
+}
+
+.button {
+  height: 50px;
+  font-family: Times, serif;
+  font-size: 110%;
+  line-height: 1.5;
+  color: rgb(255, 101, 0);
+  background-color: rgba(0, 0, 0, 0.2);
+}

@@ -8,6 +8,11 @@ import {Component} from '@angular/core';
 })
 export class SidenavComponent {
   fillerNav = Array(10).fill(0).map((_, i) => `Aufgabe  ${i + 1}`);
+  fillerNav = Array(20).fill(0).map((_, i) => `Aufgabe  ${i + 1}`);
+  name: string;
+  passwort: string;
+  constructor(public dialog: MatDialog) {
+  }
 
   onClickHaupt() {
     document.getElementById('start').style.display = 'block';
@@ -25,5 +30,15 @@ export class SidenavComponent {
     document.getElementById('start').style.display = 'none';
     }
   onClick() {}
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(DialogOverviewComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }
 

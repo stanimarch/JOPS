@@ -1,0 +1,15 @@
+<div class="dialog-container">
+  <img alt="logo" src="assets/logo/HS-Augsburg_Logo_mit_Text.png">
+  <h5>Bitte melden Sie sich an</h5>
+  <mat-form-field>
+    <input matInput placeholder="Bunutzername:" type="name">
+    <mat-icon matSuffix>perm_identity</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input (keyup.enter)="onNoClick()" matInput placeholder="Passwort:" [type]="hide ? 'password' : 'text'">
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+  </mat-form-field>
+
+  <button class="button" mat-button (click)="onNoClick()">Anmelden</button>
+</div>

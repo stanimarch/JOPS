@@ -35,19 +35,20 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule
+  MatTreeModule, MatFormFieldModule
 } from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {HttpClientModule} from '@angular/common/http';
 import {FormBuilder, FormsModule} from '@angular/forms';
 import {SidenavComponent} from './sidenav/sidenav.component';
-
+import {DialogOverviewComponent} from './dialog-overview/dialog-overview.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
+    DialogOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,10 +88,12 @@ import {SidenavComponent} from './sidenav/sidenav.component';
     MatTooltipModule,
     MatTreeModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule
   ],
   providers: [FormBuilder],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogOverviewComponent]
 })
 export class AppModule {
 }
