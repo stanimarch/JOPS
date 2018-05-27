@@ -41,18 +41,14 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {HttpClientModule} from '@angular/common/http';
 import {FormBuilder, FormsModule} from '@angular/forms';
 import {SidenavComponent} from './sidenav/sidenav.component';
-import { DialogContentComponentComponent } from './dialog-content-component/dialog-content-component.component';
-import { DialogContentDialogComponentComponent } from './dialog-content-dialog-component/dialog-content-dialog-component.component';
-import { DialogContentComponent } from './dialog-content/dialog-content.component';
-import { DialogContentDialogComponent } from './dialog-content-dialog/dialog-content-dialog.component';
+import { DialogOverviewComponent } from './dialog-overview/dialog-overview.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
-    DialogContentComponent,
-    DialogContentDialogComponent,
+    DialogOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,7 +92,7 @@ import { DialogContentDialogComponent } from './dialog-content-dialog/dialog-con
   ],
   providers: [FormBuilder],
   bootstrap: [AppComponent],
-  entryComponents: [DialogContentComponent, DialogContentDialogComponent]
+  entryComponents: [DialogOverviewComponent]
 })
 export class AppModule {
 }

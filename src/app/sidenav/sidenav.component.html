@@ -5,7 +5,7 @@
     </a>
     <button class="button-header" mat-button (click)="sidenav.toggle()">JAVA 1</button>
     <button class="button-header" mat-button (click)="sidenav.toggle()">JAVA 2</button>
-    <button class="button-login" mat-button>Logout</button>
+    <button class="button-login" mat-button (click)="openDialog()" >Login</button>
   </mat-toolbar>
   <mat-sidenav-container hasBackdrop="true" class="example-container">
     <mat-sidenav #sidenav mode="side" opened="false" class="example-sidenav">
