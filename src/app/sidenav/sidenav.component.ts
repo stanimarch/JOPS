@@ -10,7 +10,8 @@ import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.compon
 })
 export class SidenavComponent {
   fillerNav = Array(20).fill(0).map((_, i) => `Aufgabe  ${i + 1}`);
-
+  name: string;
+  passwort: string;
   constructor(public dialog: MatDialog) {
   }
 
