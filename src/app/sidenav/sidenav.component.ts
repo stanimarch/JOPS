@@ -18,7 +18,7 @@ export class SidenavComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewComponent, {
+    let dialogRef = this.dialog.open(DialogOverviewComponent, {
       width: '250px'
     });
 
