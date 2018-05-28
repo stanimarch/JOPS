@@ -38,7 +38,7 @@ import {
   MatTreeModule, MatFormFieldModule
 } from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormBuilder, FormsModule} from '@angular/forms';
 import {SidenavComponent} from './sidenav/sidenav.component';
 import {DialogOverviewComponent} from './dialog-overview/dialog-overview.component';
@@ -91,7 +91,7 @@ import {DialogOverviewComponent} from './dialog-overview/dialog-overview.compone
     FormsModule,
     MatFormFieldModule
   ],
-  providers: [FormBuilder],
+  providers: [FormBuilder, HttpClient],
   bootstrap: [AppComponent],
   entryComponents: [DialogOverviewComponent]
 })
