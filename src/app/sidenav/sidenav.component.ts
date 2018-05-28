@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.component';
+import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -10,22 +11,28 @@ import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.compon
 })
 export class SidenavComponent {
   fillerNav = Array(20).fill(0).map((_, i) => `Aufgabe  ${i + 1}`);
-  name: string;
-  passwort: string;
-  constructor(public dialog: MatDialog) {
+  username: string;
+  password: string;
+
+  constructor(public dialog: MatDialog,
+              private jopsApiService: JopsApiLoginService) {
   }
 
   onClick() {
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(DialogOverviewComponent, {
+    const dialogRef = this.dialog.open(DialogOverviewComponent, {
       width: '250px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  doPostLogin(): void {
+    this.jopsApiService.doPostTestServer();
   }
 }
 
