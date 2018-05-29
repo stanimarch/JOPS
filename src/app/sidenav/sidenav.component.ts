@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.component';
+import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 
 @Component({
   selector: 'app-sidenav',
