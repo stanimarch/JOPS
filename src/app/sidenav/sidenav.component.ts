@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.component';
-import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -10,12 +9,30 @@ import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 
 })
 export class SidenavComponent {
-  fillerNav = Array(20).fill(0).map((_, i) => `Aufgabe  ${i + 1}`);
-  username: string;
+  fillerNav = Array(10).fill(0).map((_, i) => `Aufgabe  ${i + 1}`);
+  unsername: string;
   password: string;
 
   constructor(public dialog: MatDialog,
               private jopsApiService: JopsApiLoginService) {
+  }
+
+  onClickHaupt() {
+    document.getElementById('start').style.display = 'block';
+    document.getElementById('mitte').style.display = 'none';
+    document.getElementById('impressum').style.display = 'none';
+  }
+
+  onClickAufg() {
+    document.getElementById('start').style.display = 'none';
+    document.getElementById('mitte').style.display = 'block';
+    document.getElementById('impressum').style.display = 'none';
+  }
+
+  onClickImp() {
+    document.getElementById('impressum').style.display = 'block';
+    document.getElementById('mitte').style.display = 'none';
+    document.getElementById('start').style.display = 'none';
   }
 
   onClick() {
@@ -35,4 +52,3 @@ export class SidenavComponent {
     this.jopsApiService.doPostRun();
   }
 }
-
