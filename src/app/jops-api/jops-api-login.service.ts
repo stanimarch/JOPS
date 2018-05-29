@@ -29,7 +29,7 @@ export class JopsApiLoginService {
   }
 
   doPostLogin_global(): void {
-    console.log('1. Service: JopsApiLoginService => Mehtode: doPostLogin_global(), apiRootUrl:' + this.url);
+    console.log('1. Service: JopsApiLoginService => Mehtode: doPostLogin_global(), url:' + this.url);
     this.http.post(this.url, {
       unsername: 'Muster',
       password: '123456789'

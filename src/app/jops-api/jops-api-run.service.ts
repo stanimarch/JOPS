@@ -29,13 +29,13 @@ export class JopsApiRunService {
   }
 
   doPostRun_glaobal(): void {
-    console.log('Service: JopsApiRunService => Mehtode: doPostRun(), url:' + this.url);
+    console.log('1. Service: JopsApiRunService => Mehtode: doPostRun(), url:' + this.url);
     this.http.post(this.url, {
       matrnr: '560056',
       aufgabenid: '102',
       code: 'bla-bla-bla'
     }).subscribe(res => {
-      console.log(res.valueOf());
+      console.log('2. Res = ' + res.valueOf());
     });
   }
 
