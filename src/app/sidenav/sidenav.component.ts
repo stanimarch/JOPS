@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.component';
 import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
+import {JopsApiRunService} from '../jops-api/jops-api-run.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -15,7 +16,8 @@ export class SidenavComponent {
   password: string;
 
   constructor(public dialog: MatDialog,
-              private jopsApiService: JopsApiLoginService) {
+              private jopsApiLoginService: JopsApiLoginService,
+              private jopsApiRunService: JopsApiRunService) {
   }
 
   onClickHaupt() {
@@ -49,7 +51,11 @@ export class SidenavComponent {
     });
   }
 
-  doPostRun(): void {
-    this.jopsApiService.doPostRun();
+  doPostLogin_global(): void {
+    this.jopsApiLoginService.doPostLogin_global();
+  }
+
+  doPostRun_glaobal(): void {
+    this.jopsApiRunService.doPostRun_glaobal();
   }
 }
