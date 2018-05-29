@@ -62,7 +62,6 @@
 }
 .button-footer{
   height: 40px;
-
   font-family: Times, serif;
   font-size: 110%;
   line-height: 1.5;
@@ -76,13 +75,13 @@
   font-family: Times, serif;
   margin: 8px;
   margin-bottom: 0;
-  margin-top:8;
+  margin-top: 0;
   border: 2px solid rgb(255, 101, 0);
   height:98%;
   size: auto;
 
 }
-.aufgabe, .loesung {
+.aufgabe, .loesunguser {
   position: relative;
   text-align: center;
   min-height:48%;
@@ -91,7 +90,7 @@
   margin-top: 4px;
   border: 2px solid rgb(255, 101, 0);
 }
-.loesung{
+.loesunguser{
   margin: 8px;
   margin-bottom: 0;
   margin-top: 4px;

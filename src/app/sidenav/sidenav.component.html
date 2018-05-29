@@ -3,19 +3,20 @@
     <a href="http://jops.informatik.hs-augsburg.de">
       <img (click)="onClickHaupt()" class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo"/>
     </a>
-    <button (click)="onClickAufg()" class="button-header" mat-button (click)="sidenav.toggle()">JAVA 1</button>
-    <button (click)="onClickAufg()" class="button-header" mat-button (click)="sidenav.toggle()">JAVA 2</button>
+    <button (click)="onClickAufg(); sidenav.toggle()" class="button-header" mat-button >JAVA 1</button>
+    <button (click)="onClickAufg(); sidenav.toggle()" class="button-header" mat-button >JAVA 2</button>
 
-    <!-- TestButton fürs div-->
+    <!-- TestButton fürs div
     <img (click)="onClickHaupt()" class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo"/>
+    -->
 
-    <!--Logout bzw Login Button muss noch erstellt werden-->
+    <!--Logout bzw Login als Variable, wenn User angemeldet ist es dann Logouts-->
     <button (click)="openDialog()" class="button-login" mat-button>Login</button>
   </mat-toolbar>
 
   <!-- hier kommt das Seitenmenue-->
   <mat-sidenav-container hasBackdrop="true" class="example-container">
-    <mat-sidenav #sidenav mode="side" opened="false" class="example-sidenav">
+    <mat-sidenav #sidenav mode="side" class="example-sidenav">
       <!-- hier Inhalt vom Seitenmenue, erstmal nur einfach ein Array, noch keine Sinn dahinter-->
       <mat-nav-list>
         <a mat-list-item *ngFor="let nav of fillerNav">{{nav}}</a>
@@ -23,12 +24,12 @@
     </mat-sidenav>
 
     <!--ab hier der Inhalt in der Mitte-->
-    <mat-sidenav-content>
+    <mat-sidenav-content style="font-family: Times, serif">
       <!-- Willkommen Content
       Hier braucht man noch die Statistik-->
       <div id="start" style="display:block">
-        <h1 style="display: block; text-align: center;">Willkommen auf JOPS!</h1>
-        <h4 style="display: block; text-align: center">Hier bla bla wie schön dass du da bist :) </h4>
+        <h1 style="display: block; text-align: center; color: rgb(255, 101, 0)">Willkommen auf JOPS!</h1>
+        <h4 style="display: block; text-align: center">Schön, dass Du da bist :) </h4>
 
       </div>
 
@@ -43,14 +44,16 @@
           <p>
             <label style="font-size:18px">Themengebiet</label>
           </p>
-          <p position="absolut" left="10px">
+          <p style="text-align: left">
             Hier kommt nachher die Aufgabe rein, die der Student aus dem Seitenmenue anklickt
           </p>
-          <button type="button" class="button-next-aufgabe" (click)="onClick()"> >> nächste Aufgabe</button>
+          <p>
+            <button type="button" class="button-next-aufgabe" (click)="onClick()"> >>nächste Aufgabe</button>
+          </p>
         </div>
 
-
-        <div class="loesung">
+        <!--hier muss noch die form eingebaut werden mit buttons submit und so-->
+        <div class="loesunguser">
           <p>
             <label style="font-size:20px">Gib hier deine Lösung ein</label>
           </p>
@@ -63,23 +66,47 @@
             <button type="button" class="button-speichern" (click)="onClick()">✔ Speichern!</button>
             <button type="button" class="button-abbruch" (click)="onClick()">✘ Abbrechen!</button>
           </p>
+
+          <!--diente zum testen
+                    <form>
+                      <input id="todoTitle"/>
+                      <button type="submit" id="addTodo">Add</button>
+                    </form>
+                    <ul id="todosList"></ul>
+          -->
         </div>
       </div>
 
-      <div id="impressum" style="display:none">
-        <h1 style="display: block; text-align: center;">Hier noch Impressum einfügen</h1>
-        <p style="display: block; text-align: center"> die Hochschule usw... </p>
+      <!-- Ab hier Inhalt von Impressum-->
+      <div id="impressum" style="font-family: Times, serif; display:none; text-align: center">
+        <div style="width:30%; text-align: left; margin: 0 auto;">
+          <h1 style="font-family: Times, serif; font-size:3em; color: rgb(255, 101, 0)">Impressum</h1>
+          <h1 style="color: rgb(255, 101, 0); font-size: 2em; font-family: Times, serif;">Anschrift</h1>
+          <p>
+            Hochschule für angewandte Wissenschaften Augsburg <br>
+            An der Hochschule 1<br>
+            86161 Augsburg<br>
+            <br>
+            Telefon: +49 (0)821-5586-0<br>
+            Telefax: +49 (0)821-5586-3222<br>
+            <br>
+            info@hs-augsburg.de<br>
+            <br>
+            <br>
+          </p>
+          <h1 style="margin-top: 10px; color: rgb(255, 101, 0); font-family: Times, serif; font-size: 2em;">
+            Copyright</h1>
+          <p>
+            Kopie und Weiterverwendung von Text und Graphik erfordert die Zustimmung der Hochschule Augsburg.<br>
+          </p>
+        </div>
       </div>
-
-
     </mat-sidenav-content>
-
-    <!--Hier Footer, Impressum muss noch belegt werden-->
+    <!--Hier Footer-->
   </mat-sidenav-container>
   <mat-toolbar class="footer">
     <button (click)="onClickImp()" class="button-footer" mat-button>Impressum</button>
   </mat-toolbar>
+
 </ng-container>
 
-
-<!-- Ich habe was geändert! -->
