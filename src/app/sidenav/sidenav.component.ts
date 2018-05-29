@@ -31,8 +31,8 @@ export class SidenavComponent {
     });
   }
 
-  doPostLogin(): void {
-    this.jopsApiService.doPostTestServer();
+  doPostRun(): void {
+    this.jopsApiService.doPostRun();
   }
 }
 
