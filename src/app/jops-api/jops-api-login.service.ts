@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {FormGroup} from '@angular/forms';
 
 
 interface ILoginResponse {
@@ -28,14 +29,12 @@ export class JopsApiLoginService {
     });
   }
 
-  doPostLogin_global(): void {
+  doPostLogin_global(myForm: FormGroup): void {
     console.log('1. Service: JopsApiLoginService => Mehtode: doPostLogin_global(), url:' + this.url);
-    this.http.post(this.url, {
-      unsername: 'Muster',
-      password: '123456789'
-    }).subscribe(res => {
-      console.log('2. Res = ' + res.valueOf());
-    });
+    this.http.post(this.url, JSON.stringify(myForm))
+      .subscribe(res => {
+        console.log('2. Res = ' + res.valueOf());
+      });
   }
 
   // fur echte Web-App
@@ -44,9 +43,6 @@ export class JopsApiLoginService {
     this.http.post(this.url, {
       username: `${username}`,
       password: `${password}`
-    }).subscribe((res: ILoginResponse) => {
-      console.log(res.valueOf());
-      this.data = res;
-    });
+    }).toString();
   }
 }

@@ -39,7 +39,7 @@ import {
 } from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {FormBuilder, FormsModule} from '@angular/forms';
+import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SidenavComponent} from './sidenav/sidenav.component';
 import {DialogOverviewComponent} from './dialog-overview/dialog-overview.component';
 import {JopsApiLoginService} from './jops-api/jops-api-login.service';
@@ -92,7 +92,8 @@ import {JopApiDbService} from './jops-api/jop-api-db.service';
     MatTreeModule,
     HttpClientModule,
     FormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
   providers: [FormBuilder, HttpClient, JopsApiLoginService, JopsApiRunService, JopApiDbService],
   bootstrap: [AppComponent],

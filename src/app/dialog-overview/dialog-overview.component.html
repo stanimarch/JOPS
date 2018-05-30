@@ -1,15 +1,46 @@
 <div class="dialog-container">
+
+
   <img alt="logo" src="assets/logo/HS-Augsburg_Logo_mit_Text.png">
   <h5>Bitte melden Sie sich an</h5>
-  <mat-form-field>
-    <input matInput placeholder="Benutzername:" type="name">
-    <mat-icon matSuffix>perm_identity</mat-icon>
-  </mat-form-field>
 
-  <mat-form-field>
-    <input (keyup.enter)="onNoClick()" matInput placeholder="Passwort:" [type]="hide ? 'password' : 'text'">
-    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-  </mat-form-field>
+  <form [formGroup]="myForm"
+        (ngSubmit)="onSubmit()">
 
-  <button class="button" mat-button (click)="onNoClick()">Anmelden</button>
+    <mat-form-field>
+      <input matInput
+             formControlName="username"
+             placeholder="Benutzername:"
+             type="name"
+             required>
+      <mat-icon matSuffix>perm_identity</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput
+             formControlName="password"
+             placeholder="Passwort:"
+             [type]="hide ? 'password' : 'text'"
+             required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+
+    <button class="button"
+            (click)="onSubmit()"
+            mat-button
+            [disabled]="myForm.invalid"
+    >Anmelden
+    </button>
+    <div>{{myForm.value|json}}</div>
+  </form>
 </div>
+
+
+<!--
+<input (keyup.enter)="submit()" matInput placeholder="Passwort:" [type]="hide ? 'password' : 'text'">
+
+
+        [action]="loginUrl"
+        method="post"
+        enctype="application/x-www-form-urlencoded"
+-->

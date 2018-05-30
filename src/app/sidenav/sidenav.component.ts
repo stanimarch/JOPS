@@ -16,7 +16,6 @@ export class SidenavComponent {
   password: string;
 
   constructor(public dialog: MatDialog,
-              private jopsApiLoginService: JopsApiLoginService,
               private jopsApiRunService: JopsApiRunService) {
   }
 
@@ -49,10 +48,6 @@ export class SidenavComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
-  }
-
-  doPostLogin_global(): void {
-    this.jopsApiLoginService.doPostLogin_global();
   }
 
   doPostRun_glaobal(): void {
