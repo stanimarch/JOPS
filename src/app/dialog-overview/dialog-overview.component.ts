@@ -23,15 +23,15 @@ export class DialogOverviewComponent implements OnInit {
     dialogRef.disableClose = true;
   }
 
-  onNoClick(): void {
+  /*onNoClick(): void {
     this.dialogRef.close();
-  }
+  }*/
 
   ngOnInit() {
   }
 
   onSubmit() {
-    console.log(this.myForm);
+    // console.log(this.myForm);
     this.jopsApiLoginService.doPostLogin_global(this.myForm);
   }
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FormGroup} from '@angular/forms';
 
 
@@ -12,14 +12,33 @@ interface ILoginResponse {
 @Injectable()
 export class JopsApiLoginService {
 
-  apiRootUrl = 'http://jops.informatik.hs-augsburg.de/api/login'; // um erwas      lokal zu testen
-  url = './api/login';                                            // um erwas auf Server zu testen
+  apiRootUrl = 'http://jops.informatik.hs-augsburg.de/api/login';
+  url = './api/login';
   data: ILoginResponse;
+
+  testUrl = 'http://httpbin.org/post';
+
 
   constructor(private http: HttpClient) {
   }
 
-  doPostLogin_local(): void {
+
+  doPostLogin_global(myForm: FormGroup): void {
+    // console.log('1. Service: JopsApiLoginService => Mehtode: doPostLogin_global(), JSON.stringify(myForm.value):' + JSON.stringify(myForm.value));
+
+    this.http.post(this.testUrl, myForm.toString(), {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+    })
+      .subscribe(res => {
+        console.log('2. Res = ' + JSON.stringify(res.valueOf()));
+      });
+  }
+}
+
+
+/*
+doPostLogin_local(): void {
     console.log('1. Service: JopsApiLoginService => Mehtode: doPostLogin_local(), apiRootUrl:' + this.apiRootUrl);
     this.http.post(this.apiRootUrl, {
       unsername: 'Muster',
@@ -28,21 +47,18 @@ export class JopsApiLoginService {
       console.log('2. Res = ' + res.valueOf());
     });
   }
+*/
 
-  doPostLogin_global(myForm: FormGroup): void {
-    console.log('1. Service: JopsApiLoginService => Mehtode: doPostLogin_global(), url:' + this.url);
-    this.http.post(this.url, JSON.stringify(myForm))
-      .subscribe(res => {
-        console.log('2. Res = ' + res.valueOf());
-      });
-  }
+/*
+doPostLogin_global(myForm: FormGroup): void {
+  console.log('1. Service: JopsApiLoginService => Mehtode: doPostLogin_global(), JSON.stringify(myForm.value):' +
+  JSON.stringify(myForm.value));
 
-  // fur echte Web-App
-  doPostLogin(username: string, password: string): void {
-    console.log('Service: JopsApiLoginService => Mehtode: doPostLogin(), url:' + this.url);
-    this.http.post(this.url, {
-      username: `${username}`,
-      password: `${password}`
-    }).toString();
-  }
+  this.http.post(this.testUrl, JSON.stringify(myForm.value))
+    .subscribe(res => {
+    console.log('2. Res = ' + res.valueOf());
+  });
+
 }
+}
+*/

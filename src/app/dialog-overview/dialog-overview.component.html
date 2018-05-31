@@ -28,9 +28,9 @@
     <button class="button"
             (click)="onSubmit()"
             mat-button
-            [disabled]="myForm.invalid"
-    >Anmelden
+            [disabled]="myForm.invalid">Anmelden
     </button>
+
     <div>{{myForm.value|json}}</div>
   </form>
 </div>
