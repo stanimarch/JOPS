@@ -20,7 +20,8 @@ input.right-align {
 }
 
 .button {
-  height: 50px;
+  height: 40px;
+  width: 100%;
   font-family: Times, serif;
   font-size: 110%;
   line-height: 1.5;

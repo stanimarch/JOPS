@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {FormGroup} from '@angular/forms';
 
 
@@ -11,12 +11,10 @@ interface ILoginResponse {
 
 @Injectable()
 export class JopsApiLoginService {
-
-  apiRootUrl = 'http://jops.informatik.hs-augsburg.de/api/login';
   url = './api/login';
   data: ILoginResponse;
 
-  testUrl = 'http://httpbin.org/post';
+  // testUrl = 'http://httpbin.org/post';  // um zu testen
 
 
   constructor(private http: HttpClient) {
@@ -26,39 +24,29 @@ export class JopsApiLoginService {
   doPostLogin_global(myForm: FormGroup): void {
     console.log('1. Service: JopsApiLoginService => JSON.stringify(myForm.toString()) ===>' + JSON.stringify(myForm.value));
 
-    this.http.post(this.url, myForm.value, {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-    })
+    this.http.post(this.url, new HttpParams()
+        .set(`username`, myForm.get('username').value)
+        .set(`password`, myForm.get('password').value),
+      {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      })
       .subscribe(res => {
         console.log('2. Res = ' + JSON.stringify(res.valueOf()));
       });
   }
 }
 
-
-/*
-doPostLogin_local(): void {
-    console.log('1. Service: JopsApiLoginService => Mehtode: doPostLogin_local(), apiRootUrl:' + this.apiRootUrl);
-    this.http.post(this.apiRootUrl, {
-      unsername: 'Muster',
-      password: '123456789'
-    }).subscribe(res => {
-      console.log('2. Res = ' + res.valueOf());
-    });
-  }
-*/
-
 /*
 doPostLogin_global(myForm: FormGroup): void {
-  console.log('1. Service: JopsApiLoginService => Mehtode: doPostLogin_global(), JSON.stringify(myForm.value):' +
-  JSON.stringify(myForm.value));
+  console.log('1. Service: JopsApiLoginService => JSON.stringify(myForm.toString()) ===>' + JSON.stringify(myForm.value));
 
-  this.http.post(this.testUrl, JSON.stringify(myForm.value))
-    .subscribe(res => {
-    console.log('2. Res = ' + res.valueOf());
+this.http.post(this.url, myForm.value,
+  {
+    headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+  })
+  .subscribe(res => {
+    console.log('2. Res = ' + JSON.stringify(res.valueOf()));
   });
-
 }
 }
 */

@@ -12,8 +12,8 @@ export class DialogOverviewComponent implements OnInit {
   hide = true;
 
   myForm = new FormGroup({
-    username: new FormControl('maxmuster'),
-    password: new FormControl('fO8M56Qm8K')
+    username: new FormControl(),
+    password: new FormControl()
   });
 
   constructor(
@@ -23,15 +23,10 @@ export class DialogOverviewComponent implements OnInit {
     dialogRef.disableClose = true;
   }
 
-  /*onNoClick(): void {
-    this.dialogRef.close();
-  }*/
-
   ngOnInit() {
   }
 
   onSubmit() {
-    // console.log(this.myForm);
     this.jopsApiLoginService.doPostLogin_global(this.myForm);
   }
 }
