@@ -24,9 +24,9 @@ export class JopsApiLoginService {
 
 
   doPostLogin_global(myForm: FormGroup): void {
-    // console.log('1. Service: JopsApiLoginService => Mehtode: doPostLogin_global(), JSON.stringify(myForm.value):' + JSON.stringify(myForm.value));
+    console.log('1. Service: JopsApiLoginService => JSON.stringify(myForm.toString()) ===>' + JSON.stringify(myForm.value));
 
-    this.http.post(this.testUrl, myForm.toString(), {
+    this.http.post(this.testUrl, myForm.value, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
     })
