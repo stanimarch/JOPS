@@ -12,8 +12,8 @@ export class DialogOverviewComponent implements OnInit {
   hide = true;
 
   myForm = new FormGroup({
-    username: new FormControl('stas'),
-    password: new FormControl('password')
+    username: new FormControl('maxmuster'),
+    password: new FormControl('fO8M56Qm8K')
   });
 
   constructor(
