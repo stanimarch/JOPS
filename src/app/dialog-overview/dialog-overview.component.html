@@ -12,6 +12,7 @@
              formControlName="username"
              placeholder="Benutzername:"
              type="name"
+             tabindex="1"
              required>
       <mat-icon matSuffix>perm_identity</mat-icon>
     </mat-form-field>
@@ -20,14 +21,16 @@
       <input matInput
              formControlName="password"
              placeholder="Passwort:"
+             tabindex="2"
              [type]="hide ? 'password' : 'text'"
              required>
       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
     </mat-form-field>
 
     <button class="button"
-            (click)="onSubmit()"
+            (click)="onSubmit(); "
             mat-button
+            tabindex="3"
             [disabled]="myForm.invalid">Anmelden
     </button>
   </form>

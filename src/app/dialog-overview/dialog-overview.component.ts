@@ -11,10 +11,7 @@ import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 export class DialogOverviewComponent implements OnInit {
   hide = true;
 
-  myForm = new FormGroup({
-    username: new FormControl(),
-    password: new FormControl()
-  });
+  myForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewComponent>,
@@ -24,9 +21,15 @@ export class DialogOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.myForm = new FormGroup({
+      username: new FormControl(),
+      password: new FormControl()
+    });
   }
 
   onSubmit() {
     this.jopsApiLoginService.doPostLogin_global(this.myForm);
+    this.myForm.reset();
+    this.dialogRef.close();
   }
 }

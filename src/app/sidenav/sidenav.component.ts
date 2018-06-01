@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {AfterContentInit, Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.component';
 import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
@@ -10,13 +10,17 @@ import {JopsApiRunService} from '../jops-api/jops-api-run.service';
   styleUrls: ['./sidenav.component.css']
 
 })
-export class SidenavComponent {
+export class SidenavComponent implements AfterContentInit {
   fillerNav = Array(10).fill(0).map((_, i) => `Aufgabe  ${i + 1}`);
   unsername: string;
   password: string;
 
   constructor(public dialog: MatDialog,
               private jopsApiRunService: JopsApiRunService) {
+  }
+
+  ngAfterContentInit() {
+    this.openDialog();
   }
 
   onClickHaupt() {

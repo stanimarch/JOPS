@@ -45,6 +45,7 @@ import {DialogOverviewComponent} from './dialog-overview/dialog-overview.compone
 import {JopsApiLoginService} from './jops-api/jops-api-login.service';
 import {JopsApiRunService} from './jops-api/jops-api-run.service';
 import {JopApiDbService} from './jops-api/jop-api-db.service';
+import {UserService} from './user/user.service';
 
 
 @NgModule({
@@ -95,7 +96,7 @@ import {JopApiDbService} from './jops-api/jop-api-db.service';
     MatFormFieldModule,
     ReactiveFormsModule
   ],
-  providers: [FormBuilder, HttpClient, JopsApiLoginService, JopsApiRunService, JopApiDbService],
+  providers: [FormBuilder, HttpClient, JopsApiLoginService, JopsApiRunService, JopApiDbService, UserService],
   bootstrap: [AppComponent],
   entryComponents: [DialogOverviewComponent]
 })
