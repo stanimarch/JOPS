@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormGroup, FormControl} from '@angular/forms';
-import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 
 @Component({
   selector: 'app-dialog-overview',
@@ -10,13 +9,11 @@ import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 })
 export class DialogOverviewComponent implements OnInit {
   hide = true;
-
   myForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private jopsApiLoginService: JopsApiLoginService) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
     dialogRef.disableClose = true;
   }
 
@@ -28,8 +25,7 @@ export class DialogOverviewComponent implements OnInit {
   }
 
   onSubmit() {
-    this.jopsApiLoginService.doPostLogin_global(this.myForm);
-    this.myForm.reset();
-    this.dialogRef.close();
+    // console.log(this.myForm.value);
+    this.dialogRef.close(this.myForm);
   }
 }

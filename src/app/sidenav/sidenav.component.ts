@@ -1,8 +1,10 @@
-import {AfterContentInit, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.component';
 import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 import {JopsApiRunService} from '../jops-api/jops-api-run.service';
+import {FormGroup} from '@angular/forms';
+
 
 @Component({
   selector: 'app-sidenav',
@@ -10,17 +12,16 @@ import {JopsApiRunService} from '../jops-api/jops-api-run.service';
   styleUrls: ['./sidenav.component.css']
 
 })
-export class SidenavComponent implements AfterContentInit {
+export class SidenavComponent {
   fillerNav = Array(10).fill(0).map((_, i) => `Aufgabe  ${i + 1}`);
-  unsername: string;
-  password: string;
+  myForm: FormGroup;
 
   constructor(public dialog: MatDialog,
-              private jopsApiRunService: JopsApiRunService) {
-  }
-
-  ngAfterContentInit() {
-    this.openDialog();
+              private jopsApiRunService: JopsApiRunService,
+              private jopsApiLoginService: JopsApiLoginService) {
+    if (localStorage.getItem('sessionId') === null || localStorage.getItem('sessionId') === undefined) {
+      this.openDialog();
+    }
   }
 
   onClickHaupt() {
@@ -41,20 +42,31 @@ export class SidenavComponent implements AfterContentInit {
     document.getElementById('start').style.display = 'none';
   }
 
-  onClick() {
-  }
-
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
       width: '250px'
+      /*,
+      data: {
+        doOpenDialog: this.doOpenDialog,
+        myForm: this.myForm
+      }*/
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.myForm = result;
+      console.log(JSON.stringify(this.myForm.value));
+      this.doLogin();
     });
   }
 
-  doPostRun_glaobal(): void {
-    this.jopsApiRunService.doPostRun_glaobal();
+  doLogin(): void {
+    if (!this.jopsApiLoginService.login(this.myForm)) {
+      this.openDialog();
+    }
+  }
+
+  doLogout() {
+    this.jopsApiLoginService.logout();
+    this.openDialog();
   }
 }

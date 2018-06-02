@@ -35,7 +35,8 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule, MatFormFieldModule
+  MatTreeModule,
+  MatFormFieldModule
 } from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
@@ -45,7 +46,7 @@ import {DialogOverviewComponent} from './dialog-overview/dialog-overview.compone
 import {JopsApiLoginService} from './jops-api/jops-api-login.service';
 import {JopsApiRunService} from './jops-api/jops-api-run.service';
 import {JopApiDbService} from './jops-api/jop-api-db.service';
-import {UserService} from './user/user.service';
+import {AuthInterceptorService} from './jops-api/auth-interceptor.service';
 
 
 @NgModule({
@@ -96,7 +97,7 @@ import {UserService} from './user/user.service';
     MatFormFieldModule,
     ReactiveFormsModule
   ],
-  providers: [FormBuilder, HttpClient, JopsApiLoginService, JopsApiRunService, JopApiDbService, UserService],
+  providers: [FormBuilder, HttpClient, JopsApiLoginService, JopsApiRunService, JopApiDbService, AuthInterceptorService],
   bootstrap: [AppComponent],
   entryComponents: [DialogOverviewComponent]
 })
