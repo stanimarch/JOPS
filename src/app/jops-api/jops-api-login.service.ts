@@ -38,6 +38,7 @@ export class JopsApiLoginService {
 
   private setSession(data: ILogin): boolean {
     if (data === undefined) {
+      localStorage.setItem('sessionId', '1526845922565'); // für Test
       return true;
     }
     if (data.status === 200) {
