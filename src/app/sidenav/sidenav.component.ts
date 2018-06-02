@@ -42,6 +42,9 @@ export class SidenavComponent {
     document.getElementById('start').style.display = 'none';
   }
 
+  onClick() {
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
       width: '250px'
