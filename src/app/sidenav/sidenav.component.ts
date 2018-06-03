@@ -62,8 +62,9 @@ export class SidenavComponent {
     });
   }
 
-  doLogin(): void {
-    if (!this.jopsApiLoginService.login(this.myForm)) {
+  async doLogin() {
+    await this.jopsApiLoginService.login(this.myForm);
+    if (localStorage.getItem('sessionId') === null || localStorage.getItem('sessionId') === undefined) {
       this.openDialog();
     }
   }

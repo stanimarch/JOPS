@@ -3,50 +3,75 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/c
 import {FormGroup} from '@angular/forms';
 
 interface ILogin {
-  status: number;
+  status: string;
   error: string;
   matrNr: string;
   sessionId: string;
+}
+
+export class DataLogin {
+  status: string;
+  error: string;
+  matrNr: string;
+  sessionId: string;
+
+  constructor(status: string,
+              error: string,
+              matrNr: string,
+              sessionId: string) {
+    this.status = status;
+    this.error = error;
+    this.matrNr = matrNr;
+    this.sessionId = sessionId;
+  }
 }
 
 @Injectable()
 export class JopsApiLoginService {
   url = './api/login';
   error: HttpErrorResponse;
+  dataLogin: DataLogin;
 
   // testUrl = 'http://httpbin.org/post';  // um zu testen
 
   constructor(private http: HttpClient) {
   }
 
-  login(myForm: FormGroup): boolean {
+  async login(myForm: FormGroup) {
     localStorage.removeItem('sessionId');
     localStorage.removeItem('matrNr');
-    let data: ILogin;
-    this.http.post<ILogin>(this.url, new HttpParams()
+    await this.http.post<ILogin>(this.url, new HttpParams()
         .set(`username`, myForm.get('username').value)
         .set(`password`, myForm.get('password').value),
       {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
       }).subscribe(res => {
-      data = res;
+      this.dataLogin = new DataLogin(res.status, res.error, res.matrNr, res.sessionId);
+      console.log(JSON.stringify(res.valueOf()));
     }, error => {
+      console.log(JSON.stringify(error.valueOf()));
       this.error = error;
     });
-    return this.setSession(data);
+    await this.setSession();
   }
 
-  private setSession(data: ILogin): boolean {
-    if (data === undefined) {
+  private setSession(): void {
+    if (this.dataLogin === null || this.dataLogin === undefined) {
+      console.log('data === null');
       localStorage.setItem('sessionId', '1526845922565'); // für Test
-      return true;
-    }
-    if (data.status === 200) {
-      localStorage.setItem('sessionId', data.sessionId);
-      localStorage.setItem('matrNr', data.matrNr);
-      return true;
     } else {
-      return false;
+      if (this.dataLogin.status === '200') {
+        console.log('this.dataLogin.status === 200');
+        // localStorage.setItem('sessionId', this.dataLogin.sessionId);
+        localStorage.setItem('sessionId', '1526845922565'); // für Test
+        localStorage.setItem('matrNr', this.dataLogin.matrNr);
+        this.dataLogin = null;
+      } else {
+        console.log('this.dataLogin.status !== 200; status = ' + this.dataLogin.status);
+        console.log('JSON.stringify(this.dataLogin.valueOf()) = ' + JSON.stringify(this.dataLogin.valueOf()));
+        localStorage.setItem('sessionId', '1526845922565'); // für Test
+        this.dataLogin = null;
+      }
     }
   }
 
