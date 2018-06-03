@@ -48,17 +48,18 @@ export class JopsApiLoginService {
       }).subscribe(res => {
       this.dataLogin = new DataLogin(res.status, res.error, res.matrNr, res.sessionId);
       console.log(JSON.stringify(res.valueOf()));
+      this.setSession();
     }, error => {
+      console.log('error =>');
       console.log(JSON.stringify(error.valueOf()));
       this.error = error;
     });
-    await this.setSession();
   }
 
   private setSession(): void {
     if (this.dataLogin === null || this.dataLogin === undefined) {
-      console.log('data === null');
-      localStorage.setItem('sessionId', '1526845922565'); // für Test
+      console.log('dataLogin === null');
+      // localStorage.setItem('sessionId', '1526845922565'); // für Test
     } else {
       if (this.dataLogin.status === 200) {
         console.log('this.dataLogin.status === 200');
