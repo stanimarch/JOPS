@@ -3,19 +3,19 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/c
 import {FormGroup} from '@angular/forms';
 
 interface ILogin {
-  status: string;
+  status: number;
   error: string;
   matrNr: string;
   sessionId: string;
 }
 
 export class DataLogin {
-  status: string;
+  status: number;
   error: string;
   matrNr: string;
   sessionId: string;
 
-  constructor(status: string,
+  constructor(status: number,
               error: string,
               matrNr: string,
               sessionId: string) {
@@ -60,16 +60,16 @@ export class JopsApiLoginService {
       console.log('data === null');
       localStorage.setItem('sessionId', '1526845922565'); // für Test
     } else {
-      if (this.dataLogin.status === '200') {
+      if (this.dataLogin.status === 200) {
         console.log('this.dataLogin.status === 200');
-        // localStorage.setItem('sessionId', this.dataLogin.sessionId);
-        localStorage.setItem('sessionId', '1526845922565'); // für Test
+        localStorage.setItem('sessionId', this.dataLogin.sessionId);
+        // localStorage.setItem('sessionId', '1526845922565'); // für Test
         localStorage.setItem('matrNr', this.dataLogin.matrNr);
         this.dataLogin = null;
       } else {
         console.log('this.dataLogin.status !== 200; status = ' + this.dataLogin.status);
         console.log('JSON.stringify(this.dataLogin.valueOf()) = ' + JSON.stringify(this.dataLogin.valueOf()));
-        localStorage.setItem('sessionId', '1526845922565'); // für Test
+        // localStorage.setItem('sessionId', '1526845922565'); // für Test
         this.dataLogin = null;
       }
     }
