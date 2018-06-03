@@ -20,7 +20,7 @@ export class SidenavComponent {
               private jopsApiRunService: JopsApiRunService,
               private jopsApiLoginService: JopsApiLoginService) {
     if (localStorage.getItem('sessionId') === null || localStorage.getItem('sessionId') === undefined) {
-      this.openDialog();
+      // this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
     }
   }
 

@@ -53,22 +53,23 @@ export class JopsApiLoginService {
       console.log('error =>');
       console.log(JSON.stringify(error.valueOf()));
       this.error = error;
+      // this.setSession();                                               // für Test ############################## das kommentieren!
     });
   }
 
   private setSession(): void {
     if (this.dataLogin === null || this.dataLogin === undefined) {
       console.log('dataLogin === null');
-      // localStorage.setItem('sessionId', '1526845922565'); // für Test
+      // localStorage.setItem('sessionId', '1526845922565');   // für Test ############################### das kommentieren!
+      // localStorage.setItem('matrNr', '560000');             // für Test ############################### das kommentieren!
     } else {
-      if (this.dataLogin.status === 200) {
-        console.log('this.dataLogin.status === 200');
+      if (this.dataLogin.status === 200 && this.dataLogin.sessionId !== null && this.dataLogin.sessionId !== undefined) {
+        console.log('this.dataLogin.status === 200 && this.dataLogin.sessionId !== null && this.dataLogin.sessionId !== undefined');
         localStorage.setItem('sessionId', this.dataLogin.sessionId);
-        // localStorage.setItem('sessionId', '1526845922565'); // für Test
         localStorage.setItem('matrNr', this.dataLogin.matrNr);
         this.dataLogin = null;
       } else {
-        console.log('this.dataLogin.status !== 200; status = ' + this.dataLogin.status);
+        console.log('this.dataLogin.status !== 200 or this.dataLogin.sessionId === null or this.dataLogin.sessionId === undefined');
         console.log('JSON.stringify(this.dataLogin.valueOf()) = ' + JSON.stringify(this.dataLogin.valueOf()));
         // localStorage.setItem('sessionId', '1526845922565'); // für Test
         this.dataLogin = null;
