@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material';
 import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.component';
 import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 import {JopsApiRunService} from '../jops-api/jops-api-run.service';
+import {HeaderArray, MenuService} from '../menu/menu.service';
 
 
 @Component({
@@ -12,15 +13,20 @@ import {JopsApiRunService} from '../jops-api/jops-api-run.service';
   providers: []
 })
 export class SidenavComponent {
+  panelOpenState: boolean;
+  menuData: Array<HeaderArray>;
 
   constructor(public dialog: MatDialog,
               private jopsApiRunService: JopsApiRunService,
-              private jopsApiLoginService: JopsApiLoginService) {
+              private jopsApiLoginService: JopsApiLoginService,
+              private menuService: MenuService) {
     if (localStorage.getItem('sessionId') === null ||
       localStorage.getItem('sessionId') === undefined ||
       localStorage.getItem('matrNr') === null ||
       localStorage.getItem('matrNr') === undefined) {
+      this.panelOpenState = true;
       // this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
+      this.menuData = this.menuService.getData();
     }
   }
 
@@ -43,7 +49,8 @@ export class SidenavComponent {
     document.getElementById('start').style.display = 'none';
   }
 
-  onClick() {
+  onClick(id: number) {
+    console.log(id);
   }
 
   openDialog(): void {

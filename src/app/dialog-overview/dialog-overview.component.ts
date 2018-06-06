@@ -25,6 +25,7 @@ export class DialogOverviewComponent implements OnInit {
       username: new FormControl(),
       password: new FormControl()
     });
+    // this.myForm.get('username').setValue('Maxmuster');
     this.loginForm = true;
   }
 
