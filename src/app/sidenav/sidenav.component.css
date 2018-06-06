@@ -12,11 +12,10 @@
   right: 0;
 }
 
-.example-sidenav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
+.sidenav-inhalt {
+  display: inline-flex;
+  align-items: left;
+  width: 250px;
   background: rgb(236, 238, 239);
 }
 
