@@ -13,12 +13,8 @@
 }
 
 .sidenav-inhalt {
-  /*  display: inline-flex;
-  align-items: left;*/
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-flex;
+  align-items: left;
   width: 250px;
   background: rgb(236, 238, 239);
 }
@@ -54,6 +50,7 @@
   right: 20px;
   color: rgb(255, 101, 0);
 }
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -63,6 +60,7 @@
   height: 40px;
   color: rgb(255, 101, 0)
 }
+
 .button-footer {
   height: 40px;
   font-family: Times, serif;
@@ -73,14 +71,13 @@
   right: 20px;
 }
 
-
 #start, #impressum {
   display: block;
   font-family: Times, serif;
   margin: 8px;
   margin-bottom: 0;
   border: 2px solid rgb(255, 101, 0);
-  height:98%;
+  height: 98%;
   size: auto;
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px;
@@ -96,7 +93,7 @@
   height: 100%;
 }
 
-.aufgabe, .loesunguser, .bewertung, .musterl, .unit{
+.aufgabe, .loesunguser, .bewertung, .musterl, .unit {
   position: relative;
   text-align: center;
   font-family: Times, serif;
@@ -108,6 +105,7 @@
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
+
 /*
 .kommentar{
   float: right;
@@ -133,7 +131,8 @@ label {
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px;
 }
-.textfeldkomment{
+
+.textfeldkomment {
   height: 10vh;
 }
 
@@ -142,22 +141,7 @@ label {
   clear: both;
 }
 
-#button-aufgabe-rechts-links {
-  margin-top: 4px;
-  bottom: 0;
-}
-
-
-.links-button-next-aufgabe {
-  float: left;
-}
-
-.rechts-button-next-aufgabe {
-  float: right;
-}
-
 /*Hier noch div für position der unteren buttons-*/
-
 
 .button-testen, .button-speichern, .button-next-aufgabe, .links-button-next-aufgabe, .rechts-button-next-aufgabe, .button-bewertung-schließen, .button-kommentar-senden {
   bottom: 0;
@@ -179,6 +163,16 @@ label {
 .menu-button {
   width: 220px;
 }
-.button-testen, .button-speichern, .button-next-aufgabe {
-  position: absolute;
+
+#button-aufgabe-rechts-links {
+  margin-top: 4px;
+  bottom: 0;
+}
+
+.links-button-next-aufgabe {
+  float: left;
+}
+
+.rechts-button-next-aufgabe {
+  float: right;
 }
