@@ -42,7 +42,7 @@
   height: auto;
 }
 
-.button-login{
+.button-login {
   height: 50px;
   font-family: Times, serif;
   font-size: 110%;
@@ -51,6 +51,7 @@
   right: 20px;
   color: rgb(255, 101, 0);
 }
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -60,7 +61,8 @@
   height: 40px;
   color: rgb(255, 101, 0)
 }
-.button-footer{
+
+.button-footer {
   height: 40px;
   font-family: Times, serif;
   font-size: 110%;
@@ -70,62 +72,109 @@
   right: 20px;
 }
 
-
 #start, #impressum {
-  font-family: Times, serif;
-  margin: 8px;
-  margin-bottom: 0;
-  border: 2px solid rgb(255, 101, 0);
-  height:98%;
-  size: auto;
-
-}
-.aufgabe, .loesunguser {
-  position: relative;
-  text-align: center;
-  min-height:48%;
-  font-family: Times, serif;
-  margin: 8px;
-  margin-top: 4px;
-  border: 2px solid rgb(255, 101, 0);
-}
-.loesunguser{
-  margin: 8px;
-  margin-bottom: 0;
-  margin-top: 4px;
-}
-label{
   display: block;
-  text-align: center;
-}
-
-.button-speichern {
-  background: #ebf5d7;
-  color: green;
-  font-weight: bold;
-}
-
-.button-abbruch {
-  background: #ffebe6;
-  color: red;
-  font-weight: bold;
-}
-
-.button-next-aufgabe{
-  color: rgb(255, 101, 0);
-  background: blanchedalmond;
-  font-weight: bold;
-}
-
-.textfeld{
-  height: 30vh;
-  width: 95%;
+  font-family: Times, serif;
+  margin: 8px;
+  margin-bottom: 0;
+  border: 2px solid rgb(255, 101, 0);
+  height: 98%;
+  size: auto;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
 }
-#mitte{
+
+#mitte {
   position: relative;
   margin: 0;
   width: 100%;
   height: 100%;
 }
+
+.aufgabe, .loesunguser, .bewertung, .musterl, .unit{
+  position: relative;
+  text-align: center;
+  font-family: Times, serif;
+  margin: 8px;
+  margin-top: 4px;
+  border: 2px solid rgb(255, 101, 0);
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+/*
+.kommentar{
+  float: right;
+  width: 48%;
+}
+.studbewertung {
+  float: left;
+  width: 48%;
+  }
+*/
+
+label {
+  display: block;
+  text-align: center;
+  position: relative;
+  font-size: 20px
+}
+
+.textfeld, .textfeldkomment {
+  height: 30vh;
+  width: 95%;
+  border: 1px solid rgb(255, 101, 0);
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+}
+.textfeldkomment{
+  height: 10vh;
+}
+
+/*Ab hier nur Buttons die im Content sind, im div mitte*/
+.clear {
+  clear: both;
+}
+
+#button-aufgabe-rechts-links {
+  margin-top: 4px;
+  bottom: 0;
+}
+
+.links-button-next-aufgabe {
+  float: left;
+}
+
+.rechts-button-next-aufgabe {
+  float: right;
+}
+
+/*Hier noch div für position der unteren buttons-*/
+.button-testen, .button-speichern, .button-next-aufgabe {
+  position: absolute;
+}
+
+.button-testen, .button-speichern, .button-next-aufgabe, .links-button-next-aufgabe, .rechts-button-next-aufgabe, .button-bewertung-schließen, .button-kommentar-senden {
+  bottom: 0;
+  margin: 4px;
+  display: inline-block;
+  font-family: Times, serif;
+  padding: 5px 10px 6px;
+  text-decoration: none;
+  font-size: 110%;
+  line-height: 1.5;
+  border: solid;
+  border-width: thin;
+  border-color: rgba(195, 206, 206, 0.76);
+  color: rgb(255, 101, 0);
+  position: relative;
+  cursor: pointer;
+}
+
+
+
 

@@ -15,6 +15,14 @@ import {FormGroup} from '@angular/forms';
 export class SidenavComponent {
   fillerNav = Array(10).fill(0).map((_, i) => `Aufgabe  ${i + 1}`);
   myForm: FormGroup;
+  aufgabenstellung = true;
+  studloesung = true;
+  inhaltcenter = false;
+  impressum = false;
+  startseite = true;
+  bewertung = false;
+  musterloeusung = false;
+  unitantwort = false;
 
   constructor(public dialog: MatDialog,
               private jopsApiRunService: JopsApiRunService,
@@ -24,22 +32,38 @@ export class SidenavComponent {
     }
   }
 
+  onClickUnit() {
+    this.unitantwort = true;
+  }
+
+  onClickComment() {
+    this.bewertung = false;
+  }
+
+  onClickmusterl() {
+    this.musterloeusung = true;
+  }
+
+  onClickBewert() {
+    this.bewertung = true;
+  }
+
   onClickHaupt() {
-    document.getElementById('start').style.display = 'block';
-    document.getElementById('mitte').style.display = 'none';
-    document.getElementById('impressum').style.display = 'none';
+    this.inhaltcenter = false;
+    this.impressum = false;
+    this.startseite = true;
   }
 
   onClickAufg() {
-    document.getElementById('start').style.display = 'none';
-    document.getElementById('mitte').style.display = 'block';
-    document.getElementById('impressum').style.display = 'none';
+    this.inhaltcenter = true;
+    this.impressum = false;
+    this.startseite = false;
   }
 
   onClickImp() {
-    document.getElementById('impressum').style.display = 'block';
-    document.getElementById('mitte').style.display = 'none';
-    document.getElementById('start').style.display = 'none';
+    this.inhaltcenter = false;
+    this.impressum = true;
+    this.startseite = false;
   }
 
   onClick() {
