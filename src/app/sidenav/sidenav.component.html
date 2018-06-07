@@ -5,7 +5,7 @@
     </a>
 
     <button (click)="sidenav.toggle();" class="button-header" mat-button>JAVA 1</button>
-    <button (click)="onClickAufg(); sidenav.toggle();" class="button-header" mat-button>JAVA 2</button>
+    <button (click)="sidenav.toggle();" class="button-header" mat-button>JAVA 2</button>
 
     <button (click)="doLogout()" class="button-login" mat-button>Logout</button>
   </mat-toolbar>
@@ -24,7 +24,7 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
-                  [attr.data-index]="id" (click)="onClick(id)">Aufgabe {{1+i}}
+                  [attr.data-index]="id" (click)="onClick(id); onClickAufg()">Aufgabe {{1+i}}
           </button>
 
         </mat-expansion-panel>
