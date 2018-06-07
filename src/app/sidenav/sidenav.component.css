@@ -12,11 +12,14 @@
   right: 0;
 }
 
-.example-sidenav {
+.sidenav-inhalt {
+  /*  display: inline-flex;
+  align-items: left;*/
+
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
+  width: 250px;
   background: rgb(236, 238, 239);
 }
 
@@ -51,7 +54,6 @@
   right: 20px;
   color: rgb(255, 101, 0);
 }
-
 .footer {
   position: fixed;
   bottom: 0;
@@ -61,7 +63,6 @@
   height: 40px;
   color: rgb(255, 101, 0)
 }
-
 .button-footer {
   height: 40px;
   font-family: Times, serif;
@@ -72,13 +73,14 @@
   right: 20px;
 }
 
+
 #start, #impressum {
   display: block;
   font-family: Times, serif;
   margin: 8px;
   margin-bottom: 0;
   border: 2px solid rgb(255, 101, 0);
-  height: 98%;
+  height:98%;
   size: auto;
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px;
@@ -145,6 +147,7 @@ label {
   bottom: 0;
 }
 
+
 .links-button-next-aufgabe {
   float: left;
 }
@@ -154,9 +157,7 @@ label {
 }
 
 /*Hier noch div für position der unteren buttons-*/
-.button-testen, .button-speichern, .button-next-aufgabe {
-  position: absolute;
-}
+
 
 .button-testen, .button-speichern, .button-next-aufgabe, .links-button-next-aufgabe, .rechts-button-next-aufgabe, .button-bewertung-schließen, .button-kommentar-senden {
   bottom: 0;
@@ -171,10 +172,13 @@ label {
   border-width: thin;
   border-color: rgba(195, 206, 206, 0.76);
   color: rgb(255, 101, 0);
-  position: relative;
   cursor: pointer;
+  position: relative;
 }
 
-
-
-
+.menu-button {
+  width: 220px;
+}
+.button-testen, .button-speichern, .button-next-aufgabe {
+  position: absolute;
+}

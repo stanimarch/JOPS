@@ -13,11 +13,22 @@
   <!-- hier kommt das Seitenmenue-->
 
   <mat-sidenav-container hasBackdrop="true" class="example-container">
-    <mat-sidenav #sidenav mode="side" class="example-sidenav">
-      <!-- hier Inhalt vom Seitenmenue, erstmal nur einfach ein Array, noch keine Sinn dahinter-->
-      <mat-nav-list>
-        <a mat-list-item *ngFor="let nav of fillerNav">{{nav}}</a>
-      </mat-nav-list>
+    <mat-sidenav #sidenav mode="side" class="sidenav-inhalt">
+
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let data of menuData">
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{data.thema}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
+                  [attr.data-index]="id" (click)="onClick(id)">Aufgabe {{1+i}}
+          </button>
+
+        </mat-expansion-panel>
+      </mat-accordion>
     </mat-sidenav>
 
     <!--ab hier der Inhalt in der Mitte-->

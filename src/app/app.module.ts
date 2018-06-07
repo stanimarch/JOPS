@@ -47,6 +47,7 @@ import {JopsApiLoginService} from './jops-api/jops-api-login.service';
 import {JopsApiRunService} from './jops-api/jops-api-run.service';
 import {JopApiDbService} from './jops-api/jop-api-db.service';
 import {AuthInterceptorService} from './jops-api/auth-interceptor.service';
+import {MenuService} from './menu/menu.service';
 
 
 @NgModule({
@@ -97,7 +98,7 @@ import {AuthInterceptorService} from './jops-api/auth-interceptor.service';
     MatFormFieldModule,
     ReactiveFormsModule
   ],
-  providers: [FormBuilder, HttpClient, JopsApiLoginService, JopsApiRunService, JopApiDbService, AuthInterceptorService],
+  providers: [FormBuilder, HttpClient, JopsApiLoginService, JopsApiRunService, JopApiDbService, AuthInterceptorService, MenuService],
   bootstrap: [AppComponent],
   entryComponents: [DialogOverviewComponent]
 })
