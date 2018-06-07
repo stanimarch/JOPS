@@ -48,11 +48,12 @@
         <!--Aufgabe div-->
         <div class="aufgabe" *ngIf="aufgabenstellung">
           <div>
+
             <p>
               <label>Themengebiet</label>
             </p>
             <p>
-              <label>Aufgabenname</label>
+              <label >Aufgabenname</label>
             </p>
           </div>
           <div class="clear"></div>
@@ -66,8 +67,8 @@
           <div class="clear"></div>
           <div id="button-aufgabe-rechts-links">
             <button mat-button type="button" class="links-button-next-aufgabe" (click)="onClick()">
-              <mat-icon>navigate_before</mat-icon>
-              before
+              <mat-icon>navigate_before</mat-icon>before</button>
+            <button mat-button type="button" class="button-next-aufgabe" (click)="onClickComment()"> Anregung zur Aufgabe!
             </button>
             <button mat-button type="button" class="rechts-button-next-aufgabe" (click)="onClick()">next
               <mat-icon>navigate_next</mat-icon>
@@ -75,7 +76,21 @@
           </div>
           <div class="clear"></div>
         </div>
+        <div class="commentar" *ngIf="kommentar">
 
+          <div>
+            <p>
+              <label>Kommentarfeld, Vorschläge oder Wünsche bzgl. der Aufgabe
+                <textarea formControlName="comment" class="textfeldkomment"
+                          style="color: red">Hinweis: Du brauchst Dir hier kein Kopf machen, dies wird anonym verschickt!
+                </textarea>
+              </label>
+            </p>
+          </div>
+          <button mat-button type="button" class="button-kommentar-senden" (click)="onClick()">Senden</button>
+          <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickComment()">Schließen
+          </button>
+        </div>
 
         <!--hier muss noch die form eingebaut werden mit buttons submit und so-->
         <div class="loesunguser" *ngIf="studloesung">
@@ -87,18 +102,6 @@
               <textarea formControlName="haha" rows="100" class="textfeld"></textarea>
             </label>
           </p>
-          <div>
-            <p>
-              <button mat-button type="button" class="button-testen" (click)="onClickUnit()"> Testen</button>
-              <button mat-button type="button" class="button-speichern" (click)="onClick()">Speichern</button>
-              <button mat-button type="button" class="button-next-aufgabe" (click)="onClickmusterl()"> Musterlösung</button>
-              <button mat-button type="button" class="button-next-aufgabe" (click)="onClickBewert()"> Aufgabe bewerten
-              </button>
-            </p>
-          </div>
-        </div>
-
-        <div class="bewertung" *ngIf="bewertung">
           <div class="studbewertung">
             <p>
               <label>Hier kommen noch die Buttons für die Pktvergabe </label>
@@ -112,22 +115,16 @@
               </p>
             </div>
           </div>
-
-          <div class="kommentar">
+          <div>
             <p>
-              <label>
-                <textarea formControlName="comment" class="textfeldkomment"
-                          style="color: red">Kommentarfeld, Vorschläge oder Wünsche bzgl. der Aufgabe
-
-                  !!!Wichiger Hinweis!!!
-                </textarea>
-              </label>
+              <button mat-button type="button" class="button-testen" (click)="onClickUnit()"> Testen</button>
+              <button mat-button type="button" class="button-speichern" (click)="onClick()">Speichern</button>
+              <button mat-button type="button" class="button-next-aufgabe" (click)="onClickmusterl()"> Musterlösung</button>
             </p>
           </div>
-          <button mat-button type="button" class="button-kommentar-senden" (click)="onClick()">Senden</button>
-          <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickComment()">Schließen
-          </button>
         </div>
+
+<!-- Hier div für Musterlösugnen-->
         <div class="unit" *ngIf="unitantwort">
           <p>
             <label>Unittest</label>

@@ -21,7 +21,7 @@ export class SidenavComponent {
   inhaltcenter = false;
   impressum = false;
   startseite = true;
-  bewertung = false;
+  kommentar = false;
   musterloeusung = false;
   unitantwort = false;
 
@@ -44,16 +44,13 @@ export class SidenavComponent {
   }
 
   onClickComment() {
-    this.bewertung = false;
+    this.kommentar = true;
   }
 
   onClickmusterl() {
     this.musterloeusung = true;
   }
 
-  onClickBewert() {
-    this.bewertung = true;
-  }
 
   onClickHaupt() {
     this.inhaltcenter = false;

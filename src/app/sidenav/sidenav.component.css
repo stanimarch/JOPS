@@ -93,7 +93,7 @@
   height: 100%;
 }
 
-.aufgabe, .loesunguser, .bewertung, .musterl, .unit {
+.aufgabe, .loesunguser, .bewertung, .musterl, .unit, .commentar{
   position: relative;
   text-align: center;
   font-family: Times, serif;
