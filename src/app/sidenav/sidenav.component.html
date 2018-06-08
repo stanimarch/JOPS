@@ -1,7 +1,3 @@
-<style type="text/css">
-  .menu-spinner {
-  }
-</style>
 <ng-container>
   <mat-toolbar class="header">
     <a href="http://jops.informatik.hs-augsburg.de">
@@ -22,14 +18,14 @@
         <mat-accordion>
           <mat-expansion-panel class="sidenav-thema-aufgabe" *ngFor="let data of menuData">
 
-            <mat-expansion-panel-header>
-              <mat-panel-title class="sidenav-thema-header">
-                {{data.thema}}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
-                    [attr.data-index]="id" (click)="onClick(id); onClickAufg()"> Aufgabe {{1+i}}
-            </button>
+          <mat-expansion-panel-header>
+            <mat-panel-title class="sidenav-thema-header">
+              {{data.thema}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
+                  [attr.data-index]="id" (click)="onClick(id); onClickAufg()"> Aufgabe {{1+i}}
+          </button>
 
           </mat-expansion-panel>
         </mat-accordion>
@@ -181,6 +177,7 @@
             <br>
             <br>
           </p>
+
           <h1 style="margin-top: 10px; color: rgb(255, 101, 0); font-size: 2em;">
             Copyright</h1>
           <p>
