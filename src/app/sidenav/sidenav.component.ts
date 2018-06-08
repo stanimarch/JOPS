@@ -77,6 +77,9 @@ export class SidenavComponent implements OnInit {
   onClickComment() {
     this.kommentar = true;
   }
+  onClickCommentClose() {
+    this.kommentar = false;
+  }
 
   onClickmusterl() {
     this.musterloeusung = true;

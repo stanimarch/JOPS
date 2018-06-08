@@ -16,7 +16,34 @@
   display: inline-flex;
   align-items: left;
   width: 250px;
-  background: rgb(236, 238, 239);
+}
+
+.sidenav-thema-aufgabe {
+  width: 250px;
+}
+
+.sidenav-thema-header {
+  display: block;
+  width: 250px;
+  bottom: 0;
+  font-family: Times, serif, bold;
+  font-size: 20px;
+  padding: 5px 10px 6px;
+  line-height: 1.5;
+  color: rgb(255, 101, 0);
+  cursor: pointer;
+}
+
+.menu-button {
+  width: 190px;
+  font-size: 18px;
+  font-family: Times, serif;
+  display: block;
+  margin: 4px;
+  border: solid;
+  border-width: thin;
+  border-color: rgb(255, 101, 0);
+  background: rgba(255,161,21,0.4);
 }
 
 .header {
@@ -93,7 +120,7 @@
   height: 100%;
 }
 
-.aufgabe, .loesunguser, .bewertung, .musterl, .unit, .commentar{
+.aufgabe, .loesunguser, .bewertung, .musterl, .unit, .commentar {
   position: relative;
   text-align: center;
   font-family: Times, serif;
@@ -158,10 +185,6 @@ label {
   color: rgb(255, 101, 0);
   cursor: pointer;
   position: relative;
-}
-
-.menu-button {
-  width: 220px;
 }
 
 #button-aufgabe-rechts-links {
