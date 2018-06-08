@@ -46,10 +46,10 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit() {
     this.menuData = this.menuService.getData();
-    this.isMenu = false;
+    this.isMenu = true;
     this.menuNeu = -1;
   }
-
+/*
   menuJava1() {
     if (this.menuNeu === 1) {
       this.myNav.open();
@@ -80,7 +80,7 @@ export class SidenavComponent implements OnInit {
       });
     });
   }
-
+*/
 
   onClickUnit() {
     this.unitantwort = true;
@@ -134,5 +134,13 @@ export class SidenavComponent implements OnInit {
   doLogout() {
     this.jopsApiLoginService.logout();
     this.openDialog();
+  }
+
+  menuJava1_test() {
+    this.myNav.toggle();
+  }
+
+  menuJava2_test() {
+    this.myNav.toggle();
   }
 }
