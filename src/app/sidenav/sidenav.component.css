@@ -16,10 +16,12 @@
   display: inline-flex;
   align-items: left;
   width: 250px;
+  background: rgba(255,240,0,0.2);
 }
 
 .sidenav-thema-aufgabe {
   width: 250px;
+
 }
 
 .sidenav-thema-header {
@@ -43,7 +45,7 @@
   border: solid;
   border-width: thin;
   border-color: rgb(255, 101, 0);
-  background: rgba(255,161,21,0.4);
+  background: rgba(255,240,0,0.2);
 }
 
 .header {
