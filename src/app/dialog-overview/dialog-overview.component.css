@@ -34,7 +34,6 @@ input.right-align {
   height: 232px;
   align-content: center;
   margin: auto;
-  align-content: center;
 }
 
 .mat-spinner-content {
@@ -42,4 +41,7 @@ input.right-align {
   width: min-content;
   margin-top: 30%;
   margin-left: 25%;
+}
+.mat-spinner-content ::ng-deep circle {
+  stroke: rgb(255,101,0);
 }
