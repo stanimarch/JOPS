@@ -4,9 +4,9 @@
       <img (click)="onClickHaupt()" class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo"/>
     </a>
 
-    <button (click)="sidenav.toggle();" class="button-header" mat-button>JAVA 1</button>
-    <button (click)="sidenav.toggle();" class="button-header" mat-button>JAVA 2</button>
-    <button class="button-header" mat-button>TEST</button>
+    <button (click)="sidenav.toggle()" class="button-header" mat-button>JAVA 1</button>
+    <button class="button-header" mat-button>JAVA 2</button>
+    <button (click)="menuJava1()" class="button-header" mat-button>TEST</button>
     <button (click)="doLogout()" class="button-login" mat-button>Logout</button>
   </mat-toolbar>
 
@@ -15,7 +15,7 @@
   <mat-sidenav-container hasBackdrop="true" class="example-container">
     <mat-sidenav #sidenav mode="side" class="sidenav-inhalt">
 
-      <mat-accordion>
+      <mat-accordion style="background: #eceeef">
         <mat-expansion-panel *ngFor="let data of menuData">
 
           <mat-expansion-panel-header>
@@ -53,7 +53,7 @@
               <label>Themengebiet</label>
             </p>
             <p>
-              <label >Aufgabenname</label>
+              <label>Aufgabenname</label>
             </p>
           </div>
           <div class="clear"></div>
@@ -67,8 +67,11 @@
           <div class="clear"></div>
           <div id="button-aufgabe-rechts-links">
             <button mat-button type="button" class="links-button-next-aufgabe" (click)="onClick()">
-              <mat-icon>navigate_before</mat-icon>before</button>
-            <button mat-button type="button" class="button-next-aufgabe" (click)="onClickComment()"> Anregung zur Aufgabe!
+              <mat-icon>navigate_before</mat-icon>
+              before
+            </button>
+            <button mat-button type="button" class="button-next-aufgabe" (click)="onClickComment()"> Anregung zur
+              Aufgabe!
             </button>
             <button mat-button type="button" class="rechts-button-next-aufgabe" (click)="onClick()">next
               <mat-icon>navigate_next</mat-icon>
@@ -119,12 +122,13 @@
             <p>
               <button mat-button type="button" class="button-testen" (click)="onClickUnit()"> Testen</button>
               <button mat-button type="button" class="button-speichern" (click)="onClick()">Speichern</button>
-              <button mat-button type="button" class="button-next-aufgabe" (click)="onClickmusterl()"> Musterlösung</button>
+              <button mat-button type="button" class="button-next-aufgabe" (click)="onClickmusterl()"> Musterlösung
+              </button>
             </p>
           </div>
         </div>
 
-<!-- Hier div für Musterlösugnen-->
+        <!-- Hier div für Musterlösugnen-->
         <div class="unit" *ngIf="unitantwort">
           <p>
             <label>Unittest</label>
@@ -137,9 +141,9 @@
           </div>
         </div>
         <div class="musterl" *ngIf="musterloeusung">
-            <p>
-              <label>Musterlösung</label>
-            </p>
+          <p>
+            <label>Musterlösung</label>
+          </p>
           <div class="clear"></div>
           <div style="margin: 4px">
             <p style="text-align: left">

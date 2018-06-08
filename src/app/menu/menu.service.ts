@@ -65,4 +65,23 @@ export class MenuService {
       }
     });
   }
+
+  buildArray2(urdatenType: Array<UrdatenType>) {
+    let thema = '';
+    let arr: number[] = [];
+    this.urdaten.forEach((data, index) => {
+      if (index === 0) {
+        thema = data.thema;
+      }
+      if (data.thema === thema) {
+        arr.push(data.aufgabenId);
+      }
+      if (index !== 0 && data.thema !== thema || index === this.urdaten.length - 1) {
+        this.dataHeader.push(new HeaderArray(thema, arr));
+        thema = data.thema;
+        arr = [];
+        arr.push(data.aufgabenId);
+      }
+    });
+  }
 }
