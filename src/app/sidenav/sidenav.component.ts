@@ -3,8 +3,9 @@ import {MatDialog, MatDrawerContainer} from '@angular/material';
 import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.component';
 import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 import {JopsApiRunService} from '../jops-api/jops-api-run.service';
-import {HeaderArray, MenuService} from '../menu/menu.service';
-import {JopApiDbService} from '../jops-api/jop-api-db.service';
+import {HeaderArray, MenuService, UrdatenType} from '../menu/menu.service';
+import {JopApiDbService, SThemaResponse} from '../jops-api/jop-api-db.service';
+import {HttpClient} from '@angular/common/http';
 
 
 @Component({
@@ -16,10 +17,9 @@ import {JopApiDbService} from '../jops-api/jop-api-db.service';
 export class SidenavComponent implements OnInit {
   @ViewChild('sidenav') public myNav;
 
-  panelOpenState: boolean;
-  menuData: Array<HeaderArray>;
-  isMenu: boolean;
-  menuNeu: number;
+  menuAktuell: number;
+  dataJava1: Array<HeaderArray>;
+  dataJava2: Array<HeaderArray>;
 
   aufgabenstellung = true;
   studloesung = true;
@@ -34,53 +34,123 @@ export class SidenavComponent implements OnInit {
               private jopsApiRunService: JopsApiRunService,
               private jopsApiLoginService: JopsApiLoginService,
               private jopApiDbService: JopApiDbService,
-              private menuService: MenuService) {
+              private menuService: MenuService,
+              private http: HttpClient) {
     if (localStorage.getItem('sessionId') === null ||
       localStorage.getItem('sessionId') === undefined ||
       localStorage.getItem('matrNr') === null ||
       localStorage.getItem('matrNr') === undefined) {
-      this.panelOpenState = true;
       // this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
     }
   }
 
   ngOnInit() {
-    this.menuData = this.menuService.getData();
-    this.isMenu = true;
-    this.menuNeu = -1;
+    this.menuAktuell = -1;
+    this.dataJava1 = null;
+    this.dataJava2 = null;
   }
-/*
+
   menuJava1() {
-    if (this.menuNeu === 1) {
-      this.myNav.open();
-    } else if (this.menuNeu) {
-
+    if (!this.myNav.opened) {
+      if (this.dataJava1 !== null) {
+        this.menuAktuell = 1;
+        this.myNav.open();
+      } else {
+        this.menuAktuell = -1;
+        this.myNav.open();
+        this.buildJava1Data()
+          .then(res => {
+            // console.log('menuJava1(): alles ist OK');
+            this.menuAktuell = 1;
+            this.myNav.open();
+          })
+          .catch(msg => {
+            // console.log('menuJava1(): alles ist nicht OK');
+            this.myNav.close();
+          });
+      }
+    } else { // opened
+      if (this.menuAktuell === 1) {
+        this.myNav.close();
+      } else if (this.dataJava1 !== null) {
+        this.menuAktuell = 1;
+      } else {
+        this.menuAktuell = -1;
+        this.buildJava1Data()
+          .then(res => {
+            // console.log('menuJava1(): alles ist OK');
+            this.menuAktuell = 1;
+          })
+          .catch(msg => {
+            // console.log('menuJava1(): alles ist nicht OK');
+            this.myNav.close();
+          });
+      }
     }
-
-
-    this.getJava1().then(res => {
-      console.log('menuJava1(): alles ist OK');
-      this.menuData = this.menuService.dataJava1;
-      this.isMenu = true;
-    }).catch(msg => {
-      console.log('menuJava1(): alles ist nicht OK');
-      this.myNav.close();
-    });
-
   }
 
-  getJava1() {
+  buildJava1Data() {
     return new Promise((resolve, reject) => {
-      this.jopApiDbService.java1().then(res => {
-        console.log('getJava1(): alles ist OK');
-        resolve();
-      }).catch(msg => {
-        console.log('getJava1(): alles ist nicht OK');
+      this.jopApiDbService.buildJava1()
+        .then(res => {
+          this.dataJava1 = this.menuService.dataJava1;
+          resolve();
+        }).catch(msg => {
         reject();
       });
     });
   }
-*/
+
+  menuJava2() {
+    if (!this.myNav.opened) {
+      if (this.dataJava2 !== null) {
+        this.menuAktuell = 2;
+        this.myNav.open();
+      } else {
+        this.menuAktuell = -1;
+        this.myNav.open();
+        this.buildJava2Data()
+          .then(res => {
+            // console.log('menuJava2(): alles ist OK');
+            this.menuAktuell = 2;
+            this.myNav.open();
+          })
+          .catch(msg => {
+            // console.log('menuJava2(): alles ist nicht OK');
+            this.myNav.close();
+          });
+      }
+    } else { // opened
+      if (this.menuAktuell === 2) {
+        this.myNav.close();
+      } else if (this.dataJava2 !== null) {
+        this.menuAktuell = 2;
+      } else {
+        this.menuAktuell = -1;
+        this.buildJava2Data()
+          .then(res => {
+            // console.log('menuJava2(): alles ist OK');
+            this.menuAktuell = 2;
+          })
+          .catch(msg => {
+            // console.log('menuJava2(): alles ist nicht OK');
+            this.myNav.close();
+          });
+      }
+    }
+  }
+
+  buildJava2Data() {
+    return new Promise((resolve, reject) => {
+      this.jopApiDbService.buildJava2()
+        .then(res => {
+          this.dataJava2 = this.menuService.dataJava2;
+          resolve();
+        }).catch(msg => {
+        reject();
+      });
+    });
+  }
 
   onClickUnit() {
     this.unitantwort = true;
@@ -122,7 +192,13 @@ export class SidenavComponent implements OnInit {
   }
 
   onClick_2() {
-    console.log(this.myNav.opened);
+    this.http.get<SThemaResponse>('./api/1')
+      .toPromise()
+      .then((res) => {
+        console.log(JSON.stringify(res.response));
+      }).catch(msg => {
+      console.log('########## Error by http.get(): ' + msg);
+    });
   }
 
   openDialog(): void {
@@ -136,11 +212,9 @@ export class SidenavComponent implements OnInit {
     this.openDialog();
   }
 
-  menuJava1_test() {
-    this.myNav.toggle();
-  }
-
-  menuJava2_test() {
-    this.myNav.toggle();
-  }
 }
+
+/*
+res.forEach((data, index) => {
+  console.log('Index: ' + index + 'data: ' + data.toString());
+*/

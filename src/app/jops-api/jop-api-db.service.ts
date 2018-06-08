@@ -2,42 +2,57 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MenuService, UrdatenType} from '../menu/menu.service';
 
-export class Zeile {
-  themengebiet: string;
-  aufgabeIndex: string;
 
-  constructor(themengebiet: string, aufgabeIndex: string) {
-    this.themengebiet = themengebiet;
-    this.aufgabeIndex = aufgabeIndex;
-  }
+export class SThemaResponse {
+  status: number;
+  error: string;
+  response: Array<UrdatenType>;
 }
 
 @Injectable()
 export class JopApiDbService {
-  apiRootUrl = 'http://jops.informatik.hs-augsburg.de/api/login'; // um erwas      lokal zu testen
-  url = './api/login';                                            // um erwas auf Server zu testen
-  menuList: Array<Zeile> = [];
 
   constructor(private http: HttpClient,
               private menuService: MenuService) {
   }
 
-  java1() {
-    console.log('########## JopApiDbService => java1():');
+  buildJava1() {
+    console.log('########## JopApiDbService => buildJava1(): ');
     return new Promise((resolve, reject) => {
-      this.http.get('./api/java1')
+      this.http.get<SThemaResponse>('./api/1')
         .toPromise()
-        .then((res: Array<UrdatenType>) => {
-          // this.menuService.buildArray2(res);
-          res.forEach((data, index) => {
-            console.log('Index: ' + index + 'data: ' + data.toString());
-          });
-          resolve();
+        .then((res) => {
+          this.menuService.buildArrayJava1(res.response)
+            .then(res2 => {
+              resolve();
+            })
+            .catch(msg => {
+              reject();
+            });
         }).catch(msg => {
-        console.log('Error: ' + msg);
+        console.log('########## Error by http.get(): ' + msg);
         reject();
       });
     });
   }
 
+  buildJava2() {
+    console.log('########## JopApiDbService => buildJava2(): ');
+    return new Promise((resolve, reject) => {
+      this.http.get<SThemaResponse>('./api/2')
+        .toPromise()
+        .then((res) => {
+          this.menuService.buildArrayJava2(res.response)
+            .then(res2 => {
+              resolve();
+            })
+            .catch(msg => {
+              reject();
+            });
+        }).catch(msg => {
+        console.log('########## Error by http.get(): ' + msg);
+        reject();
+      });
+    });
+  }
 }

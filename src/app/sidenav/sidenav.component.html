@@ -4,10 +4,9 @@
       <img (click)="onClickHaupt()" class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo"/>
     </a>
 
-    <button (click)="menuJava1_test()" class="button-header" mat-button>JAVA 1</button>
-    <button (click)="menuJava2_test()" class="button-header" mat-button>JAVA 2</button>
-    <button (click)="menuJava1()" class="button-header" mat-button>TEST 1</button>
-    <button (click)="onClick_2()" class="button-header" mat-button>TEST 2</button>
+    <button (click)="menuJava1()" class="button-header" mat-button>JAVA 1</button>
+    <button (click)="menuJava2()" class="button-header" mat-button>JAVA 2</button>
+    <button (click)="onClick_2()" class="button-header" mat-button>TEST</button>
     <button (click)="doLogout()" class="button-login" mat-button>Logout</button>
   </mat-toolbar>
 
@@ -15,23 +14,40 @@
 
   <mat-sidenav-container hasBackdrop="false" class="example-container">
     <mat-sidenav #sidenav mode="side" class="sidenav-inhalt">
-      <div *ngIf="isMenu">
-        <mat-accordion>
-          <mat-expansion-panel class="sidenav-thema-aufgabe" *ngFor="let data of menuData">
+      <div *ngIf="menuAktuell !== 0">
 
-            <mat-expansion-panel-header>
-              <mat-panel-title class="sidenav-thema-header">
-                {{data.thema}}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
-                    [attr.data-index]="id" (click)="onClick(id); onClickAufg()"> Aufgabe {{1+i}}
-            </button>
+        <div *ngIf="menuAktuell === 1">
+          <mat-accordion>
+            <mat-expansion-panel class="sidenav-thema-aufgabe" *ngFor="let data of dataJava1">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="sidenav-thema-header">
+                  {{data.thema}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
+                      [attr.data-index]="id" (click)="onClick(id); onClickAufg()"> Aufgabe {{1+i}}
+              </button>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
 
-          </mat-expansion-panel>
-        </mat-accordion>
+        <div *ngIf="menuAktuell === 2">
+          <mat-accordion>
+            <mat-expansion-panel class="sidenav-thema-aufgabe" *ngFor="let data of dataJava2">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="sidenav-thema-header">
+                  {{data.thema}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
+                      [attr.data-index]="id" (click)="onClick(id); onClickAufg()"> Aufgabe {{1+i}}
+              </button>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
       </div>
-      <div class="mat-spinner-content menu-spinner" *ngIf="!isMenu">
+      <div class="mat-spinner-content menu-spinner" *ngIf="menuAktuell === -1">
         <mat-spinner></mat-spinner>
       </div>
     </mat-sidenav>
