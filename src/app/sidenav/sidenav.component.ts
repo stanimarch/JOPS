@@ -18,6 +18,7 @@ export class SidenavComponent implements OnInit {
 
   panelOpenState: boolean;
   menuData: Array<HeaderArray>;
+  isMenu: boolean;
 
   aufgabenstellung = true;
   studloesung = true;
@@ -68,6 +69,7 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit() {
     this.menuData = this.menuService.getData();
+    this.isMenu = false;
   }
 
   onClickUnit() {
@@ -77,6 +79,7 @@ export class SidenavComponent implements OnInit {
   onClickComment() {
     this.kommentar = true;
   }
+
   onClickCommentClose() {
     this.kommentar = false;
   }

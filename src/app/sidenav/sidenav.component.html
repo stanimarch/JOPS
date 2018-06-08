@@ -1,3 +1,7 @@
+<style type="text/css">
+  .menu-spinner {
+  }
+</style>
 <ng-container>
   <mat-toolbar class="header">
     <a href="http://jops.informatik.hs-augsburg.de">
@@ -14,21 +18,25 @@
 
   <mat-sidenav-container hasBackdrop="false" class="example-container">
     <mat-sidenav #sidenav mode="side" class="sidenav-inhalt">
+      <div *ngIf="isMenu">
+        <mat-accordion>
+          <mat-expansion-panel class="sidenav-thema-aufgabe" *ngFor="let data of menuData">
 
-      <mat-accordion>
-        <mat-expansion-panel class="sidenav-thema-aufgabe" *ngFor="let data of menuData">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="sidenav-thema-header">
+                {{data.thema}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
+                    [attr.data-index]="id" (click)="onClick(id); onClickAufg()"> Aufgabe {{1+i}}
+            </button>
 
-          <mat-expansion-panel-header>
-            <mat-panel-title class="sidenav-thema-header">
-              {{data.thema}}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
-                  [attr.data-index]="id" (click)="onClick(id); onClickAufg()"> Aufgabe {{1+i}}
-          </button>
-
-        </mat-expansion-panel>
-      </mat-accordion>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div class="mat-spinner-content menu-spinner" *ngIf="!isMenu">
+        <mat-spinner></mat-spinner>
+      </div>
     </mat-sidenav>
 
     <!--ab hier der Inhalt in der Mitte-->

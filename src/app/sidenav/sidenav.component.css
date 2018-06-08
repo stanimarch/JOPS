@@ -13,10 +13,10 @@
 }
 
 .sidenav-inhalt {
-  display: inline-flex;
+  display: block;
   align-items: left;
   width: 250px;
-  background: rgba(255,240,0,0.2);
+  background: rgba(255, 240, 0, 0.2);
 }
 
 .sidenav-thema-aufgabe {
@@ -45,7 +45,7 @@
   border: solid;
   border-width: thin;
   border-color: rgb(255, 101, 0);
-  background: rgba(255,240,0,0.2);
+  background: rgba(255, 240, 0, 0.2);
 }
 
 .header {
@@ -202,4 +202,14 @@ label {
   float: right;
 }
 
+.menu-spinner {
+  position: relative;
+  height: 100px;
+  width: fit-content;
+  top: 20%;
+  left: calc(50% - 50px);
+}
 
+.mat-spinner-content ::ng-deep circle {
+  stroke: rgb(255, 101, 0);
+}
