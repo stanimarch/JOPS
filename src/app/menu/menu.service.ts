@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 
 export class HeaderArray {
   thema: string;
@@ -16,11 +16,17 @@ export class UrdatenType {
 }
 
 @Injectable()
-export class MenuService {
+export class MenuService implements OnInit {
   urdaten: Array<UrdatenType>;
-  dataHeader: Array<HeaderArray>;
+  dataJava1: Array<HeaderArray>;
+  dataJava2: Array<HeaderArray>;
 
   constructor() {
+  }
+
+  ngOnInit() {
+    this.dataJava1 = [];
+    this.dataJava2 = [];
     this.urdaten = [
       {'thema': 'Thema 1', 'aufgabenId': 101},
       {'thema': 'Thema 1', 'aufgabenId': 102},
@@ -32,22 +38,43 @@ export class MenuService {
       {'thema': 'Thema 3', 'aufgabenId': 303},
       {'thema': 'Thema 3', 'aufgabenId': 304}
     ];
-    this.dataHeader = [];
-    this.buildArray();
+    this.buildArray_TestDaten();
   }
 
   getData(): Array<HeaderArray> {
-    this.dataHeader.forEach((data, index) => {
+    this.dataJava1.forEach((data, index) => {
       console.log(data.thema);
       data.aufgabenId.forEach((id) => {
         console.log('  => ' + id);
       });
     });
-    return this.dataHeader;
+    return this.dataJava1;
   }
 
 
-  buildArray() {
+  buildArrayJava1(urdaten: Array<UrdatenType>) {
+    if (this.dataJava1 === null) {
+      let thema = '';
+      let arr: number[] = [];
+      this.dataJava1 = [];
+      urdaten.forEach((data, index) => {
+        if (index === 0) {
+          thema = data.thema;
+        }
+        if (data.thema === thema) {
+          arr.push(data.aufgabenId);
+        }
+        if (index !== 0 && data.thema !== thema || index === urdaten.length - 1) {
+          this.dataJava1.push(new HeaderArray(thema, arr));
+          thema = data.thema;
+          arr = [];
+          arr.push(data.aufgabenId);
+        }
+      });
+    }
+  }
+
+  buildArray_TestDaten() {
     let thema = '';
     let arr: number[] = [];
     this.urdaten.forEach((data, index) => {
@@ -58,26 +85,7 @@ export class MenuService {
         arr.push(data.aufgabenId);
       }
       if (index !== 0 && data.thema !== thema || index === this.urdaten.length - 1) {
-        this.dataHeader.push(new HeaderArray(thema, arr));
-        thema = data.thema;
-        arr = [];
-        arr.push(data.aufgabenId);
-      }
-    });
-  }
-
-  buildArray2(urdatenType: Array<UrdatenType>) {
-    let thema = '';
-    let arr: number[] = [];
-    this.urdaten.forEach((data, index) => {
-      if (index === 0) {
-        thema = data.thema;
-      }
-      if (data.thema === thema) {
-        arr.push(data.aufgabenId);
-      }
-      if (index !== 0 && data.thema !== thema || index === this.urdaten.length - 1) {
-        this.dataHeader.push(new HeaderArray(thema, arr));
+        this.dataJava1.push(new HeaderArray(thema, arr));
         thema = data.thema;
         arr = [];
         arr.push(data.aufgabenId);

@@ -4,9 +4,10 @@
       <img (click)="onClickHaupt()" class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo"/>
     </a>
 
-    <button (click)="sidenav.toggle()" class="button-header" mat-button>JAVA 1</button>
+    <button (click)="menuJava1()" class="button-header" mat-button>JAVA 1</button>
     <button (click)="sidenav.toggle()" class="button-header" mat-button>JAVA 2</button>
-    <button (click)="menuJava1()" class="button-header" mat-button>TEST</button>
+    <button (click)="menuJava1()" class="button-header" mat-button>TEST 1</button>
+    <button (click)="onClick_2()" class="button-header" mat-button>TEST 2</button>
     <button (click)="doLogout()" class="button-login" mat-button>Logout</button>
   </mat-toolbar>
 
@@ -18,14 +19,14 @@
         <mat-accordion>
           <mat-expansion-panel class="sidenav-thema-aufgabe" *ngFor="let data of menuData">
 
-          <mat-expansion-panel-header>
-            <mat-panel-title class="sidenav-thema-header">
-              {{data.thema}}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
-                  [attr.data-index]="id" (click)="onClick(id); onClickAufg()"> Aufgabe {{1+i}}
-          </button>
+            <mat-expansion-panel-header>
+              <mat-panel-title class="sidenav-thema-header">
+                {{data.thema}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
+                    [attr.data-index]="id" (click)="onClick(id); onClickAufg()"> Aufgabe {{1+i}}
+            </button>
 
           </mat-expansion-panel>
         </mat-accordion>

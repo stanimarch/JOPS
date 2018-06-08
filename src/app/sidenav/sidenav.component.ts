@@ -19,6 +19,7 @@ export class SidenavComponent implements OnInit {
   panelOpenState: boolean;
   menuData: Array<HeaderArray>;
   isMenu: boolean;
+  menuNeu: number;
 
   aufgabenstellung = true;
   studloesung = true;
@@ -43,11 +44,23 @@ export class SidenavComponent implements OnInit {
     }
   }
 
+  ngOnInit() {
+    this.menuData = this.menuService.getData();
+    this.isMenu = false;
+    this.menuNeu = -1;
+  }
+
   menuJava1() {
-    console.log('menuJava1()');
-    this.myNav.open();
+    if (this.menuNeu === 1) {
+      this.myNav.open();
+    } else if (this.menuNeu) {
+
+    }
+
+
     this.getJava1().then(res => {
       console.log('menuJava1(): alles ist OK');
+      this.menuData = this.menuService.dataJava1;
       this.isMenu = true;
     }).catch(msg => {
       console.log('menuJava1(): alles ist nicht OK');
@@ -68,10 +81,6 @@ export class SidenavComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.menuData = this.menuService.getData();
-    this.isMenu = false;
-  }
 
   onClickUnit() {
     this.unitantwort = true;
@@ -110,6 +119,10 @@ export class SidenavComponent implements OnInit {
 
   onClick(id: number) {
     console.log(id);
+  }
+
+  onClick_2() {
+    console.log(this.myNav.opened);
   }
 
   openDialog(): void {
