@@ -6,6 +6,7 @@ import {JopsApiRunService} from '../jops-api/jops-api-run.service';
 import {HeaderArray, MenuService, UrdatenType} from '../menu/menu.service';
 import {JopApiDbService, SThemaResponse} from '../jops-api/jop-api-db.service';
 import {HttpClient} from '@angular/common/http';
+import {FormControl, FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -167,7 +168,6 @@ export class SidenavComponent implements OnInit {
   onClickmusterl() {
     this.musterloeusung = true;
   }
-
 
   onClickHaupt() {
     this.inhaltcenter = false;
