@@ -45,12 +45,13 @@ export class SidenavComponent implements OnInit {
 
   menuJava1() {
     console.log('menuJava1()');
-
+    this.myNav.open();
     this.getJava1().then(res => {
       console.log('menuJava1(): alles ist OK');
-      this.myNav.open();
+      this.isMenu = true;
     }).catch(msg => {
       console.log('menuJava1(): alles ist nicht OK');
+      this.myNav.close();
     });
 
   }
