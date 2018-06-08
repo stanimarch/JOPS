@@ -5,18 +5,18 @@
     </a>
 
     <button (click)="sidenav.toggle()" class="button-header" mat-button>JAVA 1</button>
-    <button class="button-header" mat-button>JAVA 2</button>
+    <button (click)="sidenav.toggle()" class="button-header" mat-button>JAVA 2</button>
     <button (click)="menuJava1()" class="button-header" mat-button>TEST</button>
     <button (click)="doLogout()" class="button-login" mat-button>Logout</button>
   </mat-toolbar>
 
   <!-- hier kommt das Seitenmenue-->
 
-  <mat-sidenav-container  hasBackdrop="false" class="example-container">
-    <mat-sidenav  #sidenav mode="side" class="sidenav-inhalt">
+  <mat-sidenav-container hasBackdrop="false" class="example-container">
+    <mat-sidenav #sidenav mode="side" class="sidenav-inhalt">
 
       <mat-accordion>
-        <mat-expansion-panel  class="sidenav-thema-aufgabe" *ngFor="let data of menuData">
+        <mat-expansion-panel class="sidenav-thema-aufgabe" *ngFor="let data of menuData">
 
           <mat-expansion-panel-header>
             <mat-panel-title class="sidenav-thema-header">

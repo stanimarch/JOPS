@@ -45,7 +45,7 @@ export class SidenavComponent implements OnInit {
   menuJava1() {
     console.log('menuJava1()');
 
-    this.postJava1().then(res => {
+    this.getJava1().then(res => {
       console.log('menuJava1(): alles ist OK');
       this.myNav.open();
     }).catch(msg => {
@@ -54,13 +54,13 @@ export class SidenavComponent implements OnInit {
 
   }
 
-  postJava1() {
+  getJava1() {
     return new Promise((resolve, reject) => {
       this.jopApiDbService.java1().then(res => {
-        console.log('postJava1(): alles ist OK');
+        console.log('getJava1(): alles ist OK');
         resolve();
       }).catch(msg => {
-        console.log('postJava1(): alles ist nicht OK');
+        console.log('getJava1(): alles ist nicht OK');
         reject();
       });
     });
