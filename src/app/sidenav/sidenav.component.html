@@ -12,19 +12,19 @@
 
   <!-- hier kommt das Seitenmenue-->
 
-  <mat-sidenav-container hasBackdrop="true" class="example-container">
-    <mat-sidenav #sidenav mode="side" class="sidenav-inhalt">
+  <mat-sidenav-container  hasBackdrop="false" class="example-container">
+    <mat-sidenav  #sidenav mode="side" class="sidenav-inhalt">
 
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let data of menuData">
+        <mat-expansion-panel class="sidenav-thema-aufgabe"  *ngFor="let data of menuData">
 
           <mat-expansion-panel-header>
-            <mat-panel-title>
+            <mat-panel-title class="sidenav-thema-header">
               {{data.thema}}
             </mat-panel-title>
           </mat-expansion-panel-header>
           <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
-                  [attr.data-index]="id" (click)="onClick(id); onClickAufg()">Aufgabe {{1+i}}
+                  [attr.data-index]="id" (click)="onClick(id); onClickAufg()"> Aufgabe {{1+i}}
           </button>
 
         </mat-expansion-panel>
@@ -53,7 +53,7 @@
               <label>Themengebiet</label>
             </p>
             <p>
-              <label >Aufgabenname</label>
+              <label>Aufgabenname</label>
             </p>
           </div>
           <div class="clear"></div>
@@ -67,8 +67,11 @@
           <div class="clear"></div>
           <div id="button-aufgabe-rechts-links">
             <button mat-button type="button" class="links-button-next-aufgabe" (click)="onClick()">
-              <mat-icon>navigate_before</mat-icon>before</button>
-            <button mat-button type="button" class="button-next-aufgabe" (click)="onClickComment()"> Anregung zur Aufgabe!
+              <mat-icon>navigate_before</mat-icon>
+              before
+            </button>
+            <button mat-button type="button" class="button-next-aufgabe" (click)="onClickComment()"> Anregung zur
+              Aufgabe!
             </button>
             <button mat-button type="button" class="rechts-button-next-aufgabe" (click)="onClick()">next
               <mat-icon>navigate_next</mat-icon>
@@ -88,7 +91,7 @@
             </p>
           </div>
           <button mat-button type="button" class="button-kommentar-senden" (click)="onClick()">Senden</button>
-          <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickComment()">Schließen
+          <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickCommentClose()">Schließen
           </button>
         </div>
 
@@ -119,12 +122,13 @@
             <p>
               <button mat-button type="button" class="button-testen" (click)="onClickUnit()"> Testen</button>
               <button mat-button type="button" class="button-speichern" (click)="onClick()">Speichern</button>
-              <button mat-button type="button" class="button-next-aufgabe" (click)="onClickmusterl()"> Musterlösung</button>
+              <button mat-button type="button" class="button-next-aufgabe" (click)="onClickmusterl()"> Musterlösung
+              </button>
             </p>
           </div>
         </div>
 
-<!-- Hier div für Musterlösugnen-->
+        <!-- Hier div für Musterlösugnen-->
         <div class="unit" *ngIf="unitantwort">
           <p>
             <label>Unittest</label>
@@ -137,9 +141,9 @@
           </div>
         </div>
         <div class="musterl" *ngIf="musterloeusung">
-            <p>
-              <label>Musterlösung</label>
-            </p>
+          <p>
+            <label>Musterlösung</label>
+          </p>
           <div class="clear"></div>
           <div style="margin: 4px">
             <p style="text-align: left">

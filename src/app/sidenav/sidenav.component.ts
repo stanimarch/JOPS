@@ -46,6 +46,9 @@ export class SidenavComponent {
   onClickComment() {
     this.kommentar = true;
   }
+  onClickCommentClose() {
+    this.kommentar = false;
+  }
 
   onClickmusterl() {
     this.musterloeusung = true;
