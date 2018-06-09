@@ -6,6 +6,9 @@
 
     <button (click)="menuJava1()" class="button-header" mat-button>JAVA 1</button>
     <button (click)="menuJava2()" class="button-header" mat-button>JAVA 2</button>
+    <button (click)="sidenav.toggle(); onClickAufg()" class="button-header" mat-button>JULIA</button>
+    <button (click)="sidenav.toggle(); onClickAufg()" class="button-header" mat-button>JULIA</button>
+
     <button (click)="onClick_2()" class="button-header" mat-button>TEST</button>
     <button (click)="doLogout()" class="button-login" mat-button>Logout</button>
   </mat-toolbar>
@@ -100,17 +103,24 @@
           </div>
           <div class="clear"></div>
         </div>
-        <div class="commentar" *ngIf="kommentar">
 
+        <div class="commentar" *ngIf="kommentar">
           <div>
             <p>
-              <label>Kommentarfeld, Vorschläge oder Wünsche bzgl. der Aufgabe
-                <textarea formControlName="comment" class="textfeldkomment"
-                          style="color: red">Hinweis: Du brauchst Dir hier kein Kopf machen, dies wird anonym verschickt!
-                </textarea>
-              </label>
+              <label style="margin-left: 20px; text-align: left; font-size: 16px">Deine Vorschläge, Wünsche oder Anregungen zu der
+                Aufgabe</label>
+              <textarea formControlName="comment" class="textfeldkomment" placeholder="HINWEIS: Diese Eingabe wird anonym abgeschickt. Möchtest Du eine persönliche Rückmeldung, trage bitte unten Deine E-Mail ein."
+                        style="margin-top: 5px; padding-top: 10px;"></textarea>
             </p>
           </div>
+          <div class="email-container">
+            <mat-form-field>
+              <!-- <input matInput placeholder="E-Mail" [formControl]="email" required> -->
+              <input matInput placeholder="E-Mail (optional)" [formControl]="email">
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+
           <button mat-button type="button" class="button-kommentar-senden" (click)="onClick()">Senden</button>
           <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickCommentClose()">Schließen
           </button>
@@ -133,16 +143,34 @@
 
             <div>
               <div>
-              <form class="rating">
-                <legend >Bewerte die Aufgabe:</legend>
-                <input type="radio" id="star5" name="rating" value="5"/><label for="star5" title="sehr schwer">5 stars</label>
-                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="schwer">4 stars</label>
-                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="mittel">3 stars</label>
-                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="ganz ok">2 stars</label>
-                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="sehr leicht">1 star</label>
-              </form>
+                <form class="rating">
+                  <legend>Bewerte die Aufgabe:</legend>
+                  <input type="radio" id="star5" name="rating" value="5"/><label for="star5" title="sehr schwer">5
+                  stars</label>
+                  <input type="radio" id="star4" name="rating" value="4"/><label for="star4" title="schwer">4
+                  stars</label>
+                  <input type="radio" id="star3" name="rating" value="3"/><label for="star3" title="mittel">3
+                  stars</label>
+                  <input type="radio" id="star2" name="rating" value="2"/><label for="star2" title="ganz ok">2
+                  stars</label>
+                  <input type="radio" id="star1" name="rating" value="1"/><label for="star1" title="einfach">1
+                  star</label>
+                </form>
               </div>
-                <button mat-button type="button" class="button" (click)="onClick()">... Punkte...</button>
+              <div>
+
+              </div>
+              <!--
+                            <form>
+                              <select id="demo" name="rating">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                            </form>
+                -->
             </div>
           </div>
           <div>

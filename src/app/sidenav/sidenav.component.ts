@@ -7,7 +7,7 @@ import {HeaderArray, MenuService, UrdatenType} from '../menu/menu.service';
 import {JopApiDbService, SThemaResponse} from '../jops-api/jop-api-db.service';
 import {HttpClient} from '@angular/common/http';
 import {FormControl, FormGroup} from '@angular/forms';
-
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-sidenav',
@@ -17,7 +17,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 })
 export class SidenavComponent implements OnInit {
   @ViewChild('sidenav') public myNav;
-
+  email = new FormControl('', [Validators.required, Validators.email]);
   menuAktuell: number;
   dataJava1: Array<HeaderArray>;
   dataJava2: Array<HeaderArray>;
@@ -151,6 +151,12 @@ export class SidenavComponent implements OnInit {
         reject();
       });
     });
+  }
+
+  getErrorMessage() {
+    /*return this.email.hasError('required') ? 'Bitte E-Mail eingeben' :*/
+      return this.email.hasError('email') ? 'Keine gültige E-Mail' :
+        '';
   }
 
   onClickUnit() {
