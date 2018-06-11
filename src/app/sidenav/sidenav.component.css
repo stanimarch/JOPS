@@ -114,6 +114,14 @@
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
 }
+.inhalt-center{
+ position: relative;
+font-family: Times, serif, bold;
+  font-size: 20px;
+  text-align: justify;
+  margin-left: 20%;
+  margin-right: 20%;
+}
 
 #mitte {
   position: relative;
@@ -134,9 +142,10 @@
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
+
 .email-container {
   display: block;
-  margin-left: 20px;
+  margin-left: 22px;
   width: 40px;
   flex-direction: column;
 }
@@ -149,6 +158,9 @@ label {
 }
 
 .textfeld, .textfeldkomment {
+  text-align: left;
+  margin-left: 4px;
+  margin-right: 20px;
   height: 30vh;
   width: 95%;
   border: 1px solid rgb(255, 101, 0);

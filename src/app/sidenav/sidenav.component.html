@@ -60,8 +60,29 @@
       <!-- Willkommen Content
       Hier braucht man noch die Statistik-->
       <div id="start" *ngIf="startseite">
-        <h1 style="display: block; text-align: center; color: rgb(255, 101, 0)">Willkommen auf JOPS!</h1>
-        <h4 style="display: block; text-align: center">Schön, dass Du da bist :) </h4>
+        <h1 style="display: block; text-align: center; color: rgb(255, 101, 0)">Herzlich Willkommen auf JOPS!</h1>
+        <div class="inhalt-center">
+        <p>
+          Diese Seite ist von Studenten für Studenten.
+          Sie soll Dich dabei unterstützen, Dein Wissen in Java aufzubauen und zu vertiefen.
+          Dafür werden Dir hier verschiedene Übungen zu den unterschiedlichsten Themenbereichen
+          und Schwierigkeitsstufen vorgestellt. <br><br>
+          Jede Übung besitzt eine Musterlösung, die Du Dir nach Bearbeitung anzeigen lassen kannst.
+          Bei jeder Aufgabe hast Du die Möglichkeit, dir selbst Punkte für diese Aufgabe zu geben
+          und deine Meinung bzgl. der Schwierigkeit oder Aufgabenstellung mitzuteilen.
+          Bedenke bitte, dass diese Plattform zur Übung und Prüfungsvorbereitung für die
+          Studenten der Hochscule Augsburg vorgesehen ist.<br><br>
+          Bitte vermeide deshalb, die Übungen zu kopieren und zu verbreiten.
+          Du selbst hast natürlich die Möglichkeit, die Übungen mehr als einmal durchzuführen.
+          Und falls Du es möchtest, kannst Du zu jeder Aufgabe, Deine letzte Lösung speichern.
+          Beachte bitte, dass damit Deine vorherige Lösung, sobald du auf "Speichern" klickst,
+          nicht mehr verfügbar ist und auch nicht wieder hergestellt werden kann.
+          Wir wünschen Dir viel Spaß und Erfolg bei den Aufgaben.<br>
+          <br>
+          <b>P.S.:</b> Deine Meinung ist uns wirklich wichtig, daher haben wir Dir bei jeder Aufgabe
+          die Möglichkeit gegeben - entweder anonym oder mit Kontaktangabe - Verbesserungsvorschläge
+          an uns weiterzugeben. </p>
+        </div>
       </div>
 
 
@@ -107,16 +128,18 @@
         <div class="commentar" *ngIf="kommentar">
           <div>
             <p>
-              <label style="margin-left: 23px; text-align: left; font-size: 16px">Deine Vorschläge, Wünsche oder Anregungen zu der
+              <label style="font-size: 16px; margin-left: 22px; text-align: left">Deine Vorschläge, Wünsche oder
+                Anregungen zu der
                 Aufgabe</label>
-              <textarea formControlName="comment" class="textfeldkomment" placeholder="HINWEIS: Diese Eingabe wird anonym abgeschickt. Möchtest Du eine persönliche Rückmeldung, trage bitte unten Deine E-Mail ein."
+              <textarea formControlName="comment" class="textfeldkomment"
+                        placeholder="HINWEIS: Diese Eingabe wird anonym abgeschickt. Möchtest Du eine persönliche Rückmeldung, trage bitte unten Deine E-Mail ein."
                         style="margin-top: 5px; padding-top: 10px;"></textarea>
             </p>
           </div>
           <div class="email-container">
             <mat-form-field>
               <!-- <input matInput placeholder="E-Mail" [formControl]="email" required> -->
-              <input matInput placeholder="E-Mail (optional)" [formControl]="email">
+              <input type="email" matInput placeholder="E-Mail (optional)" [formControl]="email">
               <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </div>
