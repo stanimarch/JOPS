@@ -109,6 +109,9 @@ export class SidenavComponent implements OnInit {
     });
   }
 
+
+
+
   test() {
     console.log('#####  Anfang test()');
     this.testArray.forEach((data, index) => {

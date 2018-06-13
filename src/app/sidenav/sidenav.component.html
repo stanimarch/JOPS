@@ -60,7 +60,7 @@
       <!-- Willkommen Content
       Hier braucht man noch die Statistik-->
       <div id="start" *ngIf="startseite">
-        <h1 style="display: block; text-align: center; color: rgb(255, 101, 0)">Herzlich Willkommen auf JOPS!</h1>
+        <h1 style="display: block; text-align: center; color: rgb(255, 101, 0)">Herzlich Willkommen auf JOPS! </h1>
         <div class="inhalt-center">
           <p>
             Diese Seite ist von Studenten für Studenten.
@@ -146,12 +146,17 @@
                   <mat-error *ngIf="commentForm.get('email').invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
               </div>
-              <button mat-button [disabled]="commentForm.get('comment').invalid" type="button"
-                      class="button-kommentar-senden" (click)="onClickCommentSenden()">Senden
-              </button>
-              <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickCommentClose()">
-                Schließen
-              </button>
+              <div class="clear"></div>
+              <div>
+                <p style="margin-bottom: 4px; margin-top: 0">
+                  <button mat-button [disabled]="commentForm.get('comment').invalid" type="button"
+                          class="button-kommentar-senden" (click)="onClickCommentSenden()">Senden
+                  </button>
+                  <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickCommentClose()">
+                    Schließen
+                  </button>
+                </p>
+              </div>
             </form>
           </div>
           <div class="mat-spinner-content menu-spinner" *ngIf="spinner_commenter">
@@ -192,34 +197,18 @@
                     star</label>
                   </form>
 
-                  <mat-form-field style="float:left; font-family: Times; margin-left: 30px" hintLabel="Maximum {{this.aufgabe.maxPunkte}}">
-                    <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}" matInput #input maxlength="2" placeholder="Erreichte Punkte">
+                  <mat-form-field style="float:left; font-family: Times; margin-left: 30px"
+                                  hintLabel="Maximum {{this.aufgabe.maxPunkte}}">
+                    <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}" matInput #input maxlength="2"
+                           placeholder="Erreichte Punkte">
                     <mat-hint align="end">{{input.value || 0}}/{{this.aufgabe.maxPunkte}}</mat-hint>
                   </mat-form-field>
-
                 </div>
-<!--
-                <div>
-
-                  <form style="float: left; margin-left: 40px">
-
-                    <label style="margin-bottom: 10px; font-size: 16px;">Erreichte Punkte von
-                      {{this.aufgabe.maxPunkte}} </label>
-                    <input style="width: 120px;" title="punkte" type="number" maxlength="2" min="0" max="{{this.aufgabe.maxPunkte}}"
-                           required/>
-
-
-                  </form>
-
-                </div>
-          -->
-
-
               </div>
             </div>
             <div class="clear"></div>
             <div>
-                <p>
+              <p style="margin-bottom: 4px; margin-top: 0">
                 <button *ngIf="aufgabe.unittest !== null"
                         mat-button type="button"
                         class="button-testen"
