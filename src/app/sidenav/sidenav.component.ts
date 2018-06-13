@@ -71,7 +71,7 @@ export class SidenavComponent implements OnInit {
       '********************\n' +
       '********************\n' +
       '******************** ',
-      1,
+      '',
       null,
       'public class SternchenRechteckGefuellt {\n' +
       'public static void main(String[] args) throws IOException {\n' +
@@ -106,10 +106,10 @@ export class SidenavComponent implements OnInit {
     });
   }
 
-  postUnittest(code: string) {
+  postUnittest() {
     console.log('##### 1. ANFANG: postUnittest(code: string)');
     return new Promise((resolve, reject) => {
-      this.jopApiDbService.postUnittest(code, this.aufgabe.id.toString())
+      this.jopApiDbService.postUnittest(this.aufgabe.id.toString(), this.aufgabe.loesungStud, this.aufgabe.titel, this.aufgabe.unittest)
         .then(res => {
           console.log('##### 2. ENDE: postUnittest(code: string): Alles ist GUT!');
           this.aufgabe.unittestAusgabe = 'OUTPUT:\n' + this.jopApiDbService.unittestResponse.output
@@ -300,7 +300,7 @@ export class SidenavComponent implements OnInit {
   onClickUnit() {
     this.unitantwort = true;
     this.spinner_unittest = true;
-    this.postUnittest(this.studLoesungForm.get('loesungstext').value);
+    this.postUnittest();
   }
 
   onClickComment() {

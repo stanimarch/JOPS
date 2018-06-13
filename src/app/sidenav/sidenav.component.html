@@ -208,7 +208,10 @@
             </div>
             <div>
               <p>
-                <button mat-button type="button" class="button-testen" (click)="onClickUnit()"
+                <button *ngIf="aufgabe.unittest !== null"
+                        mat-button type="button"
+                        class="button-testen"
+                        (click)="onClickUnit()"
                         [disabled]="studLoesungForm.get('loesungstext').invalid"> Testen
                 </button>
                 <button mat-button type="button" class="button-speichern" (click)="onClickLoesungSpeichern()"
@@ -230,7 +233,7 @@
             </p>
             <div class="clear"></div>
             <div style="margin: 4px" ng-bind="textFromJSON" style="white-space:pre-wrap">
-                {{aufgabe.unittestAusgabe}}
+              {{aufgabe.unittestAusgabe}}
             </div>
           </div>
           <div class="mat-spinner-content menu-spinner" *ngIf="spinner_unittest">

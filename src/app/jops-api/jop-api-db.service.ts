@@ -25,7 +25,7 @@ export class Aufgabe {
   titel: string;
   maxPunkte: number;
   aufgabenText: string;
-  unittest: number;
+  unittest: string;
   unittestAusgabe: string;
   loesungStud: string;
   sGrad: number;
@@ -38,7 +38,7 @@ export class Aufgabe {
               titel: string,
               maxPunkte: number,
               aufgabenText: string,
-              unittest: number,
+              unittest: string,
               unittestAusgabe: string,
               loesungStud: string,
               sGrad: number,
@@ -60,19 +60,28 @@ export class Aufgabe {
 }
 
 export class UrdatenAufgabe {
-  id: number;
+  Titel: string;
   Sachliches_Themengebiet: string;
   Inhaltliches_Themengebiet: string;
+  Aufgabentext: string;
+  Gesamtpunkte: number;
   Datei: string;
+  Unittest: string;
   LoesungsNr: number;
-  LoesungsBild: string;
-  LoesungsText: string;
+  Loesungsbild: string;
+  Loesungstext: string;
+}
+
+export class Studloesung {
+  Erreichte_Punkte: number;
+  Loesung: string;
 }
 
 export class SAufgabeResponse {
   status: number;
   error: string;
-  response: Array<UrdatenAufgabe>;
+  aufgabe: Array<UrdatenAufgabe>;
+  studloesung: Array<Studloesung>;
 }
 
 export class CommentResponse {
@@ -101,13 +110,16 @@ export class JopApiDbService implements OnInit {
     this.aufgabenArray = [];
   }
 
-  postUnittest(code: string, id: string) {
+  /* this.aufgabe.id.toString(), this.aufgabe.loesungStud, this.aufgabe.titel, this.aufgabe.unittest */
+  postUnittest(id: string, loesungStud: string, titel: string, unittest: string) {
     console.log('##### 1. postUnittest(code: string, id: string)');
     return new Promise((resolve, reject) => {
       this.http.post<UnittestResponse>('./api/run', new HttpParams()
-          .set(`code`, code)
+          .set(`matrNr`, localStorage.getItem('matrNr'))
           .set(`aufgabenId`, id)
-          .set(`matrNr`, localStorage.getItem('matrNr')),
+          .set(`code`, loesungStud)
+          .set(`titel`, titel)
+          .set(`unittest`, unittest),
         {
           headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
         }).toPromise()
@@ -177,6 +189,7 @@ export class JopApiDbService implements OnInit {
           headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
         }).toPromise()
         .then(res => {
+
           if (res.status === 200) {
             // this.aufgabenArray.push(res.response);
             console.log('########## 001. JSON.stringify(res.valueOf()) ' + JSON.stringify(res.valueOf()));
