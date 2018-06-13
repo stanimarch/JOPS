@@ -105,7 +105,7 @@ export class SidenavComponent implements OnInit {
     });
     this.studLoesungForm = new FormGroup({
       loesungstext: new FormControl(),
-      xxxx: new FormControl('', [Validators.required, Validators.email])
+      erreichtePunkte: new FormControl()
     });
   }
 
@@ -186,6 +186,7 @@ export class SidenavComponent implements OnInit {
           console.log('########## VOR FEHLER ==> this.aufgabe = this.jopApiDbService.getAufgabe(id);');
           this.aufgabe = this.jopApiDbService.getAufgabe(id);
           this.studLoesungForm.get('loesungstext').setValue(this.aufgabe.loesungStud);
+          this.studLoesungForm.get('erreichtePunkte').setValue(this.aufgabe.erreichtePunkte);
           this.spinner_obAufgabeLaden = false;
           this.inhaltcenter = true;
           console.log('########## getAufgabe(id: number) => Alles ist gut!');
