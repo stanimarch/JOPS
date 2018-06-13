@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatDrawerContainer} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.component';
 import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 import {JopsApiRunService} from '../jops-api/jops-api-run.service';
-import {HeaderArray, MenuService, UrdatenType} from '../menu/menu.service';
-import {Aufgabe, JopApiDbService, MusterLoesung, SThemaResponse, UnittestResponse} from '../jops-api/jop-api-db.service';
+import {HeaderArray, MenuService} from '../menu/menu.service';
+import {Aufgabe, JopApiDbService, SThemaResponse} from '../jops-api/jop-api-db.service';
 import {HttpClient} from '@angular/common/http';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Validators} from '@angular/forms';
@@ -189,12 +189,11 @@ export class SidenavComponent implements OnInit {
       console.log('@@@@@ 3.  this.jopApiDbService.istAufgebe(id) = FALSE');
       this.jopApiDbService.getAufgabePOST(id)
         .then(res => {
+          console.log('########## VOR FEHLER ==> this.aufgabe = this.jopApiDbService.getAufgabe(id);');
           this.aufgabe = this.jopApiDbService.getAufgabe(id);
-          console.log('########### this.jopApiDbService.getAufgabe(id): ' + this.jopApiDbService.getAufgabe(id));
           this.spinner_obAufgabeLaden = false;
           this.inhaltcenter = true;
           console.log('########## getAufgabe(id: number) => Alles ist gut!');
-          console.log('JSON.stringify(this.aufgabe.valueOf()): ' + JSON.stringify(this.aufgabe.valueOf()));
         })
         .catch(msg => {
           console.log('########## getAufgabe(id: number) => Fehler!!! ');

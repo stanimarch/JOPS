@@ -104,10 +104,10 @@ export class JopApiDbService implements OnInit {
 
   constructor(private http: HttpClient,
               private menuService: MenuService) {
+    this.aufgabenArray = [];
   }
 
   ngOnInit() {
-    this.aufgabenArray = [];
   }
 
   /* this.aufgabe.id.toString(), this.aufgabe.loesungStud, this.aufgabe.titel, this.aufgabe.unittest */
@@ -161,22 +161,24 @@ export class JopApiDbService implements OnInit {
   }
 
 
-  istAufgebe(id: number) {
-    this.aufgabenArray.forEach(aufgabe => {
-      if (aufgabe.id === id) {
+  istAufgebe(id: number): boolean {
+    for (let i = 0, len = this.aufgabenArray.length; i < len; i++) {
+      if (this.aufgabenArray[i].id === id) {
         return true;
       }
-    });
+    }
     console.log('istAufgebe(id: number): ' + 'false');
     return false;
   }
 
-  getAufgabe(id: number) {
-    this.aufgabenArray.forEach(aufgabe => {
-      if (aufgabe.id === id) {
-        return aufgabe;
+  getAufgabe(id: number): Aufgabe {
+    console.log('@@@@@ jops-api-db.service:    getAufgabe(id: number)');
+    for (let i = 0, len = this.aufgabenArray.length; i < len; i++) {
+      if (this.aufgabenArray[i].id === id) {
+        console.log('######### JSON.stringify(aufgabe.valueOf()) ==> ' + JSON.stringify(this.aufgabenArray[i].valueOf()));
+        return this.aufgabenArray[i];
       }
-    });
+    }
     return null;
   }
 
@@ -191,47 +193,47 @@ export class JopApiDbService implements OnInit {
         .then(res => {
 
           if (res.status === 200) {
-            // this.aufgabenArray.push(res.response);
-            console.log('########## 001. JSON.stringify(res.valueOf()) ' + JSON.stringify(res.valueOf()));
-
+            console.log('########## 001. getAufgabePOST(id: number) ');
+            console.log('########## 002. JSON.stringify(res.valueOf()) ' + JSON.stringify(res.valueOf()));
             this.musterLoesungen = [];
-            /*
-            res.response.forEach((data, index) => {
-              console.log('######### 5.res.response.forEach((data, index) => {...};');
-              console.log('######### 6. data: ' + JSON.stringify(data.valueOf()));
+
+
+            res.aufgabe.forEach((data, index) => {
+              console.log('######### 4. index');
+              console.log('######### 5. res.aufgabe.forEach((data, index) => {...};');
+              console.log('######### 6. JSON.stringify(data.valueOf()):   => ' + JSON.stringify(data.valueOf()));
               console.log('6.1 data.Sachliches_Themengebiet' + data.Sachliches_Themengebiet);
-              console.log('6.2 data.LoesungsBild' + data.LoesungsBild);
-              console.log('6.3 data.LoesungsText' + data.LoesungsText);
-              console.log('6.4 data.id' + data.id);
+              console.log('6.2 data.Loesungsbild' + data.Loesungsbild);
+              console.log('6.3 data.Loesungstext' + data.Loesungstext);
 
               this.musterLoesungen.push(new MusterLoesung(
-                data.LoesungsText,
-                data.LoesungsBild));
-              console.log('######### 8. this.musterLoesungen.push(new MusterLoesung(data.LoesungsText,data.LoesungsBild));\n' +
+                data.Loesungstext,
+                data.Loesungsbild));
+              console.log('######### 7. this.musterLoesungen.push(new MusterLoesung(data.LoesungsText,data.LoesungsBild));\n' +
                 'JSON.stringify(this.musterLoesungen.valueOf()) ===>  '
                 + JSON.stringify(this.musterLoesungen.valueOf()));
 
 
-              if (index === res.response.length - 1) {
-                console.log('########## 9. JSON.stringify(musterLoesungen.valueOf())' + JSON.stringify(this.musterLoesungen.valueOf()));
+              if (index === res.aufgabe.length - 1) {
+                console.log('########## 8. JSON.stringify(musterLoesungen.valueOf())' + JSON.stringify(this.musterLoesungen.valueOf()));
                 this.aufgabenArray.push(new Aufgabe(
-                  data.id,
+                  id,
                   data.Sachliches_Themengebiet,
+                  data.Inhaltliches_Themengebiet,
+                  data.Titel,
+                  data.Gesamtpunkte,
+                  data.Aufgabentext,
+                  data.Unittest,
                   null,
+                  res.studloesung[0].Loesung,
                   null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
+                  res.studloesung[0].Erreichte_Punkte,
                   this.musterLoesungen
                 ));
-                console.log('########## this.aufgabenArray.push(new Aufgabe...);\n' +
-                  '########### 10. JSON.stringify(this.aufgabenArray.values()) ==> ' + JSON.stringify(this.aufgabenArray.values()));
+                console.log('########## 9. this.aufgabenArray.push(new Aufgabe...);\n' +
+                  '########### 10. JSON.stringify(this.aufgabenArray[0].valueOf()) ==> ' + JSON.stringify(this.aufgabenArray[0].valueOf()));
               }
-            });*/
+            });
 
             resolve2();
           } else {
