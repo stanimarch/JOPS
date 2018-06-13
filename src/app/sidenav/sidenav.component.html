@@ -199,8 +199,8 @@
 
                   <mat-form-field style="float:left; font-family: Times; margin-left: 30px"
                                   hintLabel="Maximum {{this.aufgabe.maxPunkte}}">
-                    <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}" matInput #input maxlength="2"
-                           placeholder="Erreichte Punkte">
+                    <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}"   matInput #input maxlength="2"
+                           placeholder="Erreichte Punkte" onKeyPress="if(this.value>this.aufgabe.maxPunkte){input.value=this.aufgabe.maxPunkte;} else if(input.value<0){this.value=0;}">
                     <mat-hint align="end">{{input.value || 0}}/{{this.aufgabe.maxPunkte}}</mat-hint>
                   </mat-form-field>
                 </div>
