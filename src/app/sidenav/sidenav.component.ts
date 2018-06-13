@@ -34,9 +34,11 @@ export class SidenavComponent implements OnInit {
   kommentar = false;
   musterloeusung = false;
   unitantwort = false;
-  spinner_obAufgabeGeladen = false;
+  spinner_obAufgabeLaden = false;
   spinner_commenter = false;
   spinner_unittest = false;
+
+  testArray: Array<HeaderArray>;
 
   constructor(public dialog: MatDialog,
               private jopsApiRunService: JopsApiRunService,
@@ -53,6 +55,7 @@ export class SidenavComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.testArray = [];
     this.menuAktuell = -1;
     this.dataJava1 = null;
     this.dataJava2 = null;
@@ -71,7 +74,7 @@ export class SidenavComponent implements OnInit {
       '********************\n' +
       '********************\n' +
       '******************** ',
-      1,
+      '',
       null,
       'public class SternchenRechteckGefuellt {\n' +
       'public static void main(String[] args) throws IOException {\n' +
@@ -106,10 +109,18 @@ export class SidenavComponent implements OnInit {
     });
   }
 
-  postUnittest(code: string) {
+  test() {
+    console.log('#####  Anfang test()');
+    this.testArray.forEach((data, index) => {
+      console.log(index + ' ' + data);
+    });
+    console.log('#####  ENDE test()');
+  }
+
+  postUnittest() {
     console.log('##### 1. ANFANG: postUnittest(code: string)');
     return new Promise((resolve, reject) => {
-      this.jopApiDbService.postUnittest(code, this.aufgabe.id.toString())
+      this.jopApiDbService.postUnittest(this.aufgabe.id.toString(), this.aufgabe.loesungStud, this.aufgabe.titel, this.aufgabe.unittest)
         .then(res => {
           console.log('##### 2. ENDE: postUnittest(code: string): Alles ist GUT!');
           this.aufgabe.unittestAusgabe = 'OUTPUT:\n' + this.jopApiDbService.unittestResponse.output
@@ -154,31 +165,30 @@ export class SidenavComponent implements OnInit {
   }
 
   aufgabeHolen(id: number) {
-    console.log('1. aufgabeHolen(' + id + ');');
+    console.log('@@@@@ 1. aufgabeHolen(' + id + ');');
     this.inhaltcenter = false;
     this.impressum = false;
     this.startseite = false;
     this.kommentar = false;
-    this.spinner_obAufgabeGeladen = true;
+    this.spinner_obAufgabeLaden = true;
     this.getAufgabe(id);
   }
 
   getAufgabe(id: number) {
-    console.log('2. getAufgabe(' + id + ')');
+    console.log('@@@@@ 2. getAufgabe(' + id + ')');
 
-    if (this.jopApiDbService.aufgabenArray !== undefined &&
-      this.jopApiDbService.aufgabenArray !== null &&
-      this.jopApiDbService.istAufgebe(id)) {
+    if (this.jopApiDbService.istAufgebe(id)) {
       this.aufgabe = this.jopApiDbService.getAufgabe(id);
-      this.spinner_obAufgabeGeladen = false;
+      this.spinner_obAufgabeLaden = false;
       this.inhaltcenter = true;
+      console.log('@@@@@ 3.  this.jopApiDbService.istAufgebe(id) = TRUE');
     } else {
-      console.log('getAufgabe(id: number): else');
+      console.log('@@@@@ 3.  this.jopApiDbService.istAufgebe(id) = FALSE');
       this.jopApiDbService.getAufgabePOST(id)
         .then(res => {
           this.aufgabe = this.jopApiDbService.getAufgabe(id);
           console.log('########### this.jopApiDbService.getAufgabe(id): ' + this.jopApiDbService.getAufgabe(id));
-          this.spinner_obAufgabeGeladen = false;
+          this.spinner_obAufgabeLaden = false;
           this.inhaltcenter = true;
           console.log('########## getAufgabe(id: number) => Alles ist gut!');
           console.log('JSON.stringify(this.aufgabe.valueOf()): ' + JSON.stringify(this.aufgabe.valueOf()));
@@ -302,7 +312,7 @@ export class SidenavComponent implements OnInit {
   onClickUnit() {
     this.unitantwort = true;
     this.spinner_unittest = true;
-    this.postUnittest(this.studLoesungForm.get('loesungstext').value);
+    this.postUnittest();
   }
 
   onClickComment() {
@@ -328,7 +338,7 @@ export class SidenavComponent implements OnInit {
     this.inhaltcenter = true;
     this.impressum = false;
     this.startseite = false;
-    this.spinner_obAufgabeGeladen = false;
+    this.spinner_obAufgabeLaden = false;
   }
 
   onClickImp() {

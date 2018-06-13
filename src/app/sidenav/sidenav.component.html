@@ -8,6 +8,8 @@
     <button (click)="menuJava2()" class="button-header" mat-button>JAVA 2</button>
 
     <button (click)="onClickAufg()" class="button-header" mat-button>TEST</button>
+    <button (click)="test()" class="button-header" mat-button>TEST 2</button>
+
     <button (click)="doLogout()" class="button-login" mat-button>Logout</button>
   </mat-toolbar>
 
@@ -83,7 +85,7 @@
         </div>
       </div>
 
-      <div class="mat-spinner-content menu-spinner" *ngIf="spinner_obAufgabeGeladen">
+      <div class="mat-spinner-content menu-spinner" *ngIf="spinner_obAufgabeLaden">
         <mat-spinner></mat-spinner>
       </div>
       <!--Aufgaben und Lgs Content
@@ -217,8 +219,11 @@
             </div>
             <div class="clear"></div>
             <div>
-              <p style="margin-bottom: 0px; margin-top: 0px;">
-                <button mat-button type="button" class="button-testen" (click)="onClickUnit()"
+                <p>
+                <button *ngIf="aufgabe.unittest !== null"
+                        mat-button type="button"
+                        class="button-testen"
+                        (click)="onClickUnit()"
                         [disabled]="studLoesungForm.get('loesungstext').invalid"> Testen
                 </button>
                 <button mat-button type="button" class="button-speichern" (click)="onClickLoesungSpeichern()"
