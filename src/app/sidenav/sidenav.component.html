@@ -183,19 +183,29 @@
 
               <div>
                 <div>
-                  <form class="rating">
+                  <div class="rating">
                     <legend>Schwierigkeit der Aufgabe:</legend>
-                    <input type="radio" id="star5" name="rating" value="5"/><label for="star5" title="sehr schwer">5
+                    <input type="radio" formControlName="schwierigkeit" id="star5" name="schwierigkeit"
+                           value="5"/><label
+                    for="star5" title="sehr schwer">5
                     stars</label>
-                    <input type="radio" id="star4" name="rating" value="4"/><label for="star4" title="schwer">4
+                    <input type="radio" formControlName="schwierigkeit" id="star4" name="schwierigkeit"
+                           value="4"/><label
+                    for="star4" title="schwer">4
                     stars</label>
-                    <input type="radio" id="star3" name="rating" value="3"/><label for="star3" title="mittel">3
+                    <input type="radio" formControlName="schwierigkeit" id="star3" name="schwierigkeit"
+                           value="3"/><label
+                    for="star3" title="mittel">3
                     stars</label>
-                    <input type="radio" id="star2" name="rating" value="2"/><label for="star2" title="ganz ok">2
+                    <input type="radio" formControlName="schwierigkeit" id="star2" name="schwierigkeit"
+                           value="2"/><label
+                    for="star2" title="ganz ok">2
                     stars</label>
-                    <input type="radio" id="star1" name="rating" value="1"/><label for="star1" title="einfach">1
+                    <input type="radio" formControlName="schwierigkeit" id="star1" name="schwierigkeit"
+                           value="1"/><label
+                    for="star1" title="einfach">1
                     star</label>
-                  </form>
+                  </div>
 
                   <mat-form-field style="float:left; font-family: Times; margin-left: 30px"
                                   hintLabel="Maximum {{this.aufgabe.maxPunkte}}">

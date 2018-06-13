@@ -105,7 +105,8 @@ export class SidenavComponent implements OnInit {
     });
     this.studLoesungForm = new FormGroup({
       loesungstext: new FormControl(),
-      erreichtePunkte: new FormControl()
+      erreichtePunkte: new FormControl(),
+      schwierigkeit: new FormControl('3')
     });
   }
 
