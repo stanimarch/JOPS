@@ -110,14 +110,8 @@ export class SidenavComponent implements OnInit {
   }
 
 
-
-
   test() {
-    console.log('#####  Anfang test()');
-    this.testArray.forEach((data, index) => {
-      console.log(index + ' ' + data);
-    });
-    console.log('#####  ENDE test()');
+    console.log('######### TEST()   => ' + JSON.stringify(this.aufgabe.valueOf()));
   }
 
   postUnittest() {
@@ -191,6 +185,7 @@ export class SidenavComponent implements OnInit {
         .then(res => {
           console.log('########## VOR FEHLER ==> this.aufgabe = this.jopApiDbService.getAufgabe(id);');
           this.aufgabe = this.jopApiDbService.getAufgabe(id);
+          this.studLoesungForm.get('loesungstext').setValue(this.aufgabe.loesungStud);
           this.spinner_obAufgabeLaden = false;
           this.inhaltcenter = true;
           console.log('########## getAufgabe(id: number) => Alles ist gut!');
@@ -310,7 +305,6 @@ export class SidenavComponent implements OnInit {
   }
 
 
-
   onClickUnit() {
     this.unitantwort = true;
     this.spinner_unittest = true;
@@ -349,8 +343,7 @@ export class SidenavComponent implements OnInit {
     this.startseite = false;
   }
 
-  onClick(id: number) {
-    console.log(id);
+  onClick() {
   }
 
   onClick_2() {
