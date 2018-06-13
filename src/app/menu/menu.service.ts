@@ -58,17 +58,21 @@ export class MenuService implements OnInit {
       let arr: number[] = [];
       this.dataJava1 = [];
       urdaten.forEach((data, index) => {
+        // console.log('Index: ' + index + '; Satz: ' + JSON.stringify(data.valueOf()));
         if (index === 0) {
           thema = data.Sachliches_Themengebiet;
         }
         if (data.Sachliches_Themengebiet === thema) {
           arr.push(data.id);
         }
-        if (index !== 0 && data.Sachliches_Themengebiet !== thema || index === urdaten.length - 1) {
+        if (data.Sachliches_Themengebiet !== thema) {
           this.dataJava1.push(new HeaderArray(thema, arr));
           thema = data.Sachliches_Themengebiet;
           arr = [];
           arr.push(data.id);
+        }
+        if (index === urdaten.length - 1) {
+          this.dataJava1.push(new HeaderArray(thema, arr));
         }
       });
       resolve();
@@ -81,17 +85,21 @@ export class MenuService implements OnInit {
       let arr: number[] = [];
       this.dataJava2 = [];
       urdaten.forEach((data, index) => {
+        // console.log('Index: ' + index + '; Satz: ' + JSON.stringify(data.valueOf()));
         if (index === 0) {
           thema = data.Sachliches_Themengebiet;
         }
         if (data.Sachliches_Themengebiet === thema) {
           arr.push(data.id);
         }
-        if (index !== 0 && data.Sachliches_Themengebiet !== thema || index === urdaten.length - 1) {
+        if (data.Sachliches_Themengebiet !== thema) {
           this.dataJava2.push(new HeaderArray(thema, arr));
           thema = data.Sachliches_Themengebiet;
           arr = [];
           arr.push(data.id);
+        }
+        if (index === urdaten.length - 1) {
+          this.dataJava2.push(new HeaderArray(thema, arr));
         }
       });
       resolve();

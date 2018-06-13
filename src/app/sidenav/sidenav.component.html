@@ -6,10 +6,8 @@
 
     <button (click)="menuJava1()" class="button-header" mat-button>JAVA 1</button>
     <button (click)="menuJava2()" class="button-header" mat-button>JAVA 2</button>
-    <button (click)="sidenav.toggle(); onClickAufg()" class="button-header" mat-button>JULIA</button>
-    <button (click)="sidenav.toggle(); onClickAufg()" class="button-header" mat-button>JULIA</button>
 
-    <button (click)="onClick_2()" class="button-header" mat-button>TEST</button>
+    <button (click)="onClickAufg()" class="button-header" mat-button>TEST</button>
     <button (click)="doLogout()" class="button-login" mat-button>Logout</button>
   </mat-toolbar>
 
@@ -28,7 +26,7 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
-                      [attr.data-index]="id" (click)="onClick(id); onClickAufg()"> Aufgabe {{1+i}}
+                      (click)="aufgabeHolen(id)"> Aufgabe {{1+i}}
               </button>
             </mat-expansion-panel>
           </mat-accordion>
@@ -43,7 +41,7 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <button mat-button class="menu-button" *ngFor="let id of data.aufgabenId; let i = index"
-                      [attr.data-index]="id" (click)="onClick(id); onClickAufg()"> Aufgabe {{1+i}}
+                      (click)="aufgabeHolen(id)"> Aufgabe {{1+i}}
               </button>
             </mat-expansion-panel>
           </mat-accordion>
@@ -62,30 +60,32 @@
       <div id="start" *ngIf="startseite">
         <h1 style="display: block; text-align: center; color: rgb(255, 101, 0)">Herzlich Willkommen auf JOPS!</h1>
         <div class="inhalt-center">
-        <p>
-          Diese Seite ist von Studenten für Studenten.
-          Sie soll Dich dabei unterstützen, Dein Wissen in Java aufzubauen und zu vertiefen.
-          Dafür werden Dir hier verschiedene Übungen zu den unterschiedlichsten Themenbereichen
-          und Schwierigkeitsstufen vorgestellt. <br><br>
-          Jede Übung besitzt eine Musterlösung, die Du Dir nach Bearbeitung anzeigen lassen kannst.
-          Bei jeder Aufgabe hast Du die Möglichkeit, dir selbst Punkte für diese Aufgabe zu geben
-          und deine Meinung bzgl. der Schwierigkeit oder Aufgabenstellung mitzuteilen.
-          Bedenke bitte, dass diese Plattform zur Übung und Prüfungsvorbereitung für die
-          Studenten der Hochscule Augsburg vorgesehen ist.<br><br>
-          Bitte vermeide deshalb, die Übungen zu kopieren und zu verbreiten.
-          Du selbst hast natürlich die Möglichkeit, die Übungen mehr als einmal durchzuführen.
-          Und falls Du es möchtest, kannst Du zu jeder Aufgabe, Deine letzte Lösung speichern.
-          Beachte bitte, dass damit Deine vorherige Lösung, sobald du auf "Speichern" klickst,
-          nicht mehr verfügbar ist und auch nicht wieder hergestellt werden kann.
-          Wir wünschen Dir viel Spaß und Erfolg bei den Aufgaben.<br>
-          <br>
-          <b>P.S.:</b> Deine Meinung ist uns wirklich wichtig, daher haben wir Dir bei jeder Aufgabe
-          die Möglichkeit gegeben - entweder anonym oder mit Kontaktangabe - Verbesserungsvorschläge
-          an uns weiterzugeben. </p>
+          <p>
+            Diese Seite ist von Studenten für Studenten.
+            Sie soll Dich dabei unterstützen, Dein Wissen in Java aufzubauen und zu vertiefen.
+            Dafür werden Dir hier verschiedene Übungen zu den unterschiedlichsten Themenbereichen
+            und Schwierigkeitsstufen vorgestellt. <br><br>
+            Jede Übung besitzt eine Musterlösung, die Du Dir nach Bearbeitung anzeigen lassen kannst.
+            Bei jeder Aufgabe hast Du die Möglichkeit, dir selbst Punkte für diese Aufgabe zu geben
+            und deine Meinung bzgl. der Schwierigkeit oder Aufgabenstellung mitzuteilen.
+            Bedenke bitte, dass diese Plattform zur Übung und Prüfungsvorbereitung für die
+            Studenten der Hochscule Augsburg vorgesehen ist.<br><br>
+            Bitte vermeide deshalb, die Übungen zu kopieren und zu verbreiten.
+            Du selbst hast natürlich die Möglichkeit, die Übungen mehr als einmal durchzuführen.
+            Und falls Du es möchtest, kannst Du zu jeder Aufgabe, Deine letzte Lösung speichern.
+            Beachte bitte, dass damit Deine vorherige Lösung, sobald du auf "Speichern" klickst,
+            nicht mehr verfügbar ist und auch nicht wieder hergestellt werden kann.
+            Wir wünschen Dir viel Spaß und Erfolg bei den Aufgaben.<br>
+            <br>
+            <b>P.S.:</b> Deine Meinung ist uns wirklich wichtig, daher haben wir Dir bei jeder Aufgabe
+            die Möglichkeit gegeben - entweder anonym oder mit Kontaktangabe - Verbesserungsvorschläge
+            an uns weiterzugeben. </p>
         </div>
       </div>
 
-
+      <div class="mat-spinner-content menu-spinner" *ngIf="spinner_obAufgabeGeladen">
+        <mat-spinner></mat-spinner>
+      </div>
       <!--Aufgaben und Lgs Content
       Hier fehlen noch paar Buttons-->
       <div id="mitte" style="display:block" *ngIf="inhaltcenter">
@@ -95,19 +95,15 @@
           <div>
 
             <p>
-              <label>Themengebiet</label>
+              <label>{{this.aufgabe.sThemengebiet}}</label>
             </p>
             <p>
-              <label>Aufgabenname</label>
+              <label>{{this.aufgabe.titel}}</label>
             </p>
           </div>
           <div class="clear"></div>
-          <div style="margin: 4px">
-            <p style="text-align: left">
-              Hier kommt nachher die Aufgabe rein, die der Student aus dem Seitenmenue anklickt
-              Hier kommt nachher die Aufgabe rein, die der Student aus dem Seitenmenue anklickt
-              Hier.....
-            </p>
+          <div style="margin: 4px" ng-bind="textFromJSON" style="white-space:pre-wrap">
+            {{this.aufgabe.aufgabenText}}
           </div>
           <div class="clear"></div>
           <div id="button-aufgabe-rechts-links">
@@ -125,99 +121,124 @@
           <div class="clear"></div>
         </div>
 
-        <div class="commentar" *ngIf="kommentar">
-          <div>
-            <p>
-              <label style="font-size: 16px; margin-left: 22px; text-align: left">Deine Vorschläge, Wünsche oder
-                Anregungen zu der
-                Aufgabe</label>
-              <textarea formControlName="comment" class="textfeldkomment"
-                        placeholder="HINWEIS: Diese Eingabe wird anonym abgeschickt. Möchtest Du eine persönliche Rückmeldung, trage bitte unten Deine E-Mail ein."
-                        style="margin-top: 5px; padding-top: 10px;"></textarea>
-            </p>
-          </div>
-          <div class="email-container">
-            <mat-form-field>
-              <!-- <input matInput placeholder="E-Mail" [formControl]="email" required> -->
-              <input type="email" matInput placeholder="E-Mail (optional)" [formControl]="email">
-              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-          </div>
 
-          <button mat-button type="button" class="button-kommentar-senden" (click)="onClick()">Senden</button>
-          <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickCommentClose()">Schließen
-          </button>
+        <div class="commentar" *ngIf="kommentar">
+          <div *ngIf="!spinner_commenter">
+            <form [formGroup]="commentForm"
+                  (ngSubmit)="onClickCommentSenden()">
+              <div>
+                <p>
+                  <label style="font-size: 16px; margin-left: 22px; text-align: left">Deine Vorschläge, Wünsche oder
+                    Anregungen zu der
+                    Aufgabe</label>
+                  <textarea formControlName="comment" class="textfeldkomment" required
+                            placeholder="HINWEIS: Diese Eingabe wird anonym abgeschickt. Möchtest Du eine persönliche Rückmeldung, trage bitte unten Deine E-Mail ein."
+                            style="margin-top: 5px; padding-top: 10px;"></textarea>
+                </p>
+              </div>
+              <div class="email-container">
+                <mat-form-field>
+                  <!-- <input matInput placeholder="E-Mail" [formControl]="email" required> -->
+                  <input matInput type="email" placeholder="E-Mail (optional)" formControlName="email">
+                  <mat-error *ngIf="commentForm.get('email').invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </div>
+              <button mat-button [disabled]="commentForm.get('comment').invalid" type="button"
+                      class="button-kommentar-senden" (click)="onClickCommentSenden()">Senden
+              </button>
+              <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickCommentClose()">
+                Schließen
+              </button>
+            </form>
+          </div>
+          <div class="mat-spinner-content menu-spinner" *ngIf="spinner_commenter">
+            <mat-spinner></mat-spinner>
+          </div>
         </div>
+
 
         <!--hier muss noch die form eingebaut werden mit buttons submit und so-->
         <div class="loesunguser" *ngIf="studloesung">
-          <p>
-            <label style="font-size:20px">Gib hier deine Lösung ein</label>
-          </p>
-          <p>
-            <label>
-              <textarea formControlName="haha" rows="100" class="textfeld"></textarea>
-            </label>
-          </p>
-          <div class="studbewertung">
+          <form [formGroup]="studLoesungForm"
+                (ngSubmit)="onClickLoesungSpeichern()">
             <p>
-              <label>Hier kommen noch die Buttons für die Pktvergabe </label>
+              <label style="font-size:20px">Gib hier deine Lösung ein</label>
             </p>
+            <p>
+              <label>
+                <textarea rows="100" class="textfeld" formControlName="loesungstext" required></textarea>
+              </label>
+            </p>
+            <div class="studbewertung">
+              <p>
+                <label>Hier kommen noch die Buttons für die Pktvergabe </label>
+              </p>
 
-            <div>
               <div>
-                <form class="rating">
-                  <legend>Bewerte die Aufgabe:</legend>
-                  <input type="radio" id="star5" name="rating" value="5"/><label for="star5" title="sehr schwer">5
-                  stars</label>
-                  <input type="radio" id="star4" name="rating" value="4"/><label for="star4" title="schwer">4
-                  stars</label>
-                  <input type="radio" id="star3" name="rating" value="3"/><label for="star3" title="mittel">3
-                  stars</label>
-                  <input type="radio" id="star2" name="rating" value="2"/><label for="star2" title="ganz ok">2
-                  stars</label>
-                  <input type="radio" id="star1" name="rating" value="1"/><label for="star1" title="einfach">1
-                  star</label>
-                </form>
-              </div>
-              <div>
+                <div>
+                  <form class="rating">
+                    <legend>Bewerte die Aufgabe:</legend>
+                    <input type="radio" id="star5" name="rating" value="5"/><label for="star5" title="sehr schwer">5
+                    stars</label>
+                    <input type="radio" id="star4" name="rating" value="4"/><label for="star4" title="schwer">4
+                    stars</label>
+                    <input type="radio" id="star3" name="rating" value="3"/><label for="star3" title="mittel">3
+                    stars</label>
+                    <input type="radio" id="star2" name="rating" value="2"/><label for="star2" title="ganz ok">2
+                    stars</label>
+                    <input type="radio" id="star1" name="rating" value="1"/><label for="star1" title="einfach">1
+                    star</label>
+                  </form>
+                </div>
+                <div>
 
+                </div>
+                <!--
+                              <form>
+                                <select id="demo" name="rating">
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                </select>
+                              </form>
+                  -->
               </div>
-              <!--
-                            <form>
-                              <select id="demo" name="rating">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                              </select>
-                            </form>
-                -->
             </div>
-          </div>
-          <div>
-            <p>
-              <button mat-button type="button" class="button-testen" (click)="onClickUnit()"> Testen</button>
-              <button mat-button type="button" class="button-speichern" (click)="onClick()">Speichern</button>
-              <button mat-button type="button" class="button-next-aufgabe" (click)="onClickmusterl()"> Musterlösung
-              </button>
-            </p>
-          </div>
+            <div>
+              <p>
+                <button mat-button type="button" class="button-testen" (click)="onClickUnit()"
+                        [disabled]="studLoesungForm.get('loesungstext').invalid"> Testen
+                </button>
+                <button mat-button type="button" class="button-speichern" (click)="onClickLoesungSpeichern()"
+                        [disabled]="studLoesungForm.get('loesungstext').invalid">Speichern
+                </button>
+                <button mat-button type="button" class="button-next-aufgabe" (click)="onClickmusterl()"> Musterlösung
+                </button>
+              </p>
+            </div>
+          </form>
         </div>
+
 
         <!-- Hier div für Musterlösugnen-->
         <div class="unit" *ngIf="unitantwort">
-          <p>
-            <label>Unittest</label>
-          </p>
-          <div class="clear"></div>
-          <div style="margin: 4px">
-            <p style="text-align: left">
-              Auswertung Unittest
+          <div *ngIf="!spinner_unittest">
+            <p>
+              <label>Unittest</label>
             </p>
+            <div class="clear"></div>
+            <div style="margin: 4px" ng-bind="textFromJSON" style="white-space:pre-wrap">
+                {{aufgabe.unittestAusgabe}}
+            </div>
+          </div>
+          <div class="mat-spinner-content menu-spinner" *ngIf="spinner_unittest">
+            <mat-spinner></mat-spinner>
           </div>
         </div>
+
+
         <div class="musterl" *ngIf="musterloeusung">
           <p>
             <label>Musterlösung</label>
