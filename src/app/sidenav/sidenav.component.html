@@ -74,9 +74,9 @@
             Du selbst hast natürlich die Möglichkeit, die Übungen mehr als einmal durchzuführen.
             Und falls Du es möchtest, kannst Du zu jeder Aufgabe, Deine letzte Lösung speichern.
             Beachte bitte, dass damit Deine vorherige Lösung, sobald du auf "Speichern" klickst,
-            nicht mehr verfügbar ist und auch nicht wieder hergestellt werden kann.
-            Wir wünschen Dir viel Spaß und Erfolg bei den Aufgaben.<br>
-            <br>
+            nicht mehr verfügbar ist und auch nicht wieder hergestellt werden kann.<br><br>
+            Wir wünschen Dir viel Spaß und Erfolg bei den Aufgaben.
+            <br><br>
             <b>P.S.:</b> Deine Meinung ist uns wirklich wichtig, daher haben wir Dir bei jeder Aufgabe
             die Möglichkeit gegeben - entweder anonym oder mit Kontaktangabe - Verbesserungsvorschläge
             an uns weiterzugeben. </p>
@@ -95,14 +95,14 @@
           <div>
 
             <p>
-              <label>{{this.aufgabe.sThemengebiet}}</label>
+              <label style="text-transform: uppercase">{{this.aufgabe.sThemengebiet}}</label>
             </p>
             <p>
-              <label>{{this.aufgabe.titel}}</label>
+              <label style="text-transform: uppercase; color: rgb(255,101,0);">{{this.aufgabe.titel}}</label>
             </p>
           </div>
           <div class="clear"></div>
-          <div style="margin: 4px" ng-bind="textFromJSON" style="white-space:pre-wrap">
+          <div ng-bind="textFromJSON" style="white-space:pre-wrap; font-size: 18px">
             {{this.aufgabe.aufgabenText}}
           </div>
           <div class="clear"></div>
@@ -128,9 +128,10 @@
                   (ngSubmit)="onClickCommentSenden()">
               <div>
                 <p>
-                  <label style="font-size: 16px; margin-left: 22px; text-align: left">Deine Vorschläge, Wünsche oder
-                    Anregungen zu der
-                    Aufgabe</label>
+                  <label style="font-size: 18px; margin-bottom: 10px; text-align: center">Du hast in der
+                    Aufgabenstellung Fehler entdeckt oder Dir ist die Aufgabenstellung nicht klar, dann poste es hier.
+                    Hier ist genug Platz für Deine Vorschläge, Wünsche oder
+                    Anregungen zu der Aufgabe. </label>
                   <textarea formControlName="comment" class="textfeldkomment" required
                             placeholder="HINWEIS: Diese Eingabe wird anonym abgeschickt. Möchtest Du eine persönliche Rückmeldung, trage bitte unten Deine E-Mail ein."
                             style="margin-top: 5px; padding-top: 10px;"></textarea>
@@ -171,13 +172,12 @@
             </p>
             <div class="studbewertung">
               <p>
-                <label>Hier kommen noch die Buttons für die Pktvergabe </label>
               </p>
 
               <div>
                 <div>
                   <form class="rating">
-                    <legend>Bewerte die Aufgabe:</legend>
+                    <legend>Schwierigkeit der Aufgabe:</legend>
                     <input type="radio" id="star5" name="rating" value="5"/><label for="star5" title="sehr schwer">5
                     stars</label>
                     <input type="radio" id="star4" name="rating" value="4"/><label for="star4" title="schwer">4
@@ -189,25 +189,35 @@
                     <input type="radio" id="star1" name="rating" value="1"/><label for="star1" title="einfach">1
                     star</label>
                   </form>
-                </div>
-                <div>
+
+                  <mat-form-field style="float:left; font-family: Times; margin-left: 30px" hintLabel="Maximum {{this.aufgabe.maxPunkte}}">
+                    <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}" matInput #input maxlength="2" placeholder="Erreichte Punkte">
+                    <mat-hint align="end">{{input.value || 0}}/{{this.aufgabe.maxPunkte}}</mat-hint>
+                  </mat-form-field>
 
                 </div>
-                <!--
-                              <form>
-                                <select id="demo" name="rating">
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
-                                </select>
-                              </form>
-                  -->
+<!--
+                <div>
+
+                  <form style="float: left; margin-left: 40px">
+
+                    <label style="margin-bottom: 10px; font-size: 16px;">Erreichte Punkte von
+                      {{this.aufgabe.maxPunkte}} </label>
+                    <input style="width: 120px;" title="punkte" type="number" maxlength="2" min="0" max="{{this.aufgabe.maxPunkte}}"
+                           required/>
+
+
+                  </form>
+
+                </div>
+          -->
+
+
               </div>
             </div>
+            <div class="clear"></div>
             <div>
-              <p>
+              <p style="margin-bottom: 0px; margin-top: 0px;">
                 <button mat-button type="button" class="button-testen" (click)="onClickUnit()"
                         [disabled]="studLoesungForm.get('loesungstext').invalid"> Testen
                 </button>
@@ -229,8 +239,8 @@
               <label>Unittest</label>
             </p>
             <div class="clear"></div>
-            <div style="margin: 4px" ng-bind="textFromJSON" style="white-space:pre-wrap">
-                {{aufgabe.unittestAusgabe}}
+            <div ng-bind="textFromJSON" style="white-space:pre-wrap; margin: 4px">
+              {{aufgabe.unittestAusgabe}}
             </div>
           </div>
           <div class="mat-spinner-content menu-spinner" *ngIf="spinner_unittest">
