@@ -105,7 +105,7 @@
             </p>
           </div>
           <div class="clear"></div>
-          <div ng-bind="textFromJSON" style="white-space:pre-wrap; font-size: 18px">
+          <div ng-bind="textFromJSON" style="white-space:pre-wrap; text-align: left; font-size: 18px">
             {{this.aufgabe.aufgabenText}}
           </div>
           <div class="clear"></div>
@@ -208,12 +208,15 @@
                     star</label>
                   </div>
 
+                  <!--
+                  <mat-error *ngIf="punkte.invalid">{{getErrorMessagePunkte()}}</mat-error>-->
+
                   <mat-form-field style="float:left; font-family: Times; margin-left: 30px"
                                   hintLabel="Maximum {{this.aufgabe.maxPunkte}}">
                     <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}" matInput #input
-                           formControlName="erreichtePunkte" maxlength="2"
-                           placeholder="Erreichte Punkte">
-                    <mat-hint align="end">{{input.value || 0}}/{{this.aufgabe.maxPunkte}}</mat-hint>
+                           maxlength="2"
+                           formControlName="erreichtePunkte" >
+                    <mat-hint align="end">{{input.value|| 0}}/{{this.aufgabe.maxPunkte}}</mat-hint>
                   </mat-form-field>
                 </div>
               </div>

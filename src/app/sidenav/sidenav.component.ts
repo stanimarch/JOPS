@@ -50,7 +50,7 @@ export class SidenavComponent implements OnInit {
       localStorage.getItem('sessionId') === undefined ||
       localStorage.getItem('matrNr') === null ||
       localStorage.getItem('matrNr') === undefined) {
-      this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
+      // this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
     }
   }
 
@@ -59,7 +59,7 @@ export class SidenavComponent implements OnInit {
     this.menuAktuell = -1;
     this.dataJava1 = null;
     this.dataJava2 = null;
-    /*this.aufgabe = new Aufgabe(
+    this.aufgabe = new Aufgabe(
       101,
       'For-Schleife',
       'Schterenaufgabe',
@@ -98,7 +98,7 @@ export class SidenavComponent implements OnInit {
       3,
       15,
       null
-    );*/
+    );
     this.commentForm = new FormGroup({
       comment: new FormControl(),
       email: new FormControl('', [Validators.required, Validators.email])
@@ -110,12 +110,11 @@ export class SidenavComponent implements OnInit {
     });
   }
 
-  /*
-    test() {
-      console.log(this.studLoesungForm.get('erreichtePunkte').value + this.studLoesungForm.get('erreichtePunkte').value);
-      console.log(this.studLoesungForm.get('erreichtePunkte').value as string + this.studLoesungForm.get('erreichtePunkte').value);
-    }
-  */
+
+  test() {
+    console.log('######### TEST()   => ' + JSON.stringify(this.aufgabe.valueOf()));
+  }
+
   postUnittest() {
     console.log('##### 1. ANFANG: postUnittest(code: string)');
     return new Promise((resolve, reject) => {
@@ -369,17 +368,16 @@ export class SidenavComponent implements OnInit {
   onClick() {
   }
 
-  /*
-    onClick_2() {
-      this.http.get<SThemaResponse>('./api/2')
-        .toPromise()
-        .then((res) => {
-          console.log(JSON.stringify(res.response));
-        }).catch(msg => {
-        console.log('########## Error by http.get(): ' + msg);
-      });
-    }
-  */
+  onClick_2() {
+    this.http.get<SThemaResponse>('./api/2')
+      .toPromise()
+      .then((res) => {
+        console.log(JSON.stringify(res.response));
+      }).catch(msg => {
+      console.log('########## Error by http.get(): ' + msg);
+    });
+  }
+
 
   openDialog(): void {
     this.dialog.open(DialogOverviewComponent, {
