@@ -38,6 +38,7 @@ export class SidenavComponent implements OnInit {
   spinner_commenter = false;
   spinner_unittest = false;
 
+
   testArray: Array<HeaderArray>;
 
   constructor(public dialog: MatDialog,
@@ -109,8 +110,6 @@ export class SidenavComponent implements OnInit {
       schwierigkeit: new FormControl('3')
     });
   }
-
-
 
   test() {
     console.log('######### TEST()   => ' + JSON.stringify(this.aufgabe.valueOf()));

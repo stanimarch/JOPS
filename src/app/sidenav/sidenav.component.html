@@ -207,12 +207,15 @@
                     star</label>
                   </div>
 
+                  <!--
+                  <mat-error *ngIf="punkte.invalid">{{getErrorMessagePunkte()}}</mat-error>-->
+
                   <mat-form-field style="float:left; font-family: Times; margin-left: 30px"
                                   hintLabel="Maximum {{this.aufgabe.maxPunkte}}">
                     <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}" matInput #input
-                           formControlName="erreichtePunkte" maxlength="2"
+                           [formControl]="punkte" maxlength="2"
                            placeholder="Erreichte Punkte" >
-                    <mat-hint align="end">{{this.studLoesungForm.get('erreichtePunkte').value || 0}}/{{this.aufgabe.maxPunkte}}</mat-hint>
+                    <mat-hint align="end">{{input.value|| 0}}/{{this.aufgabe.maxPunkte}}</mat-hint>
                   </mat-form-field>
                 </div>
               </div>
