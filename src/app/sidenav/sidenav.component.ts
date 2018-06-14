@@ -106,13 +106,14 @@ export class SidenavComponent implements OnInit {
     this.studLoesungForm = new FormGroup({
       loesungstext: new FormControl(),
       erreichtePunkte: new FormControl(),
-      schwierigkeit: new FormControl('3')
+      schwierigkeit: new FormControl()
     });
   }
 
 
   test() {
-    console.log('######### TEST()   => ' + JSON.stringify(this.aufgabe.valueOf()));
+    console.log(this.studLoesungForm.get('erreichtePunkte').value + this.studLoesungForm.get('erreichtePunkte').value);
+    console.log(this.studLoesungForm.get('erreichtePunkte').value as string + this.studLoesungForm.get('erreichtePunkte').value);
   }
 
   postUnittest() {
@@ -135,6 +136,25 @@ export class SidenavComponent implements OnInit {
 
   onClickLoesungSpeichern() {
     console.log('########## 1. onClickLoesungSpeichern(); ');
+
+    this.loesungSpeichern();
+  }
+
+  loesungSpeichern() {
+    return new Promise((resolve, reject) => {
+      this.jopApiDbService.loesungSpeichernPOST(
+        this.aufgabe.id.toString(),
+        this.studLoesungForm.get('loesungstext').value as string,
+        this.studLoesungForm.get('schwierigkeit').value as string,
+        this.studLoesungForm.get('erreichtePunkte').value as string)
+        .then(res => {
+          console.log('########## 2. onClickLoesungSpeichern() ==> alles OK!');
+        })
+        .catch(msg => {
+          console.log('########## 2. onClickLoesungSpeichern() ==> nicht OK!');
+        });
+    });
+
   }
 
   onClickCommentSenden() {

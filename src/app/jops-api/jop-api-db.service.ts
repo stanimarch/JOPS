@@ -90,6 +90,12 @@ export class CommentResponse {
   response: number;
 }
 
+export class SaveResponse {
+  status: number;
+  error: string;
+  response: number;
+}
+
 export class UnittestResponse {
   status: number;
   output: string;
@@ -110,7 +116,31 @@ export class JopApiDbService implements OnInit {
   ngOnInit() {
   }
 
-  /* this.aufgabe.id.toString(), this.aufgabe.loesungStud, this.aufgabe.titel, this.aufgabe.unittest */
+  loesungSpeichernPOST(id: string, text: string, sgrad: string, punkte: string) {
+    return new Promise((resolve2, reject2) => {
+      console.log('&&&&& 1. loesungSpeichernPOST ==> START');
+      this.http.post<SaveResponse>('./api/save', new HttpParams()
+          .set(`matrNr`, localStorage.getItem('matrNr'))
+          .set(`aufgabenId`, id)
+          .set(`text`, text)
+          .set(`sgrad`, sgrad)
+          .set(`punkte`, punkte),
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+        }).toPromise()
+        .then(res => {
+          console.log('&&&&& 2. this.http.post: ==> POST OK');
+          console.log('&&&&& 3. JSON.stringify(res.valueOf()): ==>' + JSON.stringify(res.valueOf()));
+          resolve2();
+        })
+        .catch((msg) => {
+          console.log('&&&&& 2. this.http.post: ==> POST nicht OK');
+          reject2();
+        });
+    });
+  }
+
+
   postUnittest(id: string, loesungStud: string, titel: string, unittest: string) {
     console.log('##### 1. postUnittest(code: string, id: string)');
     return new Promise((resolve, reject) => {
