@@ -111,6 +111,7 @@ export class SidenavComponent implements OnInit {
   }
 
 
+
   test() {
     console.log('######### TEST()   => ' + JSON.stringify(this.aufgabe.valueOf()));
   }
