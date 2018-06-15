@@ -7,10 +7,10 @@
     <button (click)="menuJava1()" class="button-header" mat-button>JAVA 1</button>
     <button (click)="menuJava2()" class="button-header" mat-button>JAVA 2</button>
 
-    <!--
+
     <button (click)="onClickAufg()" class="button-header" mat-button>TEST</button>
     <button (click)="test()" class="button-header" mat-button>TEST 2</button>
-      -->
+
     <button (click)="doLogout()" class="button-login" mat-button>Logout</button>
   </mat-toolbar>
 
@@ -215,7 +215,7 @@
                                   hintLabel="Maximum {{this.aufgabe.maxPunkte}}">
                     <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}" matInput #input
                            maxlength="2"
-                           formControlName="erreichtePunkte" >
+                           formControlName="erreichtePunkte">
                     <mat-hint align="end">{{input.value|| 0}}/{{this.aufgabe.maxPunkte}}</mat-hint>
                   </mat-form-field>
                 </div>

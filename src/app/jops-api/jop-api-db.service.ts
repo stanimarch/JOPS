@@ -231,10 +231,10 @@ export class JopApiDbService implements OnInit {
             res.aufgabe.forEach((data, index) => {
               console.log('######### 4. index');
               console.log('######### 5. res.aufgabe.forEach((data, index) => {...};');
-              console.log('######### 6. JSON.stringify(data.valueOf()):   => ' + JSON.stringify(data.valueOf()));
+              console.log('######### 6. JSON.stringify(data.valueOf()):   => ' + data.valueOf().toString());
               console.log('6.1 data.Sachliches_Themengebiet' + data.Sachliches_Themengebiet);
-              console.log('6.2 data.Loesungsbild' + data.Loesungsbild);
-              console.log('6.3 data.Loesungstext' + data.Loesungstext);
+              console.log('6.2 data.Loesungsbild: ' + data.Loesungsbild);
+              console.log('6.3 data.Loesungstext: ' + data.Loesungstext);
 
               this.musterLoesungen.push(new MusterLoesung(
                 data.Loesungstext,
