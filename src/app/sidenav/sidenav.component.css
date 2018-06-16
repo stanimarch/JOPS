@@ -174,7 +174,6 @@ label {
 }
 
 .aufgabentext-format, .unittest-format, .musterloesung-format{
-  width: calc(100% - 100px);
   white-space:pre-wrap;
   text-align: left;
   font-size: 18px;
