@@ -131,7 +131,7 @@ export class SidenavComponent implements OnInit {
       '********************\n' +
       '******************** ',
       '',
-      null,
+      '',
       'public class SternchenRechteckGefuellt {\n' +
       'public static void main(String[] args) throws IOException {\n' +
       ' final BufferedReader konsolenEingabe = new BufferedReader(\n' +
@@ -162,14 +162,13 @@ export class SidenavComponent implements OnInit {
     this.studLoesungForm = new FormGroup({
       loesungstext: new FormControl(),
       erreichtePunkte: new FormControl('', [Validators.min(0), Validators.max(this.aufgabe.maxPunkte)]),
-      schwierigkeit: new FormControl('3')
+      schwierigkeit: new FormControl()
     });
   }
 
   getErrorMessagePunkte() {
     return this.studLoesungForm.get('erreichtePunkte').hasError('min') ? 'Minimum 0 ' :
-      this.studLoesungForm.get('erreichtePunkte').hasError('max') ? `Maximum ${this.aufgabe.maxPunkte}` :
-        '';
+      this.studLoesungForm.get('erreichtePunkte').hasError('max') ? `Maximum ${this.aufgabe.maxPunkte}` : '';
   }
 
   test() {
@@ -254,16 +253,21 @@ export class SidenavComponent implements OnInit {
 
   getAufgabe(id: number) {
     // console.log('@@@@@ 2. getAufgabe(' + id + ')');
+    if (this.aufgabe !== null) {
+      this.aufgabe.loesungStud = this.studLoesungForm.get('loesungstext').value;
+      this.aufgabe.sGrad = this.studLoesungForm.get('schwierigkeit').value;
+      this.aufgabe.erreichtePunkte = this.studLoesungForm.get('erreichtePunkte').value;
+    }
 
     if (this.jopApiDbService.istAufgebe(id)) {
-      this.anzeigeVorgereitung(id);
+      this.anzeigeVorbereitung(id);
       // console.log('@@@@@ 3.  this.jopApiDbService.istAufgebe(id) = TRUE');
     } else {
       // console.log('@@@@@ 3.  this.jopApiDbService.istAufgebe(id) = FALSE');
       this.jopApiDbService.getAufgabePOST(id)
         .then(res => {
           console.log('########## getAufgabe(id: number) => Alles ist gut!');
-          this.anzeigeVorgereitung(id);
+          this.anzeigeVorbereitung(id);
         })
         .catch(msg => {
           console.log('########## getAufgabe(id: number) => Fehler!!! ');
@@ -271,13 +275,14 @@ export class SidenavComponent implements OnInit {
     }
   }
 
-  anzeigeVorgereitung(id: number) {
+  anzeigeVorbereitung(id: number) {
     this.aufgabe = this.jopApiDbService.getAufgabe(id);
 
 
     this.studLoesungForm.get('loesungstext').setValue(this.aufgabe.loesungStud);
-    this.studLoesungForm.get('schwierigkeit').setValue(this.aufgabe.sGrad);
+    this.studLoesungForm.get('schwierigkeit').setValue(this.aufgabe.sGrad + '');
     this.studLoesungForm.get('erreichtePunkte').setValue(this.aufgabe.erreichtePunkte);
+    this.studLoesungForm.get('erreichtePunkte').setValidators([Validators.min(0), Validators.max(this.aufgabe.maxPunkte)]);
 
 
     this.spinner_obAufgabeLaden = false;
