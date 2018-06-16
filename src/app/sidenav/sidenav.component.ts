@@ -39,7 +39,7 @@ export class SidenavComponent implements OnInit {
   spinner_obAufgabeLaden = false;
   spinner_commenter = false;
   spinner_unittest = false;
-  spinner_musterloesung = false;
+
 
 
   testArray: Array<HeaderArray>;
@@ -89,6 +89,38 @@ export class SidenavComponent implements OnInit {
       'Schterenaufgabe',
       'Titel von der Aufgabe',
       20,
+      'Schreiben Sie ein Programm, das ein durch Sternchen gefülltes Rechteck zeichnet. Der Benutzer\n' +
+      'soll Breite und Höhe eingeben können:\n' +
+      'Geben Sie die Breite des Rechtecks ein: 20\n' +
+      'Geben Sie die Höhe des Rechtecks ein: 5\n' +
+      'Schreiben Sie ein Programm, das ein durch Sternchen gefülltes Rechteck zeichnet. Der Benutzer\n' +
+      'soll Breite und Höhe eingeben können:\n' +
+      'Geben Sie die Breite des Rechtecks ein: 20\n' +
+      'Geben Sie die Höhe des Rechtecks ein: 5\n' +
+      'Schreiben Sie ein Programm, das ein durch Sternchen gefülltes Rechteck zeichnet. Der Benutzer\n' +
+      'soll Breite und Höhe eingeben können:\n' +
+      'Geben Sie die Breite des Rechtecks ein: 20\n' +
+      'Geben Sie die Höhe des Rechtecks ein: 5\n' +
+      'Schreiben Sie ein Programm, das ein durch Sternchen gefülltes Rechteck zeichnet. Der Benutzer\n' +
+      'soll Breite und Höhe eingeben können:\n' +
+      'Geben Sie die Breite des Rechtecks ein: 20\n' +
+      'Geben Sie die Höhe des Rechtecks ein: 5\n' +
+      'Schreiben Sie ein Programm, das ein durch Sternchen gefülltes Rechteck zeichnet. Der Benutzer\n' +
+      'soll Breite und Höhe eingeben können:\n' +
+      'Geben Sie die Breite des Rechtecks ein: 20\n' +
+      'Geben Sie die Höhe des Rechtecks ein: 5\n' +
+      'Schreiben Sie ein Programm, das ein durch Sternchen gefülltes Rechteck zeichnet. Der Benutzer\n' +
+      'soll Breite und Höhe eingeben können:\n' +
+      'Geben Sie die Breite des Rechtecks ein: 20\n' +
+      'Geben Sie die Höhe des Rechtecks ein: 5\n' +
+      'Schreiben Sie ein Programm, das ein durch Sternchen gefülltes Rechteck zeichnet. Der Benutzer\n' +
+      'soll Breite und Höhe eingeben können:\n' +
+      'Geben Sie die Breite des Rechtecks ein: 20\n' +
+      'Geben Sie die Höhe des Rechtecks ein: 5\n' +
+      'Schreiben Sie ein Programm, das ein durch Sternchen gefülltes Rechteck zeichnet. Der Benutzer\n' +
+      'soll Breite und Höhe eingeben können:\n' +
+      'Geben Sie die Breite des Rechtecks ein: 20\n' +
+      'Geben Sie die Höhe des Rechtecks ein: 5\n' +
       'Schreiben Sie ein Programm, das ein durch Sternchen gefülltes Rechteck zeichnet. Der Benutzer\n' +
       'soll Breite und Höhe eingeben können:\n' +
       'Geben Sie die Breite des Rechtecks ein: 20\n' +
