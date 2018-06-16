@@ -7,7 +7,6 @@
     <button (click)="menuJava1()" class="button-header" mat-button>JAVA 1</button>
     <button (click)="menuJava2()" class="button-header" mat-button>JAVA 2</button>
 
-
     <button (click)="onClickAufg()" class="button-header" mat-button>TEST</button>
     <button (click)="test()" class="button-header" mat-button>TEST 2</button>
 
@@ -110,16 +109,19 @@
           </div>
           <div class="clear"></div>
           <div id="button-aufgabe-rechts-links">
+            <!--
             <button mat-button type="button" class="links-button-next-aufgabe" (click)="onClick()">
               <mat-icon>navigate_before</mat-icon>
               before
             </button>
+            -->
             <button mat-button type="button" class="button-next-aufgabe" (click)="onClickComment()"> Anregung zur
               Aufgabe!
             </button>
+            <!--
             <button mat-button type="button" class="rechts-button-next-aufgabe" (click)="onClick()">next
               <mat-icon>navigate_next</mat-icon>
-            </button>
+            </button>-->
           </div>
           <div class="clear"></div>
         </div>
@@ -208,14 +210,13 @@
                     star</label>
                   </div>
 
-                  <!--
-                  <mat-error *ngIf="punkte.invalid">{{getErrorMessagePunkte()}}</mat-error>-->
 
                   <mat-form-field style="float:left; font-family: Times; margin-left: 30px"
-                                  hintLabel="Maximum {{this.aufgabe.maxPunkte}}">
+                                  hintLabel="Maximum {{this.aufgabe.maxPunkte}}"> Erreichte Punkte
                     <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}" matInput #input
-                           maxlength="2"
-                           formControlName="erreichtePunkte">
+                           maxlength="2" formControlName="erreichtePunkte"
+                           >
+                    <mat-error *ngIf="this.studLoesungForm.get('erreichtePunkte').invalid">{{getErrorMessagePunkte()}}</mat-error>
                     <mat-hint align="end">{{input.value|| 0}}/{{this.aufgabe.maxPunkte}}</mat-hint>
                   </mat-form-field>
                 </div>
