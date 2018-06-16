@@ -38,7 +38,6 @@ export class SidenavComponent implements OnInit {
   spinner_commenter = false;
   spinner_unittest = false;
 
-
   testArray: Array<HeaderArray>;
 
   constructor(public dialog: MatDialog,
@@ -106,9 +105,15 @@ export class SidenavComponent implements OnInit {
     });
     this.studLoesungForm = new FormGroup({
       loesungstext: new FormControl(),
-      erreichtePunkte: new FormControl(),
+      erreichtePunkte: new FormControl('', [Validators.min(0), Validators.max(this.aufgabe.maxPunkte)]),
       schwierigkeit: new FormControl('3')
     });
+  }
+
+  getErrorMessagePunkte() {
+    return this.studLoesungForm.get('erreichtePunkte').hasError('min') ? 'Minimum 0 ' :
+      this.studLoesungForm.get('erreichtePunkte').hasError('max') ? `Maximum ${this.aufgabe.maxPunkte}` :
+        '';
   }
 
   test() {
