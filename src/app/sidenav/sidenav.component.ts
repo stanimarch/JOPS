@@ -39,6 +39,7 @@ export class SidenavComponent implements OnInit {
   spinner_obAufgabeLaden = false;
   spinner_commenter = false;
   spinner_unittest = false;
+  spinner_musterloesung = false;
 
 
   testArray: Array<HeaderArray>;
@@ -53,7 +54,7 @@ export class SidenavComponent implements OnInit {
       localStorage.getItem('sessionId') === undefined ||
       localStorage.getItem('matrNr') === null ||
       localStorage.getItem('matrNr') === undefined) {
-      this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
+   //   this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
     }
   }
 
@@ -65,15 +66,15 @@ export class SidenavComponent implements OnInit {
 
     this.musterLoesungTEST = new MusterLoesung('public class SternchenRechteckGefuellt {\n' +
       'public static void main(String[] args) throws IOException {\n' +
-      ' final BufferedReader konsolenEingabe = new BufferedReader(\n' +
-      ' new InputStreamReader(System.in));\n' +
-      ' System.out.print("Geben Sie die Breite des Rechtecks ein: ");\n' +
-      ' final int breite= Integer.parseInt(konsolenEingabe.readLine());\n' +
-      ' System.out.print("Geben Sie die Höhe des Rechtecks ein: ");\n' +
+      '    final BufferedReader konsolenEingabe = new BufferedReader(\n' +
+      '     new InputStreamReader(System.in));\n' +
+      '      System.out.print("Geben Sie die Breite des Rechtecks ein: ");\n' +
+      '       final int breite= Integer.parseInt(konsolenEingabe.readLine());\n' +
+             ' System.out.print("Geben Sie die Höhe des Rechtecks ein: ");\n' +
       ' final int hoehe = Integer.parseInt(konsolenEingabe.readLine());\n' +
-      ' for (int y = 0; y < hoehe; y++) {\n' +
+            ' for (int y = 0; y < hoehe; y++) {\n' +
       ' wiederholeZeichen(breite, \'*\');\n' +
-      ' System.out.println();\n' +
+             ' System.out.println();\n' +
       ' }\n' +
       ' }\n' +
       'static void wiederholeZeichen(final int breite, char c) {\n' +

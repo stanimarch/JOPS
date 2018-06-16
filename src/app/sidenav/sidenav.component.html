@@ -133,7 +133,7 @@
                   (ngSubmit)="onClickCommentSenden()">
               <div>
                 <p>
-                  <label style="font-size: 18px; margin-bottom: 10px; text-align: center">Du hast in der
+                  <label style="font-size: 18px; margin-bottom: 10px; text-align: left; margin-left: 40px">Du hast in der
                     Aufgabenstellung Fehler entdeckt oder Dir ist die Aufgabenstellung nicht klar, dann poste es hier.
                     Hier ist genug Platz für Deine Vorschläge, Wünsche oder
                     Anregungen zu der Aufgabe. </label>
@@ -216,8 +216,9 @@
                     <legend>Erreichte Punkte</legend>
                     <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}" matInput #input
                            maxlength="2" formControlName="erreichtePunkte"
-                           >
-                    <mat-error *ngIf="this.studLoesungForm.get('erreichtePunkte').invalid">{{getErrorMessagePunkte()}}</mat-error>
+                    >
+                    <mat-error *ngIf="this.studLoesungForm.get('erreichtePunkte').invalid">{{getErrorMessagePunkte()}}
+                    </mat-error>
                     <mat-hint align="end">{{input.value|| 0}}/{{this.aufgabe.maxPunkte}}</mat-hint>
                   </mat-form-field>
                 </div>
@@ -250,7 +251,7 @@
               <label>Unittest</label>
             </p>
             <div class="clear"></div>
-            <div ng-bind="textFromJSON" style="white-space:pre-wrap; margin: 4px">
+            <div ng-bind="textFromJSON" class="unittest-format" style="margin: 4px">
               {{aufgabe.unittestAusgabe}}
             </div>
           </div>
@@ -261,17 +262,23 @@
 
 
         <div class="musterl" *ngIf="musterloeusung">
-          <p>
-            <label>Musterlösung</label>
-          </p>
-          <div class="clear"></div>
-          <div style="margin: 4px">
-            <p style="text-align: left">
-              Musterlösung 1
+          <div *ngIf="!spinner_musterloesung">
+            <p>
+              <label style="margin: 8px; text-transform: uppercase">Musterlösungen</label>
             </p>
-            <p style="text-align: left">
-              Musterlösung 2
-            </p>
+            <div style="margin: 4px" class="musterloesung-format">
+              <div class="musterloesung-format" style="margin-bottom: 20px; margin-top: 10px;">
+                <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> 1. Musterlösung </label>
+                {{this.musterLoesungTEST.text}}
+              </div>
+              <div class="musterloesung-format" style="margin-bottom: 20px; margin-top: 10px;">
+                <label  style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> 2. Musterlösung </label>
+                {{this.musterLoesungTEST.text}}
+              </div>
+            </div>
+          </div>
+          <div class="mat-spinner-content menu-spinner" *ngIf="spinner_musterloesung">
+            <mat-spinner></mat-spinner>
           </div>
         </div>
       </div>

@@ -169,7 +169,7 @@ label {
   -webkit-border-radius: 7px;
 }
 
-.aufgabentext-format{
+.aufgabentext-format, .unittest-format, .musterloesung-format{
 
   white-space:pre-wrap;
   text-align: left;
