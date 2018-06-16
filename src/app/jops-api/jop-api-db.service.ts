@@ -75,6 +75,7 @@ export class UrdatenAufgabe {
 export class Studloesung {
   Erreichte_Punkte: number;
   Loesung: string;
+  Bewertung: number;
 }
 
 export class SAufgabeResponse {
@@ -85,6 +86,12 @@ export class SAufgabeResponse {
 }
 
 export class CommentResponse {
+  status: number;
+  error: string;
+  response: number;
+}
+
+export class SaveResponse {
   status: number;
   error: string;
   response: number;
@@ -110,7 +117,31 @@ export class JopApiDbService implements OnInit {
   ngOnInit() {
   }
 
-  /* this.aufgabe.id.toString(), this.aufgabe.loesungStud, this.aufgabe.titel, this.aufgabe.unittest */
+  loesungSpeichernPOST(id: string, text: string, sgrad: string, punkte: string) {
+    return new Promise((resolve2, reject2) => {
+      console.log('&&&&& 1. loesungSpeichernPOST ==> START');
+      this.http.post<SaveResponse>('./api/save', new HttpParams()
+          .set(`matrNr`, localStorage.getItem('matrNr'))
+          .set(`aufgabenId`, id)
+          .set(`text`, text)
+          .set(`sgrad`, sgrad)
+          .set(`punkte`, punkte),
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+        }).toPromise()
+        .then(res => {
+          console.log('&&&&& 2. this.http.post: ==> POST OK');
+          console.log('&&&&& 3. JSON.stringify(res.valueOf()): ==>' + JSON.stringify(res.valueOf()));
+          resolve2();
+        })
+        .catch((msg) => {
+          console.log('&&&&& 2. this.http.post: ==> POST nicht OK');
+          reject2();
+        });
+    });
+  }
+
+
   postUnittest(id: string, loesungStud: string, titel: string, unittest: string) {
     console.log('##### 1. postUnittest(code: string, id: string)');
     return new Promise((resolve, reject) => {
@@ -139,22 +170,23 @@ export class JopApiDbService implements OnInit {
     });
   }
 
-  commentSenden(comment: string, id: number) {
+  commentSenden(id: number, comment: string, email: string) {
     return new Promise((resolve, reject) => {
       this.http.post<CommentResponse>('./api/comment', new HttpParams()
           .set(`aufgabenId`, id.toString())
+          .set(`email`, email)
           .set(`comment`, comment),
         {
           headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
         }).toPromise()
         .then(res => {
           console.log(res.valueOf());
-          console.log('Alles ist gut gelaufen: ' + 'this.http.post...CommentResponse...(\'./api/comment\'');
+          // console.log('Alles ist gut gelaufen: ' + 'this.http.post...CommentResponse...(\'./api/comment\'');
           resolve();
         })
         .catch(msg => {
           console.log(msg.valueOf());
-          console.log('Alles ist nicht gut gelaufen: ' + 'this.http.post...CommentResponse...(\'./api/comment\'');
+          // console.log('Alles ist nicht gut gelaufen: ' + 'this.http.post...CommentResponse...(\'./api/comment\'');
           reject();
         });
     });
@@ -167,12 +199,12 @@ export class JopApiDbService implements OnInit {
         return true;
       }
     }
-    console.log('istAufgebe(id: number): ' + 'false');
+    // console.log('istAufgebe(id: number): ' + 'false');
     return false;
   }
 
   getAufgabe(id: number): Aufgabe {
-    console.log('@@@@@ jops-api-db.service:    getAufgabe(id: number)');
+    // console.log('@@@@@ jops-api-db.service:    getAufgabe(id: number)');
     for (let i = 0, len = this.aufgabenArray.length; i < len; i++) {
       if (this.aufgabenArray[i].id === id) {
         console.log('######### JSON.stringify(aufgabe.valueOf()) ==> ' + JSON.stringify(this.aufgabenArray[i].valueOf()));
@@ -199,19 +231,19 @@ export class JopApiDbService implements OnInit {
 
 
             res.aufgabe.forEach((data, index) => {
-              console.log('######### 4. index');
+              /*console.log('######### 4. index');
               console.log('######### 5. res.aufgabe.forEach((data, index) => {...};');
-              console.log('######### 6. JSON.stringify(data.valueOf()):   => ' + JSON.stringify(data.valueOf()));
+              console.log('######### 6. JSON.stringify(data.valueOf()):   => ' + data.valueOf().toString());
               console.log('6.1 data.Sachliches_Themengebiet' + data.Sachliches_Themengebiet);
-              console.log('6.2 data.Loesungsbild' + data.Loesungsbild);
-              console.log('6.3 data.Loesungstext' + data.Loesungstext);
+              console.log('6.2 data.Loesungsbild: ' + data.Loesungsbild);
+              console.log('6.3 data.Loesungstext: ' + data.Loesungstext);*/
 
               this.musterLoesungen.push(new MusterLoesung(
                 data.Loesungstext,
                 data.Loesungsbild));
-              console.log('######### 7. this.musterLoesungen.push(new MusterLoesung(data.LoesungsText,data.LoesungsBild));\n' +
+              /*console.log('######### 7. this.musterLoesungen.push(new MusterLoesung(data.LoesungsText,data.LoesungsBild));\n' +
                 'JSON.stringify(this.musterLoesungen.valueOf()) ===>  '
-                + JSON.stringify(this.musterLoesungen.valueOf()));
+                + JSON.stringify(this.musterLoesungen.valueOf()));*/
 
 
               if (index === res.aufgabe.length - 1) {
@@ -226,12 +258,13 @@ export class JopApiDbService implements OnInit {
                   data.Unittest,
                   null,
                   res.studloesung[0].Loesung,
-                  null,
+                  res.studloesung[0].Bewertung,
                   res.studloesung[0].Erreichte_Punkte,
                   this.musterLoesungen
                 ));
-                console.log('########## 9. this.aufgabenArray.push(new Aufgabe...);\n' +
-                  '########### 10. JSON.stringify(this.aufgabenArray[0].valueOf()) ==> ' + JSON.stringify(this.aufgabenArray[0].valueOf()));
+                /* console.log('########## 9. this.aufgabenArray.push(new Aufgabe...);\n' +
+                  '########### 10. JSON.stringify(this.aufgabenArray[0].valueOf()) ==> '
+                   + JSON.stringify(this.aufgabenArray[0].valueOf())); */
               }
             });
 

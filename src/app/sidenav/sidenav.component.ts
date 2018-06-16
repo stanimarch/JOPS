@@ -4,7 +4,7 @@ import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.compon
 import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 import {JopsApiRunService} from '../jops-api/jops-api-run.service';
 import {HeaderArray, MenuService} from '../menu/menu.service';
-import {Aufgabe, JopApiDbService, SThemaResponse} from '../jops-api/jop-api-db.service';
+import {Aufgabe, JopApiDbService, MusterLoesung, SThemaResponse} from '../jops-api/jop-api-db.service';
 import {HttpClient} from '@angular/common/http';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Validators} from '@angular/forms';
@@ -24,6 +24,8 @@ export class SidenavComponent implements OnInit {
   commentForm: FormGroup;
   studLoesungForm: FormGroup;
 
+  musterLoesungTEST: MusterLoesung;
+
   aufgabe: Aufgabe;
 
   aufgabenstellung = true;
@@ -38,6 +40,7 @@ export class SidenavComponent implements OnInit {
   spinner_commenter = false;
   spinner_unittest = false;
 
+
   testArray: Array<HeaderArray>;
 
   constructor(public dialog: MatDialog,
@@ -50,7 +53,7 @@ export class SidenavComponent implements OnInit {
       localStorage.getItem('sessionId') === undefined ||
       localStorage.getItem('matrNr') === null ||
       localStorage.getItem('matrNr') === undefined) {
-      // this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
+      this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
     }
   }
 
@@ -59,6 +62,26 @@ export class SidenavComponent implements OnInit {
     this.menuAktuell = -1;
     this.dataJava1 = null;
     this.dataJava2 = null;
+
+    this.musterLoesungTEST = new MusterLoesung('public class SternchenRechteckGefuellt {\n' +
+      'public static void main(String[] args) throws IOException {\n' +
+      ' final BufferedReader konsolenEingabe = new BufferedReader(\n' +
+      ' new InputStreamReader(System.in));\n' +
+      ' System.out.print("Geben Sie die Breite des Rechtecks ein: ");\n' +
+      ' final int breite= Integer.parseInt(konsolenEingabe.readLine());\n' +
+      ' System.out.print("Geben Sie die Höhe des Rechtecks ein: ");\n' +
+      ' final int hoehe = Integer.parseInt(konsolenEingabe.readLine());\n' +
+      ' for (int y = 0; y < hoehe; y++) {\n' +
+      ' wiederholeZeichen(breite, \'*\');\n' +
+      ' System.out.println();\n' +
+      ' }\n' +
+      ' }\n' +
+      'static void wiederholeZeichen(final int breite, char c) {\n' +
+      ' for (int x = 0; x < breite; x++) {\n' +
+      ' System.out.print(c);\n' +
+      ' }\n' +
+      ' }\n' +
+      '} ', '');
     this.aufgabe = new Aufgabe(
       101,
       'For-Schleife',
@@ -140,20 +163,39 @@ export class SidenavComponent implements OnInit {
 
   onClickLoesungSpeichern() {
     console.log('########## 1. onClickLoesungSpeichern(); ');
+
+    this.loesungSpeichern();
+  }
+
+  loesungSpeichern() {
+    return new Promise((resolve, reject) => {
+      this.jopApiDbService.loesungSpeichernPOST(
+        this.aufgabe.id.toString(),
+        this.studLoesungForm.get('loesungstext').value as string,
+        this.studLoesungForm.get('schwierigkeit').value as string,
+        this.studLoesungForm.get('erreichtePunkte').value as string)
+        .then(res => {
+          console.log('########## 2. onClickLoesungSpeichern() ==> alles OK!');
+        })
+        .catch(msg => {
+          console.log('########## 2. onClickLoesungSpeichern() ==> nicht OK!');
+        });
+    });
+
   }
 
   onClickCommentSenden() {
     console.log('########## 1. onClickCommentSenden();');
-    console.log('########## 2. this.commentForm.get(\'comment\').value: ' + this.commentForm.get('comment').value);
-    console.log('########## 3. this.commentForm.get(\'email\').value: ' + this.commentForm.get('email').value);
-    this.commentSenden('Email: ' + this.commentForm.get('email').value + '\nTEXT:\n' + this.commentForm.get('comment').value);
+    // console.log('########## 2. this.commentForm.get(\'comment\').value: ' + this.commentForm.get('comment').value);
+    // console.log('########## 3. this.commentForm.get(\'email\').value: ' + this.commentForm.get('email').value);
+    this.commentSenden(this.commentForm.get('comment').value, this.commentForm.get('email').value);
   }
 
-  commentSenden(comment: string) {
-    console.log('########## 4. commentSenden(text: string);');
-    console.log('########## 5. this.jopApiDbService.commentSenden(comment, this.aufgabe.id)... ');
+  commentSenden(comment: string, email: string) {
+    // console.log('########## 4. commentSenden(text: string);');
+    // console.log('########## 5. this.jopApiDbService.commentSenden(comment, this.aufgabe.id)... ');
     this.spinner_commenter = true;
-    this.jopApiDbService.commentSenden(comment, this.aufgabe.id)
+    this.jopApiDbService.commentSenden(this.aufgabe.id, email, comment)
       .then(res => {
         console.log('########## 6. abgeschlossen: OK');
         this.spinner_commenter = false;
@@ -178,29 +220,35 @@ export class SidenavComponent implements OnInit {
   }
 
   getAufgabe(id: number) {
-    console.log('@@@@@ 2. getAufgabe(' + id + ')');
+    // console.log('@@@@@ 2. getAufgabe(' + id + ')');
 
     if (this.jopApiDbService.istAufgebe(id)) {
-      this.aufgabe = this.jopApiDbService.getAufgabe(id);
-      this.spinner_obAufgabeLaden = false;
-      this.inhaltcenter = true;
-      console.log('@@@@@ 3.  this.jopApiDbService.istAufgebe(id) = TRUE');
+      this.anzeigeVorgereitung(id);
+      // console.log('@@@@@ 3.  this.jopApiDbService.istAufgebe(id) = TRUE');
     } else {
-      console.log('@@@@@ 3.  this.jopApiDbService.istAufgebe(id) = FALSE');
+      // console.log('@@@@@ 3.  this.jopApiDbService.istAufgebe(id) = FALSE');
       this.jopApiDbService.getAufgabePOST(id)
         .then(res => {
-          console.log('########## VOR FEHLER ==> this.aufgabe = this.jopApiDbService.getAufgabe(id);');
-          this.aufgabe = this.jopApiDbService.getAufgabe(id);
-          this.studLoesungForm.get('loesungstext').setValue(this.aufgabe.loesungStud);
-          this.studLoesungForm.get('erreichtePunkte').setValue(this.aufgabe.erreichtePunkte);
-          this.spinner_obAufgabeLaden = false;
-          this.inhaltcenter = true;
           console.log('########## getAufgabe(id: number) => Alles ist gut!');
+          this.anzeigeVorgereitung(id);
         })
         .catch(msg => {
           console.log('########## getAufgabe(id: number) => Fehler!!! ');
         });
     }
+  }
+
+  anzeigeVorgereitung(id: number) {
+    this.aufgabe = this.jopApiDbService.getAufgabe(id);
+
+
+    this.studLoesungForm.get('loesungstext').setValue(this.aufgabe.loesungStud);
+    this.studLoesungForm.get('schwierigkeit').setValue(this.aufgabe.sGrad);
+    this.studLoesungForm.get('erreichtePunkte').setValue(this.aufgabe.erreichtePunkte);
+
+
+    this.spinner_obAufgabeLaden = false;
+    this.inhaltcenter = true;
   }
 
   menuJava1() {
@@ -376,8 +424,3 @@ export class SidenavComponent implements OnInit {
   }
 
 }
-
-/*
-res.forEach((data, index) => {
-  console.log('Index: ' + index + 'data: ' + data.toString());
-*/
