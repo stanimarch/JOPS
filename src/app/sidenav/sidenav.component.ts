@@ -50,7 +50,7 @@ export class SidenavComponent implements OnInit {
       localStorage.getItem('sessionId') === undefined ||
       localStorage.getItem('matrNr') === null ||
       localStorage.getItem('matrNr') === undefined) {
-      // this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
+      this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
     }
   }
 
@@ -158,16 +158,16 @@ export class SidenavComponent implements OnInit {
 
   onClickCommentSenden() {
     console.log('########## 1. onClickCommentSenden();');
-    console.log('########## 2. this.commentForm.get(\'comment\').value: ' + this.commentForm.get('comment').value);
-    console.log('########## 3. this.commentForm.get(\'email\').value: ' + this.commentForm.get('email').value);
-    this.commentSenden('Email: ' + this.commentForm.get('email').value + '\nTEXT:\n' + this.commentForm.get('comment').value);
+    // console.log('########## 2. this.commentForm.get(\'comment\').value: ' + this.commentForm.get('comment').value);
+    // console.log('########## 3. this.commentForm.get(\'email\').value: ' + this.commentForm.get('email').value);
+    this.commentSenden(this.commentForm.get('comment').value, this.commentForm.get('email').value);
   }
 
-  commentSenden(comment: string) {
-    console.log('########## 4. commentSenden(text: string);');
-    console.log('########## 5. this.jopApiDbService.commentSenden(comment, this.aufgabe.id)... ');
+  commentSenden(comment: string, email: string) {
+    // console.log('########## 4. commentSenden(text: string);');
+    // console.log('########## 5. this.jopApiDbService.commentSenden(comment, this.aufgabe.id)... ');
     this.spinner_commenter = true;
-    this.jopApiDbService.commentSenden(comment, this.aufgabe.id)
+    this.jopApiDbService.commentSenden(this.aufgabe.id, email, comment)
       .then(res => {
         console.log('########## 6. abgeschlossen: OK');
         this.spinner_commenter = false;
@@ -391,8 +391,3 @@ export class SidenavComponent implements OnInit {
   }
 
 }
-
-/*
-res.forEach((data, index) => {
-  console.log('Index: ' + index + 'data: ' + data.toString());
-*/

@@ -169,22 +169,23 @@ export class JopApiDbService implements OnInit {
     });
   }
 
-  commentSenden(comment: string, id: number) {
+  commentSenden(id: number, comment: string, email: string) {
     return new Promise((resolve, reject) => {
       this.http.post<CommentResponse>('./api/comment', new HttpParams()
           .set(`aufgabenId`, id.toString())
+          .set(`email`, email)
           .set(`comment`, comment),
         {
           headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
         }).toPromise()
         .then(res => {
           console.log(res.valueOf());
-          console.log('Alles ist gut gelaufen: ' + 'this.http.post...CommentResponse...(\'./api/comment\'');
+          // console.log('Alles ist gut gelaufen: ' + 'this.http.post...CommentResponse...(\'./api/comment\'');
           resolve();
         })
         .catch(msg => {
           console.log(msg.valueOf());
-          console.log('Alles ist nicht gut gelaufen: ' + 'this.http.post...CommentResponse...(\'./api/comment\'');
+          // console.log('Alles ist nicht gut gelaufen: ' + 'this.http.post...CommentResponse...(\'./api/comment\'');
           reject();
         });
     });
