@@ -169,6 +169,15 @@ label {
   -webkit-border-radius: 7px;
 }
 
+.aufgabentext-format{
+
+  white-space:pre-wrap;
+  text-align: left;
+  font-size: 18px;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
 .textfeldkomment::placeholder {
   color: red;
   font-family: serif;
