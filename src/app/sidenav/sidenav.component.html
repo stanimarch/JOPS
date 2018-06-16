@@ -211,8 +211,9 @@
                   </div>
 
 
-                  <mat-form-field style="float:left; font-family: Times; margin-left: 30px"
-                                  hintLabel="Maximum {{this.aufgabe.maxPunkte}}"> Erreichte Punkte
+                  <mat-form-field style="float:left; font-family: Times, serif; margin-left: 30px"
+                                  hintLabel="Maximum {{this.aufgabe.maxPunkte}}">
+                    <legend>Erreichte Punkte</legend>
                     <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}" matInput #input
                            maxlength="2" formControlName="erreichtePunkte"
                            >
