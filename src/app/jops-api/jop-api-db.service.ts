@@ -75,6 +75,7 @@ export class UrdatenAufgabe {
 export class Studloesung {
   Erreichte_Punkte: number;
   Loesung: string;
+  Bewertung: number;
 }
 
 export class SAufgabeResponse {
@@ -198,12 +199,12 @@ export class JopApiDbService implements OnInit {
         return true;
       }
     }
-    console.log('istAufgebe(id: number): ' + 'false');
+    // console.log('istAufgebe(id: number): ' + 'false');
     return false;
   }
 
   getAufgabe(id: number): Aufgabe {
-    console.log('@@@@@ jops-api-db.service:    getAufgabe(id: number)');
+    // console.log('@@@@@ jops-api-db.service:    getAufgabe(id: number)');
     for (let i = 0, len = this.aufgabenArray.length; i < len; i++) {
       if (this.aufgabenArray[i].id === id) {
         console.log('######### JSON.stringify(aufgabe.valueOf()) ==> ' + JSON.stringify(this.aufgabenArray[i].valueOf()));
@@ -230,19 +231,19 @@ export class JopApiDbService implements OnInit {
 
 
             res.aufgabe.forEach((data, index) => {
-              console.log('######### 4. index');
+              /*console.log('######### 4. index');
               console.log('######### 5. res.aufgabe.forEach((data, index) => {...};');
               console.log('######### 6. JSON.stringify(data.valueOf()):   => ' + data.valueOf().toString());
               console.log('6.1 data.Sachliches_Themengebiet' + data.Sachliches_Themengebiet);
               console.log('6.2 data.Loesungsbild: ' + data.Loesungsbild);
-              console.log('6.3 data.Loesungstext: ' + data.Loesungstext);
+              console.log('6.3 data.Loesungstext: ' + data.Loesungstext);*/
 
               this.musterLoesungen.push(new MusterLoesung(
                 data.Loesungstext,
                 data.Loesungsbild));
-              console.log('######### 7. this.musterLoesungen.push(new MusterLoesung(data.LoesungsText,data.LoesungsBild));\n' +
+              /*console.log('######### 7. this.musterLoesungen.push(new MusterLoesung(data.LoesungsText,data.LoesungsBild));\n' +
                 'JSON.stringify(this.musterLoesungen.valueOf()) ===>  '
-                + JSON.stringify(this.musterLoesungen.valueOf()));
+                + JSON.stringify(this.musterLoesungen.valueOf()));*/
 
 
               if (index === res.aufgabe.length - 1) {
@@ -257,12 +258,13 @@ export class JopApiDbService implements OnInit {
                   data.Unittest,
                   null,
                   res.studloesung[0].Loesung,
-                  null,
+                  res.studloesung[0].Bewertung,
                   res.studloesung[0].Erreichte_Punkte,
                   this.musterLoesungen
                 ));
-                console.log('########## 9. this.aufgabenArray.push(new Aufgabe...);\n' +
-                  '########### 10. JSON.stringify(this.aufgabenArray[0].valueOf()) ==> ' + JSON.stringify(this.aufgabenArray[0].valueOf()));
+                /* console.log('########## 9. this.aufgabenArray.push(new Aufgabe...);\n' +
+                  '########### 10. JSON.stringify(this.aufgabenArray[0].valueOf()) ==> '
+                   + JSON.stringify(this.aufgabenArray[0].valueOf())); */
               }
             });
 
