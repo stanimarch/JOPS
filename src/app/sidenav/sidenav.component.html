@@ -124,7 +124,8 @@
           <div class="clear"></div>
         </div>
 
-        <!--div für Kommentarfeld, Anregungen etc mit E-Mail intput-->
+
+       <!--div für Kommentarfeld, Anregungen etc mit E-Mail intput-->
         <div class="commentar" *ngIf="kommentar">
           <div *ngIf="!spinner_commenter">
             <form [formGroup]="commentForm"
@@ -276,6 +277,7 @@
           </div>
         </div>
       </div>
+
 
       <!-- Ab hier Inhalt von Impressum-->
       <div id="impressum" style="text-align: center" *ngIf="impressum">
