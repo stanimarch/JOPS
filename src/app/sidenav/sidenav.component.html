@@ -1,15 +1,15 @@
 <ng-container>
   <!--hier der Header mit Homebutton und weiteren Buttons (JAVA1, JAVA2-->
   <mat-toolbar class="header">
-    <a href="http://jops.informatik.hs-augsburg.de">
-      <img (click)="onClickHaupt()" class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo"/>
+    <a href="https://jops.informatik.hs-augsburg.de">
+      <img class="image" src="assets/logo/FH-Augsburg-Logo.svg.png" alt="Logo"/>
     </a>
 
     <button (click)="menuJava1()" class="button-header" mat-button>JAVA 1</button>
     <button (click)="menuJava2()" class="button-header" mat-button>JAVA 2</button>
 
-    <button (click)="onClickAufg()" class="button-header" mat-button>TEST</button>
-    <button (click)="test()" class="button-header" mat-button>TEST 2</button>
+    <button (click)="TEST_aufgabe_anzeigen()" class="button-header" mat-button>TEST</button>
+    <button (click)="TEST2()" class="button-header" mat-button>UNITTEST</button>
 
     <button (click)="doLogout()" class="button-login" mat-button>Logout</button>
   </mat-toolbar>
@@ -58,7 +58,7 @@
     <!--ab hier der gesamte Inhalt für die Mitte der Homepage-->
     <mat-sidenav-content>
       <!-- Willkommen Content-->
-      <div id="start" *ngIf="startseite">
+      <div id="start" *ngIf="start_aufgabe_impres === 1">
         <h1 style="display: block; text-align: center; color: rgb(255, 101, 0)">Herzlich Willkommen auf JOPS! </h1>
         <div class="inhalt-center">
           <p>
@@ -83,204 +83,208 @@
             an uns weiterzugeben. </p>
         </div>
       </div>
-      <div class="mat-spinner-content menu-spinner" *ngIf="spinner_obAufgabeLaden">
-        <mat-spinner></mat-spinner>
-      </div>
+
 
       <!--Aufgaben und Lgs Content-->
-      <div id="mitte" style="display:block" *ngIf="inhaltcenter">
+      <div id="mitte" style="display:block" *ngIf="start_aufgabe_impres === 2">
 
-        <!--Aufgabe div-->
-        <div class="aufgabe" *ngIf="aufgabenstellung">
-          <div>
-
-            <p>
-              <label style="text-transform: uppercase">{{this.aufgabe.sThemengebiet}}</label>
-            </p>
-            <p>
-              <label style="text-transform: uppercase; color: rgb(255,101,0);">{{this.aufgabe.titel}}</label>
-            </p>
-          </div>
-          <div class="clear"></div>
-          <div ng-bind="textFromJSON" class="aufgabentext-format">
-            {{this.aufgabe.aufgabenText}}
-          </div>
-          <div class="clear"></div>
-          <div id="button-aufgabe-rechts-links">
-            <!--
-            <button mat-button type="button" class="links-button-next-aufgabe" (click)="onClick()">
-              <mat-icon>navigate_before</mat-icon>
-              before
-            </button>
-            -->
-            <button mat-button type="button" class="button-next-aufgabe" (click)="onClickComment()"> Anregung zur
-              Aufgabe!
-            </button>
-            <!--
-            <button mat-button type="button" class="rechts-button-next-aufgabe" (click)="onClick()">next
-              <mat-icon>navigate_next</mat-icon>
-            </button>-->
-          </div>
-          <div class="clear"></div>
+        <div class="mat-spinner-content menu-spinner" *ngIf="spinner_aufgabe">
+          <mat-spinner></mat-spinner>
         </div>
 
 
-       <!--div für Kommentarfeld, Anregungen etc mit E-Mail intput-->
-        <div class="commentar" *ngIf="kommentar">
-          <div *ngIf="!spinner_commenter">
-            <form [formGroup]="commentForm"
-                  (ngSubmit)="onClickCommentSenden()">
-              <div>
+        <div *ngIf="!spinner_aufgabe">
+          <!--Aufgabe div-->
+          <div class="aufgabe">
+            <div>
+
+              <p>
+                <label style="text-transform: uppercase">{{this.aufgabe.sThemengebiet}}</label>
+              </p>
+              <p>
+                <label style="text-transform: uppercase; color: rgb(255,101,0);">{{this.aufgabe.titel}}</label>
+              </p>
+            </div>
+            <div class="clear"></div>
+            <div ng-bind="textFromJSON" class="aufgabentext-format">
+              {{this.aufgabe.aufgabenText}}
+            </div>
+            <div class="clear"></div>
+            <div id="button-aufgabe-rechts-links">
+              <!--
+              <button mat-button type="button" class="links-button-next-aufgabe" (click)="onClick()">
+                <mat-icon>navigate_before</mat-icon>
+                before
+              </button>
+              -->
+              <button mat-button type="button" class="button-next-aufgabe" (click)="onClickComment()"> Anregung zur
+                Aufgabe!
+              </button>
+              <!--
+              <button mat-button type="button" class="rechts-button-next-aufgabe" (click)="onClick()">next
+                <mat-icon>navigate_next</mat-icon>
+              </button>-->
+            </div>
+            <div class="clear"></div>
+          </div>
+
+
+          <!--div für Kommentarfeld, Anregungen etc mit E-Mail intput-->
+          <div class="commentar" *ngIf="kommentar">
+            <div *ngIf="!spinner_commenter">
+              <form [formGroup]="commentForm"
+                    (ngSubmit)="onClickCommentSenden()">
+                <div>
+                  <p>
+                    <label style="font-size: 18px; margin-bottom: 10px; text-align: left; margin-left: 40px">Du hast in
+                      der
+                      Aufgabenstellung Fehler entdeckt oder Dir ist die Aufgabenstellung nicht klar, dann poste es hier.
+                      Hier ist genug Platz für Deine Vorschläge, Wünsche oder
+                      Anregungen zu der Aufgabe. </label>
+                    <textarea formControlName="comment" class="textfeldkomment" required
+                              placeholder="HINWEIS: Diese Eingabe wird anonym abgeschickt. Möchtest Du eine persönliche Rückmeldung, trage bitte unten Deine E-Mail ein."
+                              style="margin-top: 5px; padding-top: 10px;"></textarea>
+                  </p>
+                </div>
+                <div class="email-container">
+                  <mat-form-field>
+                    <!-- <input matInput placeholder="E-Mail" [formControl]="email" required> -->
+                    <input matInput type="email" placeholder="E-Mail (optional)" formControlName="email">
+                    <mat-error *ngIf="commentForm.get('email').invalid">{{getErrorMessage()}}</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="clear"></div>
+                <div>
+                  <p style="margin-bottom: 4px; margin-top: 0">
+                    <button mat-button [disabled]="commentForm.get('comment').invalid" type="button"
+                            class="button-kommentar-senden" (click)="onClickCommentSenden()">Senden
+                    </button>
+                    <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickCommentClose()">
+                      Schließen
+                    </button>
+                  </p>
+                </div>
+              </form>
+            </div>
+
+
+            <div class="mat-spinner-content menu-spinner" *ngIf="spinner_commenter">
+              <mat-spinner></mat-spinner>
+            </div>
+          </div>
+
+
+          <!--div für Studentenloesung, mit Bewertung der Aufgabe und seiner Leistung mit Punktenvergabe-->
+          <div class="loesunguser">
+            <form [formGroup]="studLoesungForm"
+                  (ngSubmit)="onClickLoesungSpeichern()">
+              <p>
+                <label style="font-size:20px">Gib hier deine Lösung ein</label>
+              </p>
+              <p>
+                <label>
+                  <textarea rows="100" class="textfeld" formControlName="loesungstext" required></textarea>
+                </label>
+              </p>
+              <div class="studbewertung">
                 <p>
-                  <label style="font-size: 18px; margin-bottom: 10px; text-align: left; margin-left: 40px">Du hast in
-                    der
-                    Aufgabenstellung Fehler entdeckt oder Dir ist die Aufgabenstellung nicht klar, dann poste es hier.
-                    Hier ist genug Platz für Deine Vorschläge, Wünsche oder
-                    Anregungen zu der Aufgabe. </label>
-                  <textarea formControlName="comment" class="textfeldkomment" required
-                            placeholder="HINWEIS: Diese Eingabe wird anonym abgeschickt. Möchtest Du eine persönliche Rückmeldung, trage bitte unten Deine E-Mail ein."
-                            style="margin-top: 5px; padding-top: 10px;"></textarea>
                 </p>
-              </div>
-              <div class="email-container">
-                <mat-form-field>
-                  <!-- <input matInput placeholder="E-Mail" [formControl]="email" required> -->
-                  <input matInput type="email" placeholder="E-Mail (optional)" formControlName="email">
-                  <mat-error *ngIf="commentForm.get('email').invalid">{{getErrorMessage()}}</mat-error>
-                </mat-form-field>
+
+                <div>
+                  <div>
+                    <div class="rating">
+                      <legend>Schwierigkeit der Aufgabe:</legend>
+                      <input type="radio" formControlName="schwierigkeit" id="star5" name="schwierigkeit"
+                             value="5"/><label
+                      for="star5" title="sehr schwer">5
+                      stars</label>
+                      <input type="radio" formControlName="schwierigkeit" id="star4" name="schwierigkeit"
+                             value="4"/><label
+                      for="star4" title="schwer">4
+                      stars</label>
+                      <input type="radio" formControlName="schwierigkeit" id="star3" name="schwierigkeit"
+                             value="3"/><label
+                      for="star3" title="mittel">3
+                      stars</label>
+                      <input type="radio" formControlName="schwierigkeit" id="star2" name="schwierigkeit"
+                             value="2"/><label
+                      for="star2" title="ganz ok">2
+                      stars</label>
+                      <input type="radio" formControlName="schwierigkeit" id="star1" name="schwierigkeit"
+                             value="1"/><label
+                      for="star1" title="einfach">1
+                      star</label>
+                    </div>
+                    <mat-form-field style="float:left; font-family: Times, serif; margin-left: 30px"
+                                    hintLabel="Maximum {{this.aufgabe.maxPunkte}}">
+                      <legend>Erreichte Punkte</legend>
+                      <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}" matInput #input
+                             maxlength="2" formControlName="erreichtePunkte"
+                      >
+                      <mat-error *ngIf="this.studLoesungForm.get('erreichtePunkte').invalid">{{getErrorMessagePunkte()}}
+                      </mat-error>
+                      <mat-hint align="end">{{input.value|| 0}}/{{this.aufgabe.maxPunkte}}</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
               </div>
               <div class="clear"></div>
               <div>
                 <p style="margin-bottom: 4px; margin-top: 0">
-                  <button mat-button [disabled]="commentForm.get('comment').invalid" type="button"
-                          class="button-kommentar-senden" (click)="onClickCommentSenden()">Senden
+                  <button mat-button type="button" class="button-speichern" (click)="onClickLoesungSpeichern()"
+                          [disabled]="studLoesungForm.get('loesungstext').invalid">Speichern
                   </button>
-                  <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickCommentClose()">
-                    Schließen
+                  <button mat-button type="button" class="button-next-aufgabe" (click)="onClickmusterl()"> Musterlösung
+                  </button>
+                  <button *ngIf="aufgabe.unittest !== null"
+                          mat-button type="button"
+                          class="button-testen"
+                          (click)="onClickUnit()"
+                          [disabled]="studLoesungForm.get('loesungstext').invalid"> Testen
                   </button>
                 </p>
               </div>
             </form>
           </div>
-          <div class="mat-spinner-content menu-spinner" *ngIf="spinner_commenter">
-            <mat-spinner></mat-spinner>
-          </div>
-        </div>
 
 
-        <!--div für Studentenloesung, mit Bewertung der Aufgabe und seiner Leistung mit Punktenvergabe-->
-        <div class="loesunguser" *ngIf="studloesung">
-          <form [formGroup]="studLoesungForm"
-                (ngSubmit)="onClickLoesungSpeichern()">
-            <p>
-              <label style="font-size:20px">Gib hier deine Lösung ein</label>
-            </p>
-            <p>
-              <label>
-                <textarea rows="100" class="textfeld" formControlName="loesungstext" required></textarea>
-              </label>
-            </p>
-            <div class="studbewertung">
+          <!-- Hier div für Unittest-->
+          <div class="unit" *ngIf="unitantwort">
+            <div *ngIf="!spinner_unittest">
               <p>
+                <label>Unittest</label>
               </p>
-
-              <div>
-                <div>
-                  <div class="rating">
-                    <legend>Schwierigkeit der Aufgabe:</legend>
-                    <input type="radio" formControlName="schwierigkeit" id="star5" name="schwierigkeit"
-                           value="5"/><label
-                    for="star5" title="sehr schwer">5
-                    stars</label>
-                    <input type="radio" formControlName="schwierigkeit" id="star4" name="schwierigkeit"
-                           value="4"/><label
-                    for="star4" title="schwer">4
-                    stars</label>
-                    <input type="radio" formControlName="schwierigkeit" id="star3" name="schwierigkeit"
-                           value="3"/><label
-                    for="star3" title="mittel">3
-                    stars</label>
-                    <input type="radio" formControlName="schwierigkeit" id="star2" name="schwierigkeit"
-                           value="2"/><label
-                    for="star2" title="ganz ok">2
-                    stars</label>
-                    <input type="radio" formControlName="schwierigkeit" id="star1" name="schwierigkeit"
-                           value="1"/><label
-                    for="star1" title="einfach">1
-                    star</label>
-                  </div>
-
-
-                  <mat-form-field style="float:left; font-family: Times, serif; margin-left: 30px"
-                                  hintLabel="Maximum {{this.aufgabe.maxPunkte}}">
-                    <legend>Erreichte Punkte</legend>
-                    <input type="number" min="0" max="{{this.aufgabe.maxPunkte}}" matInput #input
-                           maxlength="2" formControlName="erreichtePunkte"
-                    >
-                    <mat-error *ngIf="this.studLoesungForm.get('erreichtePunkte').invalid">{{getErrorMessagePunkte()}}
-                    </mat-error>
-                    <mat-hint align="end">{{input.value|| 0}}/{{this.aufgabe.maxPunkte}}</mat-hint>
-                  </mat-form-field>
-                </div>
+              <div class="clear"></div>
+              <div ng-bind="textFromJSON" class="unittest-format" style="margin: 4px">
+                {{aufgabe.unittestAusgabe}}
               </div>
             </div>
-            <div class="clear"></div>
-            <div>
-              <p style="margin-bottom: 4px; margin-top: 0">
-                <button mat-button type="button" class="button-speichern" (click)="onClickLoesungSpeichern()"
-                        [disabled]="studLoesungForm.get('loesungstext').invalid">Speichern
-                </button>
-                <button mat-button type="button" class="button-next-aufgabe" (click)="onClickmusterl()"> Musterlösung
-                </button>
-                <button *ngIf="aufgabe.unittest !== null"
-                        mat-button type="button"
-                        class="button-testen"
-                        (click)="onClickUnit()"
-                        [disabled]="studLoesungForm.get('loesungstext').invalid"> Testen
-                </button>
-              </p>
+            <div class="mat-spinner-content menu-spinner" *ngIf="spinner_unittest">
+              <mat-spinner></mat-spinner>
             </div>
-          </form>
-        </div>
+          </div>
 
-
-        <!-- Hier div für Unittest-->
-        <div class="unit" *ngIf="unitantwort">
-          <div *ngIf="!spinner_unittest">
+          <!-- div für Musterlösungen-->
+          <div class="musterl" *ngIf="musterloeusung">
             <p>
-              <label>Unittest</label>
+              <label style="margin: 8px; text-transform: uppercase">Musterlösungen</label>
             </p>
-            <div class="clear"></div>
-            <div ng-bind="textFromJSON" class="unittest-format" style="margin: 4px">
-              {{aufgabe.unittestAusgabe}}
-            </div>
-          </div>
-          <div class="mat-spinner-content menu-spinner" *ngIf="spinner_unittest">
-            <mat-spinner></mat-spinner>
-          </div>
-        </div>
-
-        <!-- div für Musterlösungen-->
-        <div class="musterl" *ngIf="musterloeusung">
-          <p>
-            <label style="margin: 8px; text-transform: uppercase">Musterlösungen</label>
-          </p>
-          <div style="margin: 4px" class="musterloesung-format">
-            <div class="musterloesung-format" style="margin-bottom: 20px; margin-top: 10px;">
-              <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> 1. Musterlösung </label>
-              {{this.musterLoesungTEST.text}}
-            </div>
-            <div class="musterloesung-format" style="margin-bottom: 20px; margin-top: 10px;">
-              <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> 2. Musterlösung </label>
-              {{this.musterLoesungTEST.text}}
+            <div style="margin: 4px" class="musterloesung-format">
+              <div class="musterloesung-format" style="margin-bottom: 20px; margin-top: 10px;">
+                <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> 1. Musterlösung </label>
+                {{this.musterLoesungTEST.text}}
+              </div>
+              <div class="musterloesung-format" style="margin-bottom: 20px; margin-top: 10px;">
+                <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> 2. Musterlösung </label>
+                {{this.musterLoesungTEST.text}}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-
       <!-- Ab hier Inhalt von Impressum-->
-      <div id="impressum" style="text-align: center" *ngIf="impressum">
+      <div id="impressum" style="text-align: center" *ngIf="start_aufgabe_impres === 3">
         <div style="width:30%; text-align: left; margin: 0 auto;">
           <h1 style="font-size:3em; color: rgb(255, 101, 0)">Impressum</h1>
           <h1 style="color: rgb(255, 101, 0); font-size: 2em; font-family: Times, serif;">Anschrift</h1>
