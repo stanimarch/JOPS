@@ -312,6 +312,7 @@ export class SidenavComponent {
         })
         .catch(msg => {
           console.log('########## getAufgabe(' + id + ') => Fehler!!! ');
+          console.log('########## msg:\n' + msg);
         });
     }
   }
