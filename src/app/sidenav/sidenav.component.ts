@@ -353,25 +353,18 @@ export class SidenavComponent {
   }
 
   onClickCommentSenden() {
-    console.log('########## 1. onClickCommentSenden();');
-    // console.log('########## 2. this.commentForm.get(\'comment\').value: ' + this.commentForm.get('comment').value);
-    // console.log('########## 3. this.commentForm.get(\'email\').value: ' + this.commentForm.get('email').value);
     this.commentSenden(this.commentForm.get('comment').value, this.commentForm.get('email').value);
   }
 
   commentSenden(comment: string, email: string) {
-    // console.log('########## 4. commentSenden(text: string);');
-    // console.log('########## 5. this.jopApiDbService.commentSenden(comment, this.aufgabe.id)... ');
     this.spinner_commenter = true;
     this.jopApiDbService.commentSenden(this.aufgabe.id, email, comment)
       .then(res => {
-        console.log('########## 6. abgeschlossen: OK');
-        this.spinner_commenter = false;
-        this.commentForm.reset();
+        console.log('########## Abgeschlossen: OK');
         this.onClickCommentClose();
       })
       .catch(msg => {
-        console.log('########## 6. abgeschlossen: nicht OK');
+        console.log('########## Abgeschlossen: nicht OK');
         this.spinner_commenter = false;
       })
     ;
@@ -379,13 +372,12 @@ export class SidenavComponent {
 
   onClickCommentClose() {
     this.kommentar = false;
+    this.spinner_commenter = false;
     this.commentForm.reset();
   }
 
 
   onClickLoesungSpeichern() {
-    console.log('########## 1. onClickLoesungSpeichern(); ');
-
     this.loesungSpeichern();
   }
 
@@ -393,9 +385,11 @@ export class SidenavComponent {
     return new Promise((resolve, reject) => {
       this.jopApiDbService.loesungSpeichernPOST(
         this.aufgabe.id.toString(),
-        this.studLoesungForm.get('loesungstext').value as string,
-        this.studLoesungForm.get('schwierigkeit').value as string,
-        this.studLoesungForm.get('erreichtePunkte').value as string)
+        this.studLoesungForm.get('loesungstext').value,
+        (this.studLoesungForm.get('schwierigkeit').value + '' === this.aufgabe.sGrad + '')
+          ? null : this.studLoesungForm.get('schwierigkeit').value,
+        (this.studLoesungForm.get('erreichtePunkte').value + '' === this.aufgabe.erreichtePunkte + '')
+          ? null : this.studLoesungForm.get('erreichtePunkte').value)
         .then(res => {
           console.log('########## 2. onClickLoesungSpeichern() ==> alles OK!');
         })
@@ -403,6 +397,13 @@ export class SidenavComponent {
           console.log('########## 2. onClickLoesungSpeichern() ==> nicht OK!');
         });
     });
+  }
+
+  TEST3() {
+    console.log(this.studLoesungForm.get('erreichtePunkte').value);
+    console.log(this.aufgabe.erreichtePunkte);
+    console.log(((this.studLoesungForm.get('erreichtePunkte').value + '' === this.aufgabe.erreichtePunkte + '')
+      ? 'gleich' : 'nicht gleich'));
   }
 
 
