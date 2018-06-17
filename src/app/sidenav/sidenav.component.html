@@ -233,7 +233,8 @@
               <div>
                 <p style="margin-bottom: 4px; margin-top: 0">
                   <button mat-button type="button" class="button-speichern" (click)="onClickLoesungSpeichern()"
-                          [disabled]="studLoesungForm.get('loesungstext').invalid">Speichern
+                          [disabled]="studLoesungForm.get('loesungstext').invalid || studLoesungForm.get('erreichtePunkte').invalid">
+                    Speichern
                   </button>
                   <button mat-button type="button" class="button-next-aufgabe" (click)="onClickmusterl()"> Musterlösung
                   </button>
