@@ -72,7 +72,7 @@ export class SidenavComponent {
       localStorage.getItem('sessionId') === undefined ||
       localStorage.getItem('matrNr') === null ||
       localStorage.getItem('matrNr') === undefined) {
-      this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
+      // this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
     }
   }
 
@@ -100,6 +100,8 @@ export class SidenavComponent {
 
     const musLoes: Array<MusterLoesung> = [];
     musLoes.push(this.musterLoesungTEST);
+
+    const unittestAusgabe = 'Das ist Unittest-Ausgabe!';
 
     this.aufgabe = new Aufgabe(
       101,
@@ -149,7 +151,7 @@ export class SidenavComponent {
       '********************\n' +
       '******************** ',
       'not null :)',
-      'Das ist Ausgabe vom Unittest!',
+      unittestAusgabe,
       'public class SternchenRechteckGefuellt {\n' +
       '   public static void main(String[] args) throws IOException {\n' +
       '     final BufferedReader konsolenEingabe = new BufferedReader(\n' +
@@ -180,6 +182,7 @@ export class SidenavComponent {
     this.studLoesungForm.get('erreichtePunkte').setValidators([Validators.min(0), Validators.max(this.aufgabe.maxPunkte)]);
 
     this.spinner_aufgabe = false;
+    this.start_aufgabe_impres = 2;
   }
 
   TEST2() {
