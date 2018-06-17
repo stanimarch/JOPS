@@ -58,7 +58,7 @@ export class SidenavComponent {
 
     this.commentForm = new FormGroup({
       comment: new FormControl(),
-      email: new FormControl('', [Validators.required, Validators.email])
+      email: new FormControl('', [Validators.email])
     });
 
     this.studLoesungForm = new FormGroup({

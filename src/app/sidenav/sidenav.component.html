@@ -157,7 +157,7 @@
                 <div class="clear"></div>
                 <div>
                   <p style="margin-bottom: 4px; margin-top: 0">
-                    <button mat-button [disabled]="commentForm.get('comment').invalid" type="button"
+                    <button mat-button [disabled]="commentForm.get('comment').invalid || commentForm.get('email').invalid" type="button"
                             class="button-kommentar-senden" (click)="onClickCommentSenden()">Senden
                     </button>
                     <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickCommentClose()">
