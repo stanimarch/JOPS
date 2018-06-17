@@ -46,14 +46,15 @@ export class SidenavComponent {
               private jopsApiRunService: JopsApiRunService,
               private jopsApiLoginService: JopsApiLoginService,
               private jopApiDbService: JopApiDbService,
-              private menuService: MenuService,
-              private http: HttpClient) {
+              private menuService: MenuService) {
 
     this.menuAktuell = -1;
     this.start_aufgabe_impres = 1;
 
     this.dataJava1 = null;
     this.dataJava2 = null;
+
+    this.aufgabe = null;
 
     this.commentForm = new FormGroup({
       comment: new FormControl(),
@@ -78,24 +79,27 @@ export class SidenavComponent {
 
   TEST_aufgabe_anzeigen() {
     this.musterLoesungTEST = new MusterLoesung('public class SternchenRechteckGefuellt {\n' +
-      'public static void main(String[] args) throws IOException {\n' +
-      '    final BufferedReader konsolenEingabe = new BufferedReader(\n' +
-      '     new InputStreamReader(System.in));\n' +
-      '      System.out.print("Geben Sie die Breite des Rechtecks ein: ");\n' +
-      '       final int breite= Integer.parseInt(konsolenEingabe.readLine());\n' +
-      ' System.out.print("Geben Sie die Höhe des Rechtecks ein: ");\n' +
-      ' final int hoehe = Integer.parseInt(konsolenEingabe.readLine());\n' +
-      ' for (int y = 0; y < hoehe; y++) {\n' +
-      ' wiederholeZeichen(breite, \'*\');\n' +
-      ' System.out.println();\n' +
-      ' }\n' +
-      ' }\n' +
-      'static void wiederholeZeichen(final int breite, char c) {\n' +
-      ' for (int x = 0; x < breite; x++) {\n' +
-      ' System.out.print(c);\n' +
-      ' }\n' +
-      ' }\n' +
-      '} ', '');
+      '   public static void main(String[] args) throws IOException {\n' +
+      '     final BufferedReader konsolenEingabe = new BufferedReader(\n' +
+      '       new InputStreamReader(System.in));\n' +
+      '     System.out.print("Geben Sie die Breite des Rechtecks ein: ");\n' +
+      '     final int breite= Integer.parseInt(konsolenEingabe.readLine());\n' +
+      '      System.out.print("Geben Sie die Höhe des Rechtecks ein: ");\n' +
+      '       final int hoehe = Integer.parseInt(konsolenEingabe.readLine());\n' +
+      '       for (int y = 0; y < hoehe; y++) {\n' +
+      '         wiederholeZeichen(breite, \'*\');\n' +
+      '         System.out.println();\n' +
+      '     }\n' +
+      '   }\n' +
+      '   static void wiederholeZeichen(final int breite, char c) {\n' +
+      '     for (int x = 0; x < breite; x++) {\n' +
+      '       System.out.print(c);\n' +
+      '     }\n' +
+      '   }\n' +
+      '} ', null);
+
+    const musLoes: Array<MusterLoesung> = [];
+    musLoes.push(this.musterLoesungTEST);
 
     this.aufgabe = new Aufgabe(
       101,
@@ -145,29 +149,29 @@ export class SidenavComponent {
       '********************\n' +
       '******************** ',
       'not null :)',
-      '',
+      'Das ist Ausgabe vom Unittest!',
       'public class SternchenRechteckGefuellt {\n' +
-      'public static void main(String[] args) throws IOException {\n' +
-      ' final BufferedReader konsolenEingabe = new BufferedReader(\n' +
-      ' new InputStreamReader(System.in));\n' +
-      ' System.out.print("Geben Sie die Breite des Rechtecks ein: ");\n' +
-      ' final int breite= Integer.parseInt(konsolenEingabe.readLine());\n' +
-      ' System.out.print("Geben Sie die Höhe des Rechtecks ein: ");\n' +
-      ' final int hoehe = Integer.parseInt(konsolenEingabe.readLine());\n' +
-      ' for (int y = 0; y < hoehe; y++) {\n' +
-      ' wiederholeZeichen(breite, \'*\');\n' +
-      ' System.out.println();\n' +
-      ' }\n' +
-      ' }\n' +
-      'static void wiederholeZeichen(final int breite, char c) {\n' +
-      ' for (int x = 0; x < breite; x++) {\n' +
-      ' System.out.print(c);\n' +
-      ' }\n' +
-      ' }\n' +
+      '   public static void main(String[] args) throws IOException {\n' +
+      '     final BufferedReader konsolenEingabe = new BufferedReader(\n' +
+      '       new InputStreamReader(System.in));\n' +
+      '     System.out.print("Geben Sie die Breite des Rechtecks ein: ");\n' +
+      '     final int breite= Integer.parseInt(konsolenEingabe.readLine());\n' +
+      '     System.out.print("Geben Sie die Höhe des Rechtecks ein: ");\n' +
+      '     final int hoehe = Integer.parseInt(konsolenEingabe.readLine());\n' +
+      '     for (int y = 0; y < hoehe; y++) {\n' +
+      '       wiederholeZeichen(breite, \'*\');\n' +
+      '       System.out.println();\n' +
+      '     }\n' +
+      '   }\n' +
+      '   static void wiederholeZeichen(final int breite, char c) {\n' +
+      '       for (int x = 0; x < breite; x++) {\n' +
+      '         System.out.print(c);\n' +
+      '       }\n' +
+      '   }\n' +
       '} ',
       3,
       15,
-      null
+      musLoes
     );
 
     this.studLoesungForm.get('loesungstext').setValue(this.aufgabe.loesungStud);
@@ -179,7 +183,8 @@ export class SidenavComponent {
   }
 
   TEST2() {
-    this.postUnittest();
+    this.spinner_unittest = false;
+    this.unitantwort = true;
   }
 
   menuJava1() {
