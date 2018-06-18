@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {MenuService, UrdatenType} from '../menu/menu.service';
 
@@ -26,7 +26,7 @@ export class Aufgabe {
   maxPunkte: number;
   aufgabenText: string;
   unittest: string;
-  unittestAusgabe: string;
+  unittestResponse: UnittestResponse;
   loesungStud: string;
   sGrad: number;
   erreichtePunkte: number;
@@ -39,7 +39,7 @@ export class Aufgabe {
               maxPunkte: number,
               aufgabenText: string,
               unittest: string,
-              unittestAusgabe: string,
+              unittestResponse: UnittestResponse,
               loesungStud: string,
               sGrad: number,
               erreichtePunkte: number,
@@ -51,7 +51,7 @@ export class Aufgabe {
     this.maxPunkte = maxPunkte;
     this.aufgabenText = aufgabenText;
     this.unittest = unittest;
-    this.unittestAusgabe = unittestAusgabe;
+    this.unittestResponse = unittestResponse;
     this.loesungStud = loesungStud;
     this.sGrad = sGrad;
     this.erreichtePunkte = erreichtePunkte;
@@ -99,12 +99,13 @@ export class SaveResponse {
 
 export class UnittestResponse {
   status: number;
-  output: string;
-  errors: Array<any>;
+  output: Array<string>;
+  errors: string;
+  unfiltered: string;
 }
 
 @Injectable()
-export class JopApiDbService implements OnInit {
+export class JopApiDbService {
   aufgabenArray: Array<Aufgabe>;
   musterLoesungen: Array<MusterLoesung>;
   unittestResponse: UnittestResponse;
@@ -112,9 +113,6 @@ export class JopApiDbService implements OnInit {
   constructor(private http: HttpClient,
               private menuService: MenuService) {
     this.aufgabenArray = [];
-  }
-
-  ngOnInit() {
   }
 
   loesungSpeichernPOST(id: string, text: string, sgrad: string, punkte: string) {
@@ -161,6 +159,7 @@ export class JopApiDbService implements OnInit {
           this.unittestResponse.status = res.status;
           this.unittestResponse.errors = res.errors;
           this.unittestResponse.output = res.output;
+          this.unittestResponse.unfiltered = res.unfiltered;
           resolve();
         })
         .catch(msg => {

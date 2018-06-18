@@ -157,7 +157,9 @@
                 <div class="clear"></div>
                 <div>
                   <p style="margin-bottom: 4px; margin-top: 0">
-                    <button mat-button [disabled]="commentForm.get('comment').invalid || commentForm.get('email').invalid" type="button"
+                    <button mat-button
+                            [disabled]="commentForm.get('comment').invalid || commentForm.get('email').invalid"
+                            type="button"
                             class="button-kommentar-senden" (click)="onClickCommentSenden()">Senden
                     </button>
                     <button mat-button type="button" class="button-bewertung-schließen" (click)="onClickCommentClose()">
@@ -258,14 +260,21 @@
               </p>
               <div class="clear"></div>
               <div ng-bind="textFromJSON" class="unittest-format" style="margin: 4px">
-                {{aufgabe.unittestAusgabe}}
-                <p *ngIf ="unitzusatz">
+
+                <p *ngFor="let output of aufgabe.unittestResponse.output; let i of index">
+                  {{output}}
+                </p>
+                <p>
+                  {{aufgabe.unittestResponse.errors}}
+                </p>
+                <p *ngIf="unitzusatz">
                   noch mehr
-                  {{aufgabe.unittestAusgabe}}
+                  {{aufgabe.unittestResponse.unfiltered}}
                 </p>
 
               </div>
-              <button mat-button type="button" class="button-next-aufgabe" (click)= "unitzusatz = !unitzusatz">{{!unitzusatz ? 'mehr...' : 'weniger'}}
+              <button mat-button type="button" class="button-next-aufgabe" (click)="unitzusatz = !unitzusatz">
+                {{!unitzusatz ? 'mehr...' : 'weniger'}}
               </button>
             </div>
             <div class="mat-spinner-content menu-spinner" *ngIf="spinner_unittest">
@@ -279,8 +288,10 @@
               <label style="margin: 8px; text-transform: uppercase">Musterlösungen</label>
             </p>
             <div style="margin: 4px" class="musterloesung-format">
-              <div *ngFor="let ml of aufgabe.musterLoesungen; let i = index" class="musterloesung-format" style="margin-bottom: 20px; margin-top: 10px;">
-                <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> {{i + 1}}. Musterlösung </label>
+              <div *ngFor="let ml of aufgabe.musterLoesungen; let i = index" class="musterloesung-format"
+                   style="margin-bottom: 20px; margin-top: 10px;">
+                <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> {{i + 1}}.
+                  Musterlösung </label>
                 {{ml.text}}
               </div>
               <!--

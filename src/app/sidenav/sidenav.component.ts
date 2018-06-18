@@ -4,7 +4,7 @@ import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.compon
 import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 import {JopsApiRunService} from '../jops-api/jops-api-run.service';
 import {HeaderArray, MenuService, UrdatenType} from '../menu/menu.service';
-import {Aufgabe, JopApiDbService, MusterLoesung, SThemaResponse} from '../jops-api/jop-api-db.service';
+import {Aufgabe, JopApiDbService, MusterLoesung, SThemaResponse, UnittestResponse} from '../jops-api/jop-api-db.service';
 import {HttpClient} from '@angular/common/http';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Validators} from '@angular/forms';
@@ -103,7 +103,21 @@ export class SidenavComponent {
     musLoes.push(this.musterLoesungTEST);
     musLoes.push(this.musterLoesungTEST);
 
-    const unittestAusgabe = 'Das ist Unittest-Ausgabe!';
+    const unittestAusgabe = new UnittestResponse;
+    unittestAusgabe.output = ['Unittest und Titel von der Aufgabe erstellt'];
+    unittestAusgabe.errors = 'Error:  javac -cp ./java/junit-4.12.jar:. ./java/sessions/undefined/*.java\n' +
+      './java/sessions/undefined/Titel von der Aufgabe.java:9: error: not a statement\n' +
+      '     for (int y = 0; y < hoehe; y  ) {\n' +
+      '                                ^\n' +
+      './java/sessions/undefined/Titel von der Aufgabe.java:15: error: not a statement\n' +
+      '       for (int x = 0; x < breite; x  ) {\n' +
+      '                                   ^\n' +
+      './java/sessions/undefined/Titel von der AufgabeTest.java:1: error: class, interface, or enum expected\n' +
+      'not null :)\n' +
+      '^\n' +
+      '3 errors';
+    unittestAusgabe.unfiltered = '\nUNFILTERED:\n asdfasdfasdfasdfasdf\nasdfasdfasdfasdfasdfasdfasdf\nasdfasdfasdfasdfasdfasdf';
+
 
     this.aufgabe = new Aufgabe(
       101,
@@ -421,8 +435,7 @@ export class SidenavComponent {
       this.jopApiDbService.postUnittest(this.aufgabe.id.toString(), this.aufgabe.loesungStud, this.aufgabe.titel, this.aufgabe.unittest)
         .then(res => {
           console.log('##### 2. ENDE: postUnittest(code: string): Alles ist GUT!');
-          this.aufgabe.unittestAusgabe = 'OUTPUT:\n' + this.jopApiDbService.unittestResponse.output
-            + '\n\nERRORS:\n' + this.jopApiDbService.unittestResponse.errors.valueOf();
+          this.aufgabe.unittestResponse = this.jopApiDbService.unittestResponse;
           this.spinner_unittest = false;
         })
         .catch(msg => {
