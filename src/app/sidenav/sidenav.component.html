@@ -272,14 +272,16 @@
               <label style="margin: 8px; text-transform: uppercase">Musterlösungen</label>
             </p>
             <div style="margin: 4px" class="musterloesung-format">
-              <div class="musterloesung-format" style="margin-bottom: 20px; margin-top: 10px;">
-                <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> 1. Musterlösung </label>
-                {{this.musterLoesungTEST.text}}
+              <div *ngFor="let ml of aufgabe.musterLoesungen; let i = index" class="musterloesung-format" style="margin-bottom: 20px; margin-top: 10px;">
+                <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> {{i + 1}}. Musterlösung </label>
+                {{ml.text}}
               </div>
+              <!--
               <div class="musterloesung-format" style="margin-bottom: 20px; margin-top: 10px;">
                 <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> 2. Musterlösung </label>
                 {{this.musterLoesungTEST.text}}
               </div>
+              -->
             </div>
           </div>
         </div>

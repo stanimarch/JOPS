@@ -100,6 +100,8 @@ export class SidenavComponent {
 
     const musLoes: Array<MusterLoesung> = [];
     musLoes.push(this.musterLoesungTEST);
+    musLoes.push(this.musterLoesungTEST);
+    musLoes.push(this.musterLoesungTEST);
 
     const unittestAusgabe = 'Das ist Unittest-Ausgabe!';
 
@@ -420,7 +422,7 @@ export class SidenavComponent {
         .then(res => {
           console.log('##### 2. ENDE: postUnittest(code: string): Alles ist GUT!');
           this.aufgabe.unittestAusgabe = 'OUTPUT:\n' + this.jopApiDbService.unittestResponse.output
-            + '\n\nERRORS:\n' + JSON.stringify(this.jopApiDbService.unittestResponse.errors.valueOf());
+            + '\n\nERRORS:\n' + this.jopApiDbService.unittestResponse.errors.valueOf();
           this.spinner_unittest = false;
         })
         .catch(msg => {
