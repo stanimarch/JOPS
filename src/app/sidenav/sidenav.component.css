@@ -116,9 +116,10 @@
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
 }
-.inhalt-center{
- position: relative;
-font-family: Times, serif, bold;
+
+.inhalt-center {
+  position: relative;
+  font-family: Times, serif, bold;
   font-size: 20px;
   text-align: justify;
   margin-left: 20%;
@@ -150,7 +151,6 @@ font-family: Times, serif, bold;
   height: 60%;
 }
 
-
 .email-container {
   display: block;
   float: left;
@@ -176,8 +176,8 @@ label {
   -webkit-border-radius: 7px;
 }
 
-.aufgabentext-format, .unittest-format, .musterloesung-format{
-  white-space:pre-wrap;
+.aufgabentext-format, .unittest-format, .musterloesung-format {
+  white-space: pre-wrap;
   text-align: left;
   font-size: 18px;
   margin-right: 20%;
@@ -249,7 +249,7 @@ label {
 
 .rating:not(:checked) > input {
   position: absolute;
-  top: -9999px;
+  top: auto;
   clip: rect(0, 0, 0, 0);
 }
 
