@@ -144,10 +144,12 @@ font-family: Times, serif, bold;
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
+
 .aufgabe {
   overflow: scroll;
-  height: 50% ;
+  height: 60%;
 }
+
 
 .email-container {
   display: block;
