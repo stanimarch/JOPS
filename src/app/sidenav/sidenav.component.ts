@@ -333,8 +333,8 @@ export class SidenavComponent {
           this.anzeigeStudLoesungenVorbereiten(id);
         })
         .catch(msg => {
-          console.log('########## getAufgabe(' + id + ') => Fehler!!! ');
-          console.log('########## msg:\n' + msg);
+          // console.log('########## getAufgabe(' + id + ') => Fehler!!! ');
+          // console.log('########## msg:\n' + msg);
         });
     }
   }

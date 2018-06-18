@@ -117,7 +117,7 @@ export class JopApiDbService {
 
   loesungSpeichernPOST(id: string, text: string, sgrad: string, punkte: string) {
     return new Promise((resolve2, reject2) => {
-      console.log('&&&&& 1. loesungSpeichernPOST ==> START');
+      // console.log('&&&&& 1. loesungSpeichernPOST ==> START');
       this.http.post<SaveResponse>('./api/save', new HttpParams()
           .set(`matrNr`, localStorage.getItem('matrNr'))
           .set(`aufgabenId`, id)
@@ -128,12 +128,12 @@ export class JopApiDbService {
           headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
         }).toPromise()
         .then(res => {
-          console.log('&&&&& 2. this.http.post: ==> POST OK');
-          console.log('&&&&& 3. JSON.stringify(res.valueOf()): ==>' + JSON.stringify(res.valueOf()));
+          // console.log('&&&&& 2. this.http.post: ==> POST OK');
+          // console.log('&&&&& 3. JSON.stringify(res.valueOf()): ==>' + JSON.stringify(res.valueOf()));
           resolve2();
         })
         .catch((msg) => {
-          console.log('&&&&& 2. this.http.post: ==> POST nicht OK');
+          // console.log('&&&&& 2. this.http.post: ==> POST nicht OK');
           reject2();
         });
     });
