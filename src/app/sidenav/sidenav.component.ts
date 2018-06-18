@@ -431,19 +431,17 @@ export class SidenavComponent {
 
   postUnittest() {
     console.log('##### 1. ANFANG: postUnittest(code: string)');
-    return new Promise((resolve, reject) => {
-      this.jopApiDbService.postUnittest(this.aufgabe.id.toString(), this.aufgabe.loesungStud, this.aufgabe.titel, this.aufgabe.unittest)
-        .then(res => {
-          console.log('##### 2. ENDE: postUnittest(code: string): Alles ist GUT!');
-          this.aufgabe.unittestResponse = this.jopApiDbService.unittestResponse;
-          this.spinner_unittest = false;
-        })
-        .catch(msg => {
-          console.log('##### 2. ENDE: postUnittest(code: string): Alles ist SCHLECHT!');
-          this.unitantwort = false;
-          this.spinner_unittest = false;
-        });
-    });
+    this.jopApiDbService.postUnittest(this.aufgabe.id.toString(), this.aufgabe.loesungStud, this.aufgabe.titel, this.aufgabe.unittest)
+      .then(res => {
+        console.log('##### 2. ENDE: postUnittest(code: string): Alles ist GUT!');
+        this.aufgabe.unittestResponse = this.jopApiDbService.unittestResponse;
+        this.spinner_unittest = false;
+      })
+      .catch(msg => {
+        console.log('##### 2. ENDE: postUnittest(code: string): Alles ist SCHLECHT!');
+        this.unitantwort = false;
+        this.spinner_unittest = false;
+      });
   }
 
 
