@@ -35,7 +35,7 @@ export class SidenavComponent {
   kommentar = false;
   unitantwort = false;
   musterloeusung = false;
-
+  unitzusatz = false;
 
   spinner_aufgabe = false;
   spinner_commenter = false;

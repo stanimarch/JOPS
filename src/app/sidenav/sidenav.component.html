@@ -259,7 +259,14 @@
               <div class="clear"></div>
               <div ng-bind="textFromJSON" class="unittest-format" style="margin: 4px">
                 {{aufgabe.unittestAusgabe}}
+                <p *ngIf ="unitzusatz">
+                  noch mehr
+                  {{aufgabe.unittestAusgabe}}
+                </p>
+
               </div>
+              <button mat-button type="button" class="button-next-aufgabe" (click)= "unitzusatz = !unitzusatz">{{!unitzusatz ? 'mehr...' : 'weniger'}}
+              </button>
             </div>
             <div class="mat-spinner-content menu-spinner" *ngIf="spinner_unittest">
               <mat-spinner></mat-spinner>
