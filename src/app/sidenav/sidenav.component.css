@@ -15,7 +15,8 @@
 .sidenav-inhalt {
   display: block;
   align-items: left;
-  width: 250px;
+  min-width: 250px;
+  width: min-content;
   background: rgba(255, 240, 0, 0.2);
 }
 
@@ -37,7 +38,7 @@
 }
 
 .menu-button {
-  width: 190px;
+  width: 180px;
   font-size: 18px;
   font-family: Times, serif;
   display: block;
