@@ -62,7 +62,7 @@
       <div id="start" *ngIf="start_aufgabe_impres === 1">
         <h1 style="display: block; text-align: center; color: rgb(255, 101, 0)">Herzlich Willkommen auf JOPS! </h1>
         <div class="inhalt-center">
-          <p >
+          <p>
             Diese Seite ist von Studenten für Studenten.
             Sie soll Dich dabei unterstützen, Dein Wissen in Java aufzubauen und zu vertiefen.
             Dafür werden Dir hier verschiedene Übungen zu den unterschiedlichsten Themenbereichen
@@ -98,6 +98,7 @@
           <!--Aufgabe div-->
           <div class="aufgabe">
             <div>
+
               <p>
                 <label style="text-transform: uppercase">{{this.aufgabe.sThemengebiet}}</label>
               </p>
@@ -257,14 +258,21 @@
               </p>
               <div class="clear"></div>
               <div ng-bind="textFromJSON" class="unittest-format" style="margin-left: 40px; margin-right: 30px">
-                {{aufgabe.unittestAusgabe}}
-                <p *ngIf ="unitzusatz">
+
+                <p *ngFor="let output of aufgabe.unittestResponse.output; let i of index">
+                  {{output}}
+                </p>
+                <p>
+                  {{aufgabe.unittestResponse.errors}}
+                </p>
+                <p *ngIf="unitzusatz">
                   noch mehr
-                  {{aufgabe.unittestAusgabe}}
+                  {{aufgabe.unittestResponse.unfiltered}}
                 </p>
 
               </div>
-              <button mat-button type="button" class="button-next-aufgabe" (click)= "unitzusatz = !unitzusatz">{{!unitzusatz ? 'mehr...' : 'weniger'}}
+              <button mat-button type="button" class="button-next-aufgabe" (click)="unitzusatz = !unitzusatz">
+                {{!unitzusatz ? 'mehr...' : 'weniger'}}
               </button>
             </div>
             <div class="mat-spinner-content menu-spinner" *ngIf="spinner_unittest">
@@ -278,8 +286,10 @@
               <label style="margin: 8px; text-transform: uppercase">Musterlösungen</label>
             </p>
             <div style="margin: 4px" class="musterloesung-format">
-              <div *ngFor="let ml of aufgabe.musterLoesungen; let i = index" class="musterloesung-format" style="margin-bottom: 20px; margin-top: 10px;">
-                <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> {{i + 1}}. Musterlösung </label>
+              <div *ngFor="let ml of aufgabe.musterLoesungen; let i = index" class="musterloesung-format"
+                   style="margin-bottom: 20px; margin-top: 10px;">
+                <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> {{i + 1}}.
+                  Musterlösung </label>
                 {{ml.text}}
               </div>
               <!--
