@@ -48,6 +48,7 @@ import {JopsApiRunService} from './jops-api/jops-api-run.service';
 import {JopApiDbService} from './jops-api/jop-api-db.service';
 import {AuthInterceptorService} from './jops-api/auth-interceptor.service';
 import {MenuService} from './menu/menu.service';
+import {InfoComponent} from './info/info.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import {MenuService} from './menu/menu.service';
     AppComponent,
     SidenavComponent,
     DialogOverviewComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +102,7 @@ import {MenuService} from './menu/menu.service';
   ],
   providers: [FormBuilder, HttpClient, JopsApiLoginService, JopsApiRunService, JopApiDbService, AuthInterceptorService, MenuService],
   bootstrap: [AppComponent],
-  entryComponents: [DialogOverviewComponent]
+  entryComponents: [DialogOverviewComponent, InfoComponent]
 })
 export class AppModule {
 }

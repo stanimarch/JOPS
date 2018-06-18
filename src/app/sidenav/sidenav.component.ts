@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.component';
 import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 import {JopsApiRunService} from '../jops-api/jops-api-run.service';
@@ -8,6 +8,7 @@ import {Aufgabe, JopApiDbService, MusterLoesung, SThemaResponse, UnittestRespons
 import {HttpClient} from '@angular/common/http';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Validators} from '@angular/forms';
+import {InfoComponent} from '../info/info.component';
 
 @Component({
   selector: 'app-sidenav',
@@ -46,7 +47,8 @@ export class SidenavComponent {
               private jopsApiRunService: JopsApiRunService,
               private jopsApiLoginService: JopsApiLoginService,
               private jopApiDbService: JopApiDbService,
-              private menuService: MenuService) {
+              private menuService: MenuService,
+              public snackBar: MatSnackBar) {
 
     this.menuAktuell = -1;
     this.start_aufgabe_impres = 1;
@@ -378,6 +380,7 @@ export class SidenavComponent {
       .then(res => {
         console.log('########## Abgeschlossen: OK');
         this.onClickCommentClose();
+        this.wurdeKommentarAbgeschickt();
       })
       .catch(msg => {
         console.log('########## Abgeschlossen: nicht OK');
@@ -408,10 +411,25 @@ export class SidenavComponent {
           ? null : this.studLoesungForm.get('erreichtePunkte').value)
         .then(res => {
           console.log('########## 2. onClickLoesungSpeichern() ==> alles OK!');
+          this.wurdeLoesungGespeichert();
         })
         .catch(msg => {
           console.log('########## 2. onClickLoesungSpeichern() ==> nicht OK!');
         });
+    });
+  }
+
+  wurdeLoesungGespeichert() {
+    this.snackBar.openFromComponent(InfoComponent, {
+      duration: 2000,
+      data: 'Deine Lösung wurde gespeichert!  '
+    });
+  }
+
+  wurdeKommentarAbgeschickt() {
+    this.snackBar.openFromComponent(InfoComponent, {
+      duration: 2000,
+      data: 'Dein Kommentar wurde abgeschickt!  '
     });
   }
 
