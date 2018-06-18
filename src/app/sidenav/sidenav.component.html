@@ -257,16 +257,18 @@
                 <label style="margin: 8px; text-transform: uppercase" >Unittest</label>
               </p>
               <div class="clear"></div>
-              <div ng-bind="textFromJSON" class="unittest-format" style="margin-left: 40px; margin-right: 30px">
+              <div ng-bind="textFromJSON" class="unittest-format" style="margin-left: 40px; margin-right: 30px" >
 
-                <p *ngFor="let output of aufgabe.unittestResponse.output; let i of index">
+                <p style="margin-left: 40px" *ngFor="let output of aufgabe.unittestResponse.output; let i of index">
+                  <label style="margin: 8px; color: rgb(255,101,0); text-transform: uppercase;  text-align: left;">output<br></label>
                   {{output}}
                 </p>
-                <p>
+                <p style="margin-left: 40px;">
+                  <label style="margin: 8px; color: rgb(255,101,0); text-transform: uppercase;  text-align: left;">error<br></label>
                   {{aufgabe.unittestResponse.errors}}
                 </p>
-                <p *ngIf="unitzusatz">
-                  noch mehr
+                <p style="margin-left: 40px;" *ngIf="unitzusatz">
+                  <label style="margin-top: 20px; color: rgb(255,101,0);  text-align: left;">noch mehr ...<br></label>
                   {{aufgabe.unittestResponse.unfiltered}}
                 </p>
 
