@@ -1,11 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.component';
 import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
-import {JopsApiRunService} from '../jops-api/jops-api-run.service';
-import {HeaderArray, MenuService, UrdatenType} from '../menu/menu.service';
-import {Aufgabe, JopApiDbService, MusterLoesung, SThemaResponse, UnittestResponse} from '../jops-api/jop-api-db.service';
-import {HttpClient} from '@angular/common/http';
+import {HeaderArray, MenuService} from '../menu/menu.service';
+import {Aufgabe, JopApiDbService, MusterLoesung} from '../jops-api/jop-api-db.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Validators} from '@angular/forms';
 import {InfoComponent} from '../info/info.component';
@@ -25,7 +23,6 @@ export class SidenavComponent {
   commentForm: FormGroup;
   studLoesungForm: FormGroup;
 
-  musterLoesungTEST: MusterLoesung;
 
   aufgabe: Aufgabe;
 
@@ -44,7 +41,6 @@ export class SidenavComponent {
 
 
   constructor(public dialog: MatDialog,
-              private jopsApiRunService: JopsApiRunService,
               private jopsApiLoginService: JopsApiLoginService,
               private jopApiDbService: JopApiDbService,
               private menuService: MenuService,
@@ -74,11 +70,11 @@ export class SidenavComponent {
       localStorage.getItem('sessionId') === undefined ||
       localStorage.getItem('matrNr') === null ||
       localStorage.getItem('matrNr') === undefined) {
-      // this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
+      this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
     }
   }
 
-
+  /*
   TEST_aufgabe_anzeigen() {
     this.musterLoesungTEST = new MusterLoesung('public class SternchenRechteckGefuellt {\n' +
       '   public static void main(String[] args) throws IOException {\n' +
@@ -207,7 +203,7 @@ export class SidenavComponent {
     this.spinner_unittest = false;
     this.unitantwort = true;
   }
-
+  */
   menuJava1() {
     if (!this.myNav.opened) {
       if (this.dataJava1 !== null) {
@@ -333,7 +329,7 @@ export class SidenavComponent {
     } else {
       this.jopApiDbService.getAufgabePOST(id)
         .then(res => {
-          console.log('########## getAufgabe(' + id + ') => Alles ist gut!');
+          // console.log('########## getAufgabe(' + id + ') => Alles ist gut!');
           this.anzeigeStudLoesungenVorbereiten(id);
         })
         .catch(msg => {
@@ -378,12 +374,12 @@ export class SidenavComponent {
     this.spinner_commenter = true;
     this.jopApiDbService.commentSenden(this.aufgabe.id, email, comment)
       .then(res => {
-        console.log('########## Abgeschlossen: OK');
+        // console.log('########## Abgeschlossen: OK');
         this.onClickCommentClose();
         this.wurdeKommentarAbgeschickt();
       })
       .catch(msg => {
-        console.log('########## Abgeschlossen: nicht OK');
+        // console.log('########## Abgeschlossen: nicht OK');
         this.spinner_commenter = false;
       })
     ;
@@ -410,11 +406,11 @@ export class SidenavComponent {
         (this.studLoesungForm.get('erreichtePunkte').value + '' === this.aufgabe.erreichtePunkte + '')
           ? null : this.studLoesungForm.get('erreichtePunkte').value)
         .then(res => {
-          console.log('########## 2. onClickLoesungSpeichern() ==> alles OK!');
+          // console.log('########## 2. onClickLoesungSpeichern() ==> alles OK!');
           this.wurdeLoesungGespeichert();
         })
         .catch(msg => {
-          console.log('########## 2. onClickLoesungSpeichern() ==> nicht OK!');
+          // console.log('########## 2. onClickLoesungSpeichern() ==> nicht OK!');
         });
     });
   }
@@ -433,13 +429,6 @@ export class SidenavComponent {
     });
   }
 
-  TEST3() {
-    console.log(this.studLoesungForm.get('erreichtePunkte').value);
-    console.log(this.aufgabe.erreichtePunkte);
-    console.log(((this.studLoesungForm.get('erreichtePunkte').value + '' === this.aufgabe.erreichtePunkte + '')
-      ? 'gleich' : 'nicht gleich'));
-  }
-
 
   onClickUnit() {
     this.spinner_unittest = true;
@@ -448,15 +437,15 @@ export class SidenavComponent {
   }
 
   postUnittest() {
-    console.log('##### 1. ANFANG: postUnittest(code: string)');
+    // console.log('##### 1. ANFANG: postUnittest(code: string)');
     this.jopApiDbService.postUnittest(this.aufgabe.id.toString(), this.aufgabe.loesungStud, this.aufgabe.titel, this.aufgabe.unittest)
       .then(res => {
-        console.log('##### 2. ENDE: postUnittest(code: string): Alles ist GUT!');
+        // console.log('##### 2. ENDE: postUnittest(code: string): Alles ist GUT!');
         this.aufgabe.unittestResponse = this.jopApiDbService.unittestResponse;
         this.spinner_unittest = false;
       })
       .catch(msg => {
-        console.log('##### 2. ENDE: postUnittest(code: string): Alles ist SCHLECHT!');
+        // console.log('##### 2. ENDE: postUnittest(code: string): Alles ist SCHLECHT!');
         this.unitantwort = false;
         this.spinner_unittest = false;
       });

@@ -141,7 +141,7 @@ export class JopApiDbService {
 
 
   postUnittest(id: string, loesungStud: string, titel: string, unittest: string) {
-    console.log('##### 1. postUnittest(code: string, id: string)');
+    // console.log('##### 1. postUnittest(code: string, id: string)');
     return new Promise((resolve, reject) => {
       this.http.post<UnittestResponse>('./api/run', new HttpParams()
           .set(`matrNr`, localStorage.getItem('matrNr'))
@@ -153,8 +153,8 @@ export class JopApiDbService {
           headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
         }).toPromise()
         .then(res => {
-          console.log('##### 2. this.http.post: ==> alles OK');
-          console.log('##### 3. JSON.stringify(res.valueOf()): ==> ' + JSON.stringify(res.valueOf()));
+          // console.log('##### 2. this.http.post: ==> alles OK');
+          // console.log('##### 3. JSON.stringify(res.valueOf()): ==> ' + JSON.stringify(res.valueOf()));
           this.unittestResponse = new UnittestResponse();
           this.unittestResponse.status = res.status;
           this.unittestResponse.errors = res.errors;
@@ -163,7 +163,7 @@ export class JopApiDbService {
           resolve();
         })
         .catch(msg => {
-          console.log('##### 2. this.http.post: ==> alles nicht OK');
+          // console.log('##### 2. this.http.post: ==> alles nicht OK');
           reject();
         });
     });
@@ -179,12 +179,12 @@ export class JopApiDbService {
           headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
         }).toPromise()
         .then(res => {
-          console.log(res.valueOf());
+          // console.log(res.valueOf());
           // console.log('Alles ist gut gelaufen: ' + 'this.http.post...CommentResponse...(\'./api/comment\'');
           resolve();
         })
         .catch(msg => {
-          console.log(msg.valueOf());
+          // console.log(msg.valueOf());
           // console.log('Alles ist nicht gut gelaufen: ' + 'this.http.post...CommentResponse...(\'./api/comment\'');
           reject();
         });
@@ -206,7 +206,7 @@ export class JopApiDbService {
     // console.log('@@@@@ jops-api-db.service:    getAufgabe(id: number)');
     for (let i = 0, len = this.aufgabenArray.length; i < len; i++) {
       if (this.aufgabenArray[i].id === id) {
-        console.log('######### JSON.stringify(aufgabe.valueOf()) ==> ' + JSON.stringify(this.aufgabenArray[i].valueOf()));
+        // console.log('######### JSON.stringify(aufgabe.valueOf()) ==> ' + JSON.stringify(this.aufgabenArray[i].valueOf()));
         return this.aufgabenArray[i];
       }
     }
@@ -224,8 +224,8 @@ export class JopApiDbService {
         .then(res => {
 
           if (res.status === 200) {
-            console.log('########## 001. getAufgabePOST(id: number) ');
-            console.log('########## 002. JSON.stringify(res.valueOf()) ' + JSON.stringify(res.valueOf()));
+            // console.log('########## 001. getAufgabePOST(id: number) ');
+            // console.log('########## 002. JSON.stringify(res.valueOf()) ' + JSON.stringify(res.valueOf()));
             this.musterLoesungen = [];
 
 
@@ -246,7 +246,7 @@ export class JopApiDbService {
 
 
               if (index === res.aufgabe.length - 1) {
-                console.log('########## 8. JSON.stringify(musterLoesungen.valueOf())' + JSON.stringify(this.musterLoesungen.valueOf()));
+                // console.log('########## 8. JSON.stringify(musterLoesungen.valueOf())' + JSON.stringify(this.musterLoesungen.valueOf()));
                 this.aufgabenArray.push(new Aufgabe(
                   id,
                   data.Sachliches_Themengebiet,
@@ -269,12 +269,12 @@ export class JopApiDbService {
 
             resolve2();
           } else {
-            console.log('getAufgabePOST(id: number): Schlecht: ' + JSON.stringify(res.valueOf()));
+            // console.log('getAufgabePOST(id: number): Schlecht: ' + JSON.stringify(res.valueOf()));
             reject2();
           }
         })
         .catch(msg => {
-          console.log('getAufgabePOST(id: number): Schlecht: ' + msg);
+          // console.log('getAufgabePOST(id: number): Schlecht: ' + msg);
           reject2();
         });
     });
@@ -294,7 +294,7 @@ export class JopApiDbService {
               reject();
             });
         }).catch(msg => {
-        console.log('########## Error by http.get(): ' + msg);
+        // console.log('########## Error by http.get(): ' + msg);
         reject();
       });
     });
@@ -313,7 +313,7 @@ export class JopApiDbService {
               reject();
             });
         }).catch(msg => {
-        console.log('########## Error by http.get(): ' + msg);
+        // console.log('########## Error by http.get(): ' + msg);
         reject();
       });
     });
