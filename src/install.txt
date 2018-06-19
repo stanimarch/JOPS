@@ -5,3 +5,4 @@ npm install --save @angular/animations
 npm install --save hammerjs
 npm install
 
+https://github.com/angular/angular/issues/18261

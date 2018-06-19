@@ -204,6 +204,7 @@ export class SidenavComponent {
     this.unitantwort = true;
   }
   */
+
   menuJava1() {
     if (!this.myNav.opened) {
       if (this.dataJava1 !== null) {

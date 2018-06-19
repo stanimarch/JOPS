@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParameterCodec, HttpParams} from '@angular/common/http';
 import {MenuService, UrdatenType} from '../menu/menu.service';
 
 export class SThemaResponse {
@@ -104,6 +104,24 @@ export class UnittestResponse {
   unfiltered: string;
 }
 
+export class CustomEncoder implements HttpParameterCodec {
+  encodeKey(key: string): string {
+    return encodeURIComponent(key);
+  }
+
+  encodeValue(value: string): string {
+    return encodeURIComponent(value);
+  }
+
+  decodeKey(key: string): string {
+    return decodeURIComponent(key);
+  }
+
+  decodeValue(value: string): string {
+    return decodeURIComponent(value);
+  }
+}
+
 @Injectable()
 export class JopApiDbService {
   aufgabenArray: Array<Aufgabe>;
@@ -116,24 +134,11 @@ export class JopApiDbService {
   }
 
 
-  standardEncoding(v: string): string {
-    return encodeURIComponent(v)
-      .replace(/%40/gi, '@')
-      .replace(/%3A/gi, ':')
-      .replace(/%24/gi, '$')
-      .replace(/%2C/gi, ',')
-      .replace(/%3B/gi, ';')
-      .replace(/%2B/gi, '+')
-      .replace(/%3D/gi, '=')
-      .replace(/%3F/gi, '?')
-      .replace(/%2F/gi, '/');
-  }
-
-
   loesungSpeichernPOST(id: string, text: string, sgrad: string, punkte: string) {
+    const params = new HttpParams({encoder: new CustomEncoder()});
     return new Promise((resolve2, reject2) => {
       // console.log('&&&&& 1. loesungSpeichernPOST ==> START');
-      this.http.post<SaveResponse>('./api/save', new HttpParams()
+      this.http.post<SaveResponse>('./api/save', params
           .set(`matrNr`, localStorage.getItem('matrNr'))
           .set(`aufgabenId`, id)
           .set(`text`, text)
@@ -154,11 +159,11 @@ export class JopApiDbService {
     });
   }
 
-
   postUnittest(id: string, loesungStud: string, titel: string, unittest: string) {
     // console.log('##### 1. postUnittest(code: string, id: string)');
+    const params = new HttpParams({encoder: new CustomEncoder()});
     return new Promise((resolve, reject) => {
-      this.http.post<UnittestResponse>('./api/run', new HttpParams()
+      this.http.post<UnittestResponse>('./api/run', params
           .set(`matrNr`, localStorage.getItem('matrNr'))
           .set(`aufgabenId`, id)
           .set(`code`, loesungStud)
@@ -185,8 +190,9 @@ export class JopApiDbService {
   }
 
   commentSenden(id: number, comment: string, email: string) {
+    const params = new HttpParams({encoder: new CustomEncoder()});
     return new Promise((resolve, reject) => {
-      this.http.post<CommentResponse>('./api/comment', new HttpParams()
+      this.http.post<CommentResponse>('./api/comment', params
           .set(`aufgabenId`, id.toString())
           .set(`email`, email)
           .set(`comment`, comment),
@@ -229,8 +235,9 @@ export class JopApiDbService {
   }
 
   getAufgabePOST(id: number) {
+    const params = new HttpParams({encoder: new CustomEncoder()});
     return new Promise((resolve2, reject2) => {
-      this.http.post<SAufgabeResponse>('./api/aufgabe', new HttpParams()
+      this.http.post<SAufgabeResponse>('./api/aufgabe', params
           .set(`aufgabenId`, id.toString())
           .set(`matrNr`, localStorage.getItem('matrNr')),
         {

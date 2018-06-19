@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {FormGroup} from '@angular/forms';
+import {CustomEncoder} from './jop-api-db.service';
 
 interface ILogin {
   status: number;
@@ -51,7 +52,8 @@ export class JopsApiLoginService {
 
   postPromise(myForm: FormGroup) {
     return new Promise((resolve, reject4) => {
-      this.http.post<ILogin>(this.url, new HttpParams()
+      const params = new HttpParams({encoder: new CustomEncoder()});
+      this.http.post<ILogin>(this.url, params
           .set(`username`, myForm.get('username').value)
           .set(`password`, myForm.get('password').value),
         {
