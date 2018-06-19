@@ -438,7 +438,11 @@ export class SidenavComponent {
 
   postUnittest() {
     // console.log('##### 1. ANFANG: postUnittest(code: string)');
-    this.jopApiDbService.postUnittest(this.aufgabe.id.toString(), this.aufgabe.loesungStud, this.aufgabe.titel, this.aufgabe.unittest)
+    this.jopApiDbService.postUnittest(
+      this.aufgabe.id.toString(),
+      this.studLoesungForm.get('loesungstext').value,
+      this.aufgabe.titel,
+      this.aufgabe.unittest)
       .then(res => {
         // console.log('##### 2. ENDE: postUnittest(code: string): Alles ist GUT!');
         this.aufgabe.unittestResponse = this.jopApiDbService.unittestResponse;
