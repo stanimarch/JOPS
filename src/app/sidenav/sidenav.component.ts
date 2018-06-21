@@ -462,13 +462,30 @@ export class SidenavComponent {
 
 
   doLogout() {
+    this.reset();
+    this.jopsApiLoginService.logout();
+    this.openDialog();
+  }
+
+  reset() {
     this.start_aufgabe_impres = 1;
     this.myNav.close();
-    this.jopsApiLoginService.logout();
+
+    this.kommentar = false;
+    this.spinner_commenter = false;
+    this.commentForm.reset();
+    this.studLoesungForm.reset();
+    this.unitantwort = false;
+    this.spinner_unittest = false;
+    this.musterloeusung = false;
     this.dataJava1 = null;
     this.dataJava2 = null;
     this.aufgabe = null;
-    this.studLoesungForm = null;
-    this.openDialog();
+
+    this.menuService.dataJava1 = [];
+    this.menuService.dataJava2 = [];
+
+    this.jopApiDbService.aufgabenArray = [];
   }
 }
+
