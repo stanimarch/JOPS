@@ -39,7 +39,7 @@ export class SidenavComponent {
   spinner_commenter = false;
   spinner_unittest = false;
 
-  musterLoesungTEST: MusterLoesung;
+  // musterLoesungTEST: MusterLoesung;
 
   constructor(public dialog: MatDialog,
               private jopsApiLoginService: JopsApiLoginService,
@@ -71,105 +71,105 @@ export class SidenavComponent {
       localStorage.getItem('sessionId') === undefined ||
       localStorage.getItem('matrNr') === null ||
       localStorage.getItem('matrNr') === undefined) {
-      // this.openDialog();                         // ################################## auskommentieren, um Loginfenster zu bekommen
+      this.openDialog();                         // auskommentieren, um Loginfenster zu bekommen
     }
   }
 
+  /*
+    TEST_aufgabe_anzeigen() {
+      this.musterLoesungTEST = new MusterLoesung('public class SternchenRechteckGefuellt {\n' +
+        '   public static void main(String[] args) throws IOException {\n' +
+        '     final BufferedReader konsolenEingabe = new BufferedReader(\n' +
+        '       new InputStreamReader(System.in));\n' +
+        '     System.out.print("Geben Sie die Breite des Rechtecks ein: ");\n' +
+        '     final int breite= Integer.parseInt(konsolenEingabe.readLine());\n' +
+        '      System.out.print("Geben Sie die Höhe des Rechtecks ein: ");\n' +
+        '       final int hoehe = Integer.parseInt(konsolenEingabe.readLine());\n' +
+        '       for (int y = 0; y < hoehe; y++) {\n' +
+        '         wiederholeZeichen(breite, \'*\');\n' +
+        '         System.out.println();\n' +
+        '     }\n' +
+        '   }\n' +
+        '   static void wiederholeZeichen(final int breite, char c) {\n' +
+        '     for (int x = 0; x < breite; x++) {\n' +
+        '       System.out.print(c);\n' +
+        '     }\n' +
+        '   }\n' +
+        '} ', null);
 
-  TEST_aufgabe_anzeigen() {
-    this.musterLoesungTEST = new MusterLoesung('public class SternchenRechteckGefuellt {\n' +
-      '   public static void main(String[] args) throws IOException {\n' +
-      '     final BufferedReader konsolenEingabe = new BufferedReader(\n' +
-      '       new InputStreamReader(System.in));\n' +
-      '     System.out.print("Geben Sie die Breite des Rechtecks ein: ");\n' +
-      '     final int breite= Integer.parseInt(konsolenEingabe.readLine());\n' +
-      '      System.out.print("Geben Sie die Höhe des Rechtecks ein: ");\n' +
-      '       final int hoehe = Integer.parseInt(konsolenEingabe.readLine());\n' +
-      '       for (int y = 0; y < hoehe; y++) {\n' +
-      '         wiederholeZeichen(breite, \'*\');\n' +
-      '         System.out.println();\n' +
-      '     }\n' +
-      '   }\n' +
-      '   static void wiederholeZeichen(final int breite, char c) {\n' +
-      '     for (int x = 0; x < breite; x++) {\n' +
-      '       System.out.print(c);\n' +
-      '     }\n' +
-      '   }\n' +
-      '} ', null);
+      const musLoes: Array<MusterLoesung> = [];
+      musLoes.push(this.musterLoesungTEST);
+      musLoes.push(this.musterLoesungTEST);
+      musLoes.push(this.musterLoesungTEST);
 
-    const musLoes: Array<MusterLoesung> = [];
-    musLoes.push(this.musterLoesungTEST);
-    musLoes.push(this.musterLoesungTEST);
-    musLoes.push(this.musterLoesungTEST);
-
-    const unittestAusgabe = new UnittestResponse;
-    unittestAusgabe.output = ['Unittest und Titel von der Aufgabe erstellt'];
-    unittestAusgabe.errors = 'Error:  javac -cp ./java/junit-4.12.jar:. ./java/sessions/undefined/*.java\n' +
-      './java/sessions/undefined/Titel von der Aufgabe.java:9: error: not a statement\n' +
-      '     for (int y = 0; y < hoehe; y  ) {\n' +
-      '                                ^\n' +
-      './java/sessions/undefined/Titel von der Aufgabe.java:15: error: not a statement\n' +
-      '       for (int x = 0; x < breite; x  ) {\n' +
-      '                                   ^\n' +
-      './java/sessions/undefined/Titel von der AufgabeTest.java:1: error: class, interface, or enum expected\n' +
-      'not null :)\n' +
-      '^\n' +
-      '3 errors';
-    unittestAusgabe.unfiltered = '\nUNFILTERED:\n asdfasdfasdfasdfasdf\nasdfasdfasdfasdfasdfasdfasdf\nasdfasdfasdfasdfasdfasdf';
+      const unittestAusgabe = new UnittestResponse;
+      unittestAusgabe.output = ['Unittest und Titel von der Aufgabe erstellt'];
+      unittestAusgabe.errors = 'Error:  javac -cp ./java/junit-4.12.jar:. ./java/sessions/undefined/*.java\n' +
+        './java/sessions/undefined/Titel von der Aufgabe.java:9: error: not a statement\n' +
+        '     for (int y = 0; y < hoehe; y  ) {\n' +
+        '                                ^\n' +
+        './java/sessions/undefined/Titel von der Aufgabe.java:15: error: not a statement\n' +
+        '       for (int x = 0; x < breite; x  ) {\n' +
+        '                                   ^\n' +
+        './java/sessions/undefined/Titel von der AufgabeTest.java:1: error: class, interface, or enum expected\n' +
+        'not null :)\n' +
+        '^\n' +
+        '3 errors';
+      unittestAusgabe.unfiltered = '\nUNFILTERED:\n asdfasdfasdfasdfasdf\nasdfasdfasdfasdfasdfasdfasdf\nasdfasdfasdfasdfasdfasdf';
 
 
-    this.aufgabe = new Aufgabe(
-      101,
-      'For-Schleife',
-      'Schterenaufgabe',
-      'Titel von der Aufgabe',
-      20,
-      'Schreiben Sie ein Programm, das ein durch Sternchen gefülltes Rechteck zeichnet. Der Benutzer\n' +
-      '********************\n' +
-      '********************\n' +
-      '********************\n' +
-      '********************\n' +
-      '******************** ',
-      'not null :)',
-      unittestAusgabe,
-      'public class SternchenRechteckGefuellt {\n' +
-      '   public static void main(String[] args) throws IOException {\n' +
-      '     final BufferedReader konsolenEingabe = new BufferedReader(\n' +
-      '       new InputStreamReader(System.in));\n' +
-      '     System.out.print("Geben Sie die Breite des Rechtecks ein: ");\n' +
-      '     final int breite= Integer.parseInt(konsolenEingabe.readLine());\n' +
-      '     System.out.print("Geben Sie die Höhe des Rechtecks ein: ");\n' +
-      '     final int hoehe = Integer.parseInt(konsolenEingabe.readLine());\n' +
-      '     for (int y = 0; y < hoehe; y++) {\n' +
-      '       wiederholeZeichen(breite, \'*\');\n' +
-      '       System.out.println();\n' +
-      '     }\n' +
-      '   }\n' +
-      '   static void wiederholeZeichen(final int breite, char c) {\n' +
-      '       for (int x = 0; x < breite; x++) {\n' +
-      '         System.out.print(c);\n' +
-      '       }\n' +
-      '   }\n' +
-      '} ',
-      3,
-      15,
-      musLoes
-    );
+      this.aufgabe = new Aufgabe(
+        101,
+        'For-Schleife',
+        'Schterenaufgabe',
+        'Titel von der Aufgabe',
+        20,
+        'Schreiben Sie ein Programm, das ein durch Sternchen gefülltes Rechteck zeichnet. Der Benutzer\n' +
+        '********************\n' +
+        '********************\n' +
+        '********************\n' +
+        '********************\n' +
+        '******************** ',
+        'not null :)',
+        unittestAusgabe,
+        'public class SternchenRechteckGefuellt {\n' +
+        '   public static void main(String[] args) throws IOException {\n' +
+        '     final BufferedReader konsolenEingabe = new BufferedReader(\n' +
+        '       new InputStreamReader(System.in));\n' +
+        '     System.out.print("Geben Sie die Breite des Rechtecks ein: ");\n' +
+        '     final int breite= Integer.parseInt(konsolenEingabe.readLine());\n' +
+        '     System.out.print("Geben Sie die Höhe des Rechtecks ein: ");\n' +
+        '     final int hoehe = Integer.parseInt(konsolenEingabe.readLine());\n' +
+        '     for (int y = 0; y < hoehe; y++) {\n' +
+        '       wiederholeZeichen(breite, \'*\');\n' +
+        '       System.out.println();\n' +
+        '     }\n' +
+        '   }\n' +
+        '   static void wiederholeZeichen(final int breite, char c) {\n' +
+        '       for (int x = 0; x < breite; x++) {\n' +
+        '         System.out.print(c);\n' +
+        '       }\n' +
+        '   }\n' +
+        '} ',
+        3,
+        15,
+        musLoes
+      );
 
-    this.studLoesungForm.get('loesungstext').setValue(this.aufgabe.loesungStud);
-    this.studLoesungForm.get('schwierigkeit').setValue(this.aufgabe.sGrad + '');
-    this.studLoesungForm.get('erreichtePunkte').setValue(this.aufgabe.erreichtePunkte);
-    this.studLoesungForm.get('erreichtePunkte').setValidators([Validators.min(0), Validators.max(this.aufgabe.maxPunkte)]);
+      this.studLoesungForm.get('loesungstext').setValue(this.aufgabe.loesungStud);
+      this.studLoesungForm.get('schwierigkeit').setValue(this.aufgabe.sGrad + '');
+      this.studLoesungForm.get('erreichtePunkte').setValue(this.aufgabe.erreichtePunkte);
+      this.studLoesungForm.get('erreichtePunkte').setValidators([Validators.min(0), Validators.max(this.aufgabe.maxPunkte)]);
 
-    this.spinner_aufgabe = false;
-    this.start_aufgabe_impres = 2;
-  }
+      this.spinner_aufgabe = false;
+      this.start_aufgabe_impres = 2;
+    }
 
-  TEST2() {
-    this.spinner_unittest = false;
-    this.unitantwort = true;
-  }
-
+    TEST2() {
+      this.spinner_unittest = false;
+      this.unitantwort = true;
+    }
+    */
 
   menuJava1() {
     if (!this.myNav.opened) {
@@ -462,8 +462,13 @@ export class SidenavComponent {
 
 
   doLogout() {
+    this.start_aufgabe_impres = 1;
+    this.myNav.close();
     this.jopsApiLoginService.logout();
+    this.dataJava1 = null;
+    this.dataJava2 = null;
+    this.aufgabe = null;
+    this.studLoesungForm = null;
     this.openDialog();
   }
-
 }
