@@ -364,7 +364,13 @@ export class SidenavComponent {
 
 
   onClickComment() {
-    this.kommentar = true;
+    if (this.kommentar !== true) {
+      this.kommentar = true;
+    } else {
+      this.kommentar = false;
+      this.spinner_commenter = false;
+      this.commentForm.reset();
+    }
   }
 
   onClickCommentSenden() {
@@ -458,7 +464,11 @@ export class SidenavComponent {
 
 
   onClickmusterl() {
-    this.musterloeusung = true;
+    if (this.musterloeusung !== true) {
+      this.musterloeusung = true;
+    } else {
+      this.musterloeusung = false;
+    }
   }
 
   getErrorMessage() {
