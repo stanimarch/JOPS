@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {FormGroup} from '@angular/forms';
-import {CustomEncoder} from './jop-api-db.service';
+import {CustomEncoder} from './jops-api-db.service';
 
 interface ILogin {
   status: number;

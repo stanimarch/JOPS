@@ -3,7 +3,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {DialogOverviewComponent} from '../dialog-overview/dialog-overview.component';
 import {JopsApiLoginService} from '../jops-api/jops-api-login.service';
 import {HeaderArray, MenuService} from '../menu/menu.service';
-import {Aufgabe, JopApiDbService, MusterLoesung, UnittestResponse} from '../jops-api/jop-api-db.service';
+import {Aufgabe, JopsApiDbService, MusterLoesung, UnittestResponse} from '../jops-api/jops-api-db.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Validators} from '@angular/forms';
 import {InfoComponent} from '../info/info.component';
@@ -43,7 +43,7 @@ export class SidenavComponent {
 
   constructor(public dialog: MatDialog,
               private jopsApiLoginService: JopsApiLoginService,
-              private jopApiDbService: JopApiDbService,
+              private jopApiDbService: JopsApiDbService,
               private menuService: MenuService,
               public snackBar: MatSnackBar) {
 

@@ -44,7 +44,7 @@ import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SidenavComponent} from './sidenav/sidenav.component';
 import {DialogOverviewComponent} from './dialog-overview/dialog-overview.component';
 import {JopsApiLoginService} from './jops-api/jops-api-login.service';
-import {JopApiDbService} from './jops-api/jop-api-db.service';
+import {JopsApiDbService} from './jops-api/jops-api-db.service';
 import {AuthInterceptorService} from './jops-api/auth-interceptor.service';
 import {MenuService} from './menu/menu.service';
 import {InfoComponent} from './info/info.component';
@@ -99,7 +99,7 @@ import {InfoComponent} from './info/info.component';
     MatFormFieldModule,
     ReactiveFormsModule
   ],
-  providers: [FormBuilder, HttpClient, JopsApiLoginService, JopApiDbService, AuthInterceptorService, MenuService],
+  providers: [FormBuilder, HttpClient, JopsApiLoginService, JopsApiDbService, AuthInterceptorService, MenuService],
   bootstrap: [AppComponent],
   entryComponents: [DialogOverviewComponent, InfoComponent]
 })

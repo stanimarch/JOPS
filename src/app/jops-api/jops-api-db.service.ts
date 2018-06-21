@@ -123,7 +123,7 @@ export class CustomEncoder implements HttpParameterCodec {
 }
 
 @Injectable()
-export class JopApiDbService {
+export class JopsApiDbService {
   aufgabenArray: Array<Aufgabe>;
   musterLoesungen: Array<MusterLoesung>;
   unittestResponse: UnittestResponse;
