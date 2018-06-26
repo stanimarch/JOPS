@@ -108,8 +108,8 @@
               </p>
             </div>
             <div class="clear"></div>
-            <div ng-bind="textFromJSON" class="aufgabentext-format">
-              {{this.aufgabe.aufgabenText}}
+            <div class="aufgabentext-format">
+              <div [innerHTML]="aufgabe.aufgabenText"></div>
             </div>
             <div class="clear"></div>
             <div id="button-aufgabe-rechts-links">
@@ -239,7 +239,8 @@
                           [disabled]="studLoesungForm.get('loesungstext').invalid || studLoesungForm.get('erreichtePunkte').invalid">
                     Speichern
                   </button>
-                  <button mat-button type="button" class="button-next-aufgabe" (click)="onClickMusterloesung()"> Musterlösung
+                  <button mat-button type="button" class="button-next-aufgabe" (click)="onClickMusterloesung()">
+                    Musterlösung
                   </button>
                   <button *ngIf="aufgabe.unittest !== null"
                           mat-button type="button"
@@ -297,7 +298,7 @@
                    style="margin-bottom: 20px; margin-top: 10px;">
                 <label style="color: rgb(255,101,0); text-align: left; margin-bottom: 8px"> {{i + 1}}.
                   Musterlösung </label>
-                {{ml.text}}
+                <div [innerHTML]="ml.text"></div>
               </div>
               <!--
               <div class="musterloesung-format" style="margin-bottom: 20px; margin-top: 10px;">

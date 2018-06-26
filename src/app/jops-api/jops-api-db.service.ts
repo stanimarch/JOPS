@@ -283,9 +283,9 @@ export class JopsApiDbService {
                   res.studloesung[0].Erreichte_Punkte,
                   this.musterLoesungen
                 ));
-                /* console.log('########## 9. this.aufgabenArray.push(new Aufgabe...);\n' +
+                /*console.log('########## 9. this.aufgabenArray.push(new Aufgabe...);\n' +
                   '########### 10. JSON.stringify(this.aufgabenArray[0].valueOf()) ==> '
-                   + JSON.stringify(this.aufgabenArray[0].valueOf())); */
+                  + JSON.stringify(this.aufgabenArray[0].valueOf()));*/
               }
             });
 
