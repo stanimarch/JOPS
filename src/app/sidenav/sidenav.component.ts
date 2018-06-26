@@ -429,7 +429,7 @@ export class SidenavComponent {
   }
 
 
-  onClickmusterl() {
+  onClickMusterloesung() {
     if (this.musterloeusung !== true) {
       this.musterloeusung = true;
     } else {

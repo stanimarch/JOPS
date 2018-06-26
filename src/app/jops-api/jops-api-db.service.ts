@@ -206,7 +206,7 @@ export class JopsApiDbService {
         })
         .catch(msg => {
           // console.log(msg.valueOf());
-          // console.log('Alles ist nicht gut gelaufen: ' + 'this.http.post...CommentResponse...(\'./api/comment\'');
+          // console.log('Lief was schief: ' + 'this.http.post...CommentResponse...(\'./api/comment\'');
           reject();
         });
     });
